@@ -26,16 +26,28 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    textnoteform.cpp \
+    graphicnoteform.cpp \
+    audionoteform.cpp \
+    videonoteform.cpp
 
 HEADERS += \
         mainwindow.h \
     note.h \
     date.h \
-    tag.h
+    tag.h \
+    textnoteform.h \
+    graphicnoteform.h \
+    audionoteform.h \
+    videonoteform.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    textnoteform.ui \
+    graphicnoteform.ui \
+    audionoteform.ui \
+    videonoteform.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
