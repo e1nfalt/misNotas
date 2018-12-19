@@ -55,7 +55,8 @@ SOURCES       = ../misNotas/main.cpp \
 		../misNotas/textnoteform.cpp \
 		../misNotas/graphicnoteform.cpp \
 		../misNotas/audionoteform.cpp \
-		../misNotas/videonoteform.cpp moc_mainwindow.cpp \
+		../misNotas/videonoteform.cpp qrc_resources.cpp \
+		moc_mainwindow.cpp \
 		moc_textnoteform.cpp \
 		moc_graphicnoteform.cpp \
 		moc_audionoteform.cpp \
@@ -66,6 +67,7 @@ OBJECTS       = main.o \
 		graphicnoteform.o \
 		audionoteform.o \
 		videonoteform.o \
+		qrc_resources.o \
 		moc_mainwindow.o \
 		moc_textnoteform.o \
 		moc_graphicnoteform.o \
@@ -232,6 +234,7 @@ DIST          = ../../../Qt/5.11.2/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.11.2/clang_64/mkspecs/features/qt_config.prf \
 		../../../Qt/5.11.2/clang_64/mkspecs/macx-clang/qmake.conf \
 		../../../Qt/5.11.2/clang_64/mkspecs/features/spec_post.prf \
+		../misNotas/.qmake.stash \
 		../../../Qt/5.11.2/clang_64/mkspecs/features/exclusive_builds.prf \
 		../../../Qt/5.11.2/clang_64/mkspecs/features/mac/sdk.prf \
 		../../../Qt/5.11.2/clang_64/mkspecs/features/toolchain.prf \
@@ -453,6 +456,7 @@ Makefile: ../misNotas/misNotas.pro ../../../Qt/5.11.2/clang_64/mkspecs/macx-clan
 		../../../Qt/5.11.2/clang_64/mkspecs/features/qt_config.prf \
 		../../../Qt/5.11.2/clang_64/mkspecs/macx-clang/qmake.conf \
 		../../../Qt/5.11.2/clang_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../../Qt/5.11.2/clang_64/mkspecs/features/exclusive_builds.prf \
 		../../../Qt/5.11.2/clang_64/mkspecs/features/mac/sdk.prf \
 		../../../Qt/5.11.2/clang_64/mkspecs/features/toolchain.prf \
@@ -481,6 +485,7 @@ Makefile: ../misNotas/misNotas.pro ../../../Qt/5.11.2/clang_64/mkspecs/macx-clan
 		../../../Qt/5.11.2/clang_64/mkspecs/features/yacc.prf \
 		../../../Qt/5.11.2/clang_64/mkspecs/features/lex.prf \
 		../misNotas/misNotas.pro \
+		../misNotas/resources.qrc \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/QtWidgets.prl \
 		../../../Qt/5.11.2/clang_64/lib/QtGui.framework/QtGui.prl \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/QtCore.prl
@@ -646,6 +651,7 @@ Makefile: ../misNotas/misNotas.pro ../../../Qt/5.11.2/clang_64/mkspecs/macx-clan
 ../../../Qt/5.11.2/clang_64/mkspecs/features/qt_config.prf:
 ../../../Qt/5.11.2/clang_64/mkspecs/macx-clang/qmake.conf:
 ../../../Qt/5.11.2/clang_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../../Qt/5.11.2/clang_64/mkspecs/features/exclusive_builds.prf:
 ../../../Qt/5.11.2/clang_64/mkspecs/features/mac/sdk.prf:
 ../../../Qt/5.11.2/clang_64/mkspecs/features/toolchain.prf:
@@ -674,6 +680,7 @@ Makefile: ../misNotas/misNotas.pro ../../../Qt/5.11.2/clang_64/mkspecs/macx-clan
 ../../../Qt/5.11.2/clang_64/mkspecs/features/yacc.prf:
 ../../../Qt/5.11.2/clang_64/mkspecs/features/lex.prf:
 ../misNotas/misNotas.pro:
+../misNotas/resources.qrc:
 ../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/QtWidgets.prl:
 ../../../Qt/5.11.2/clang_64/lib/QtGui.framework/QtGui.prl:
 ../../../Qt/5.11.2/clang_64/lib/QtCore.framework/QtCore.prl:
@@ -706,6 +713,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents ../misNotas/resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../Qt/5.11.2/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../misNotas/mainwindow.h ../misNotas/note.h ../misNotas/date.h ../misNotas/tag.h ../misNotas/textnoteform.h ../misNotas/graphicnoteform.h ../misNotas/audionoteform.h ../misNotas/videonoteform.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../misNotas/main.cpp ../misNotas/mainwindow.cpp ../misNotas/textnoteform.cpp ../misNotas/graphicnoteform.cpp ../misNotas/audionoteform.cpp ../misNotas/videonoteform.cpp $(DISTDIR)/
@@ -719,6 +727,7 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) -r misNotas.app
+	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
@@ -732,8 +741,14 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_resources.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_resources.cpp
+qrc_resources.cpp: ../misNotas/resources.qrc \
+		../../../Qt/5.11.2/clang_64/bin/rcc \
+		../misNotas/files/notes_list.txt
+	/Users/epidzhx/Qt/5.11.2/clang_64/bin/rcc -name resources ../misNotas/resources.qrc -o qrc_resources.cpp
+
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
@@ -813,7 +828,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
@@ -858,6 +873,9 @@ videonoteform.o: ../misNotas/videonoteform.cpp ../misNotas/videonoteform.h \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		ui_videonoteform.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o videonoteform.o ../misNotas/videonoteform.cpp
+
+qrc_resources.o: qrc_resources.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources.o qrc_resources.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

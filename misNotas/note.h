@@ -12,15 +12,20 @@ class Note
 {
 protected:
     std::string title;
-    Date created_date, editing_date;
+    const Date created_date;
+    Date editing_date;
     std::vector<Tag> tags;
-    std::string way_to_file;
 public:
 
-    Note(std::string title_)
+    Note(std::string title_, Date created_date_, Date editing_date_) : title(title_),
+        created_date(created_date_), editing_date(editing_date_)
     {
-        title = title_;
-        created_date = editing_date = created_date.get_current_date();
+
+    }
+
+    Note(std::string title_) : title(title_)
+    {
+
     }
 
     std::string get_title() { return title; }
@@ -29,20 +34,10 @@ public:
 
     void update_editing_date(Date new_date) { editing_date = new_date; }
 
-    //virtual void content() = 0;
-    virtual ~Note();
+    virtual ~Note() {}
     virtual void save_into_file() = 0;
 
-    virtual std::vector<Note> load_from_file(std::string &file_path)
-    {
-        freopen(file_path.c_str(), "r", stdin);
-        int num;
-        std::cin >> num;
-        for (int i = 0; i < num; i++)
-        {
-
-        }
-    }
+    //virtual Note* load_from_file(std::string &file_path) = 0;
 };
 
 
@@ -50,24 +45,34 @@ class TextNote : virtual public Note
 {
 private:
     static int text_note_num;
+    std::string text_data;
 public:
 
     TextNote(std::string title_) : Note(title_)
     {
         title = title_;
-        created_date = editing_date = created_date.get_current_date();
+    }
+
+    TextNote(std::string title_, Date created_date_, Date editing_date_, std::string text_data_) : Note(title_, created_date_, editing_date_)
+    {
+        //title = title_;
+        text_data = text_data_;
     }
 
     void save_into_file()
     {
-        freopen("notes.txt", "r", stdin);
+        freopen(":/rec/img/notes_list.txt", "r", stdin);
+        std::cout << "Text" << std::endl;
         std::cout << title << std::endl;
         std::cout << created_date << std::endl;
         std::cout << editing_date << std::endl;
-        std::cout << way_to_file << std::endl;
+        std::cout << text_data << std::endl;
     }
 
-
+    void update_text_data(std::string new_text_data)
+    {
+        text_data = new_text_data;
+    }
 };
 
 

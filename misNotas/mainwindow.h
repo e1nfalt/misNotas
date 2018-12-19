@@ -5,6 +5,7 @@
 
 namespace Ui {
 class MainWindow;
+//std::string notes_list = ":/rec/img/notes_list.txt";
 }
 
 class MainWindow : public QMainWindow
