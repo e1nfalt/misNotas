@@ -11,7 +11,6 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
@@ -23,11 +22,8 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralWidget;
-    QListWidget *listWidget;
-    QCheckBox *checkBox;
-    QCheckBox *checkBox_2;
-    QCheckBox *checkBox_3;
     QLabel *label;
+    QListWidget *listWidget;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -36,21 +32,12 @@ public:
         MainWindow->resize(400, 300);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        listWidget = new QListWidget(centralWidget);
-        listWidget->setObjectName(QStringLiteral("listWidget"));
-        listWidget->setGeometry(QRect(130, 60, 256, 192));
-        checkBox = new QCheckBox(centralWidget);
-        checkBox->setObjectName(QStringLiteral("checkBox"));
-        checkBox->setGeometry(QRect(10, 110, 87, 41));
-        checkBox_2 = new QCheckBox(centralWidget);
-        checkBox_2->setObjectName(QStringLiteral("checkBox_2"));
-        checkBox_2->setGeometry(QRect(10, 150, 87, 22));
-        checkBox_3 = new QCheckBox(centralWidget);
-        checkBox_3->setObjectName(QStringLiteral("checkBox_3"));
-        checkBox_3->setGeometry(QRect(10, 190, 87, 22));
         label = new QLabel(centralWidget);
         label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(140, 20, 59, 21));
+        label->setGeometry(QRect(150, 20, 59, 16));
+        listWidget = new QListWidget(centralWidget);
+        listWidget->setObjectName(QStringLiteral("listWidget"));
+        listWidget->setGeometry(QRect(60, 50, 256, 192));
         MainWindow->setCentralWidget(centralWidget);
 
         retranslateUi(MainWindow);
@@ -61,10 +48,7 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
-        checkBox->setText(QApplication::translate("MainWindow", "CheckBox", nullptr));
-        checkBox_2->setText(QApplication::translate("MainWindow", "CheckBox", nullptr));
-        checkBox_3->setText(QApplication::translate("MainWindow", "CheckBox", nullptr));
-        label->setText(QApplication::translate("MainWindow", "TextLabel", nullptr));
+        label->setText(QApplication::translate("MainWindow", "misNotas", nullptr));
     } // retranslateUi
 
 };

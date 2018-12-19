@@ -3,24 +3,24 @@
 #include <note.h>
 #include <QListWidget>
 
+std::vector<Note> get_notes()
+{
+    std::vector<Note> notes;
+    return notes;
+}
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
 
-    Note *notes_list;
-    //set_tags(ui);
-
-
+    std::vector<Note> notes;
+    notes = get_notes();
     ui->setupUi(this);
+    ui->listWidget->addItem("Sparta");
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
-}
-
-std::vector<Note> get_notes()
-{
-
 }
