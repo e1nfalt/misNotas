@@ -30,7 +30,8 @@ SOURCES += \
     textnoteform.cpp \
     graphicnoteform.cpp \
     audionoteform.cpp \
-    videonoteform.cpp
+    videonoteform.cpp \
+    new_note_window.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -40,14 +41,16 @@ HEADERS += \
     textnoteform.h \
     graphicnoteform.h \
     audionoteform.h \
-    videonoteform.h
+    videonoteform.h \
+    new_note_window.h
 
 FORMS += \
         mainwindow.ui \
     textnoteform.ui \
     graphicnoteform.ui \
     audionoteform.ui \
-    videonoteform.ui
+    videonoteform.ui \
+    new_note_window.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -55,24 +55,28 @@ SOURCES       = ../misNotas/main.cpp \
 		../misNotas/textnoteform.cpp \
 		../misNotas/graphicnoteform.cpp \
 		../misNotas/audionoteform.cpp \
-		../misNotas/videonoteform.cpp qrc_resources.cpp \
+		../misNotas/videonoteform.cpp \
+		../misNotas/new_note_window.cpp qrc_resources.cpp \
 		moc_mainwindow.cpp \
 		moc_textnoteform.cpp \
 		moc_graphicnoteform.cpp \
 		moc_audionoteform.cpp \
-		moc_videonoteform.cpp
+		moc_videonoteform.cpp \
+		moc_new_note_window.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		textnoteform.o \
 		graphicnoteform.o \
 		audionoteform.o \
 		videonoteform.o \
+		new_note_window.o \
 		qrc_resources.o \
 		moc_mainwindow.o \
 		moc_textnoteform.o \
 		moc_graphicnoteform.o \
 		moc_audionoteform.o \
-		moc_videonoteform.o
+		moc_videonoteform.o \
+		moc_new_note_window.o
 DIST          = ../../../Qt/5.11.2/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.11.2/clang_64/mkspecs/qdevice.pri \
 		../../../Qt/5.11.2/clang_64/mkspecs/features/device_config.prf \
@@ -269,12 +273,14 @@ DIST          = ../../../Qt/5.11.2/clang_64/mkspecs/features/spec_pre.prf \
 		../misNotas/textnoteform.h \
 		../misNotas/graphicnoteform.h \
 		../misNotas/audionoteform.h \
-		../misNotas/videonoteform.h ../misNotas/main.cpp \
+		../misNotas/videonoteform.h \
+		../misNotas/new_note_window.h ../misNotas/main.cpp \
 		../misNotas/mainwindow.cpp \
 		../misNotas/textnoteform.cpp \
 		../misNotas/graphicnoteform.cpp \
 		../misNotas/audionoteform.cpp \
-		../misNotas/videonoteform.cpp
+		../misNotas/videonoteform.cpp \
+		../misNotas/new_note_window.cpp
 QMAKE_TARGET  = misNotas
 DESTDIR       = 
 TARGET        = misNotas.app/Contents/MacOS/misNotas
@@ -291,7 +297,7 @@ include /Users/epidzhx/Qt/5.11.2/clang_64/mkspecs/features/mac/sdk.mk
 first: all
 ####### Build rules
 
-$(TARGET): ui_mainwindow.h ui_textnoteform.h ui_graphicnoteform.h ui_audionoteform.h ui_videonoteform.h $(OBJECTS)  
+$(TARGET): ui_mainwindow.h ui_textnoteform.h ui_graphicnoteform.h ui_audionoteform.h ui_videonoteform.h ui_new_note_window.h $(OBJECTS)  
 	@test -d misNotas.app/Contents/MacOS/ || mkdir -p misNotas.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -715,9 +721,9 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../misNotas/resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../Qt/5.11.2/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../misNotas/mainwindow.h ../misNotas/note.h ../misNotas/date.h ../misNotas/tag.h ../misNotas/textnoteform.h ../misNotas/graphicnoteform.h ../misNotas/audionoteform.h ../misNotas/videonoteform.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../misNotas/main.cpp ../misNotas/mainwindow.cpp ../misNotas/textnoteform.cpp ../misNotas/graphicnoteform.cpp ../misNotas/audionoteform.cpp ../misNotas/videonoteform.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../misNotas/mainwindow.ui ../misNotas/textnoteform.ui ../misNotas/graphicnoteform.ui ../misNotas/audionoteform.ui ../misNotas/videonoteform.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../misNotas/mainwindow.h ../misNotas/note.h ../misNotas/date.h ../misNotas/tag.h ../misNotas/textnoteform.h ../misNotas/graphicnoteform.h ../misNotas/audionoteform.h ../misNotas/videonoteform.h ../misNotas/new_note_window.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../misNotas/main.cpp ../misNotas/mainwindow.cpp ../misNotas/textnoteform.cpp ../misNotas/graphicnoteform.cpp ../misNotas/audionoteform.cpp ../misNotas/videonoteform.cpp ../misNotas/new_note_window.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../misNotas/mainwindow.ui ../misNotas/textnoteform.ui ../misNotas/graphicnoteform.ui ../misNotas/audionoteform.ui ../misNotas/videonoteform.ui ../misNotas/new_note_window.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -755,9 +761,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: ../../../Qt/5.11.2/clang_64/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -g -std=gnu++11 $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk -mmacosx-version-min=10.11 -Wall -W -dM -E -o moc_predefs.h ../../../Qt/5.11.2/clang_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_textnoteform.cpp moc_graphicnoteform.cpp moc_audionoteform.cpp moc_videonoteform.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_textnoteform.cpp moc_graphicnoteform.cpp moc_audionoteform.cpp moc_videonoteform.cpp moc_new_note_window.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_textnoteform.cpp moc_graphicnoteform.cpp moc_audionoteform.cpp moc_videonoteform.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_textnoteform.cpp moc_graphicnoteform.cpp moc_audionoteform.cpp moc_videonoteform.cpp moc_new_note_window.cpp
 moc_mainwindow.cpp: ../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		../misNotas/mainwindow.h \
@@ -793,13 +799,20 @@ moc_videonoteform.cpp: ../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Heade
 		../../../Qt/5.11.2/clang_64/bin/moc
 	/Users/epidzhx/Qt/5.11.2/clang_64/bin/moc $(DEFINES) --include /Users/epidzhx/Staff/misNotas/build-misNotas-Desktop_Qt_5_11_2_clang_64bit-Debug/moc_predefs.h -I/Users/epidzhx/Qt/5.11.2/clang_64/mkspecs/macx-clang -I/Users/epidzhx/Staff/misNotas/misNotas -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtGui.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include -F/Users/epidzhx/Qt/5.11.2/clang_64/lib ../misNotas/videonoteform.h -o moc_videonoteform.cpp
 
+moc_new_note_window.cpp: ../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../misNotas/new_note_window.h \
+		moc_predefs.h \
+		../../../Qt/5.11.2/clang_64/bin/moc
+	/Users/epidzhx/Qt/5.11.2/clang_64/bin/moc $(DEFINES) --include /Users/epidzhx/Staff/misNotas/build-misNotas-Desktop_Qt_5_11_2_clang_64bit-Debug/moc_predefs.h -I/Users/epidzhx/Qt/5.11.2/clang_64/mkspecs/macx-clang -I/Users/epidzhx/Staff/misNotas/misNotas -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtGui.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include -F/Users/epidzhx/Qt/5.11.2/clang_64/lib ../misNotas/new_note_window.h -o moc_new_note_window.cpp
+
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_mainwindow.h ui_textnoteform.h ui_graphicnoteform.h ui_audionoteform.h ui_videonoteform.h
+compiler_uic_make_all: ui_mainwindow.h ui_textnoteform.h ui_graphicnoteform.h ui_audionoteform.h ui_videonoteform.h ui_new_note_window.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_mainwindow.h ui_textnoteform.h ui_graphicnoteform.h ui_audionoteform.h ui_videonoteform.h
+	-$(DEL_FILE) ui_mainwindow.h ui_textnoteform.h ui_graphicnoteform.h ui_audionoteform.h ui_videonoteform.h ui_new_note_window.h
 ui_mainwindow.h: ../misNotas/mainwindow.ui \
 		../../../Qt/5.11.2/clang_64/bin/uic
 	/Users/epidzhx/Qt/5.11.2/clang_64/bin/uic ../misNotas/mainwindow.ui -o ui_mainwindow.h
@@ -819,6 +832,10 @@ ui_audionoteform.h: ../misNotas/audionoteform.ui \
 ui_videonoteform.h: ../misNotas/videonoteform.ui \
 		../../../Qt/5.11.2/clang_64/bin/uic
 	/Users/epidzhx/Qt/5.11.2/clang_64/bin/uic ../misNotas/videonoteform.ui -o ui_videonoteform.h
+
+ui_new_note_window.h: ../misNotas/new_note_window.ui \
+		../../../Qt/5.11.2/clang_64/bin/uic
+	/Users/epidzhx/Qt/5.11.2/clang_64/bin/uic ../misNotas/new_note_window.ui -o ui_new_note_window.h
 
 compiler_rez_source_make_all:
 compiler_rez_source_clean:
@@ -847,7 +864,14 @@ mainwindow.o: ../misNotas/mainwindow.cpp ../misNotas/mainwindow.h \
 		../misNotas/date.h \
 		../misNotas/tag.h \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QListWidget \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qlistwidget.h
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qlistwidget.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../misNotas/new_note_window.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../misNotas/mainwindow.cpp
 
 textnoteform.o: ../misNotas/textnoteform.cpp ../misNotas/textnoteform.h \
@@ -874,6 +898,12 @@ videonoteform.o: ../misNotas/videonoteform.cpp ../misNotas/videonoteform.h \
 		ui_videonoteform.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o videonoteform.o ../misNotas/videonoteform.cpp
 
+new_note_window.o: ../misNotas/new_note_window.cpp ../misNotas/new_note_window.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		ui_new_note_window.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o new_note_window.o ../misNotas/new_note_window.cpp
+
 qrc_resources.o: qrc_resources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources.o qrc_resources.cpp
 
@@ -891,6 +921,9 @@ moc_audionoteform.o: moc_audionoteform.cpp
 
 moc_videonoteform.o: moc_videonoteform.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_videonoteform.o moc_videonoteform.cpp
+
+moc_new_note_window.o: moc_new_note_window.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_new_note_window.o moc_new_note_window.cpp
 
 ####### Install
 

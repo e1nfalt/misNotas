@@ -38,6 +38,13 @@ public:
     virtual void save_into_file() = 0;
 
     //virtual Note* load_from_file(std::string &file_path) = 0;
+
+    std::string get_editing_date()
+    {
+        std::string ans = std::to_string(editing_date.get_year()) + "." + std::to_string(editing_date.get_month()) + "."
+                + std::to_string( editing_date.get_day());
+        return ans;
+    }
 };
 
 
@@ -73,6 +80,7 @@ public:
     {
         text_data = new_text_data;
     }
+
 };
 
 
