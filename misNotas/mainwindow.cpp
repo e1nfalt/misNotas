@@ -19,8 +19,6 @@ std::vector<Note*> get_notes()
     while (std::getline(std::cin, type) && std::getline(std::cin, way))
         ar.push_back(std::make_pair(type, way));
 
-    notes.assign(ar.size(), NULL);
-    int count = 0;
     for (auto i : ar)
     {
         freopen(i.second.c_str(), "r", stdin);
@@ -33,16 +31,8 @@ std::vector<Note*> get_notes()
             std::string text_data, buf;
             while (std::getline(std::cin, buf))
                 text_data += buf;
-            notes[count++] = new TextNote(title_, Date(cr_date), Date(ed_date), text_data);
+            notes.push_back(new TextNote(title_, Date(cr_date), Date(ed_date), text_data));
         }
-
-//            if (i.first == "Text")
-//            {
-//                std::string text_data, buf;
-//                while (getline(file, buf))
-//                    text_data += buf;
-//                notes[count++] = new TextNote(title_, Date(cr_date), Date(ed_date), text_data);
-//            }
     }
     return notes;
 }
@@ -55,16 +45,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     std::vector<Note*> notes;
     notes = get_notes();
-    //ui->listWidget->addItem("Sparta");
 
-    for (auto i : notes)
-    {
-        QString item = QString::fromStdString(i->get_title() + i->get_editing_date());
-        ui->listWidget->addItem(item);
-    }
 
-    for (unsigned long i = 0; i < notes.size(); i++)
-        ui->listWidget->item(i)->setForeground(Qt::blue);
 }
 
 MainWindow::~MainWindow()
@@ -76,4 +58,19 @@ void MainWindow::on_pushButton_clicked()
 {
     new_note_window *window = new new_note_window();
     window->show();
+}
+
+//template<class T>
+void MainWindow::refresh(Ui::MainWindow *ui)
+{
+    std::vector<Note*> notes = get_notes();
+    ui->listWidget->clear();
+    for (auto i : notes)
+    {
+        QString item = QString::fromStdString(i->get_title() + i->get_editing_date());
+        ui->listWidget->addItem(item);
+    }
+
+    for (unsigned long i = 0; i < notes.size(); i++)
+        ui->listWidget->item(i)->setForeground(Qt::blue);
 }

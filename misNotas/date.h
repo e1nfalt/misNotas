@@ -91,17 +91,6 @@ public:
         timeinfo = localtime (&rawtime);
         return Date(timeinfo->tm_year+1900, timeinfo->tm_mon, timeinfo->tm_mday);
     }
-
-//    static std::string get_current_date_str()
-//    {
-//        time_t rawtime;
-//        struct tm * timeinfo;
-
-//        time (&rawtime);
-//        timeinfo = localtime (&rawtime);
-//        return std::to_string(timeinfo->tm_year+1900) + "." + std::to_string(timeinfo->tm_mon)
-//                + "." +  std::to_string( timeinfo->tm_mday);
-//    }
 };
 
 

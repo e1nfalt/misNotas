@@ -68,7 +68,7 @@ public:
 
     void save_into_file()
     {
-        freopen(":/rec/img/notes_list.txt", "r", stdin);
+        freopen("/Users/epidzhx/Staff/misNotas/misNotas/files/notes_list.txt", "r", stdin);
         std::cout << "Text" << std::endl;
         std::cout << title << std::endl;
         std::cout << created_date << std::endl;

@@ -5,6 +5,7 @@
 #include <fstream>
 #include <QFile>
 #include <QTextStream>
+//#include "mainwindow.h"
 
 new_note_window::new_note_window(QWidget *parent) :
     QWidget(parent),
@@ -47,7 +48,7 @@ void new_note_window::on_pushButton_clicked()
         QString fname = QString::fromStdString("/Users/epidzhx/Staff/misNotas/misNotas/files/" + std::to_string(u) + ".txt");
         QFile file(fname);
         if (!file.exists())
-            std::cout << "Shit" << std::endl;
+            std::cout << "File already exists!" << std::endl;
         if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
 
             QTextStream textStream(&file);
@@ -57,6 +58,8 @@ void new_note_window::on_pushButton_clicked()
 
             freopen("/Users/epidzhx/Staff/misNotas/misNotas/files/notes_list.txt", "a", stdout);
             std::cout << "Text" << std::endl << fname.toStdString() << std::endl;
+            //MainWindow::refresh(Ui::MainWindow);
+
         }
         else std::cout << "ERROR! FILE IS NOT OPEN!" << std::endl;
 

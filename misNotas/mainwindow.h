@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+//#include "note.h"
 
 namespace Ui {
 class MainWindow;
@@ -15,6 +16,9 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+    //template<class T>
+    static void refresh(Ui::MainWindow *);
 
 private slots:
     void on_pushButton_clicked();
