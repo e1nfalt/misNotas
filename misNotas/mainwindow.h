@@ -18,10 +18,12 @@ public:
     ~MainWindow();
 
     //template<class T>
-    static void refresh(Ui::MainWindow *);
+    //static void refresh(Ui::MainWindow *);
 
 private slots:
     void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
 
 private:
     Ui::MainWindow *ui;

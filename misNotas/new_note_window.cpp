@@ -53,15 +53,13 @@ void new_note_window::on_pushButton_clicked()
 
             QTextStream textStream(&file);
 
-            textStream << title.toStdString().c_str() << "\n" << get_current_date_str().c_str();
+            textStream << title.toStdString().c_str() << "\n" << get_current_date_str().c_str() << "\n" << get_current_date_str().c_str();
             file.close();
 
             freopen("/Users/epidzhx/Staff/misNotas/misNotas/files/notes_list.txt", "a", stdout);
             std::cout << "Text" << std::endl << fname.toStdString() << std::endl;
-            //MainWindow::refresh(Ui::MainWindow);
 
         }
-        else std::cout << "ERROR! FILE IS NOT OPEN!" << std::endl;
 
         this->close();
 

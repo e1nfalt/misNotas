@@ -4,6 +4,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <time.h>
+#include <QString>
 
 
 class Date
@@ -17,11 +18,11 @@ public:
         //*this = this->get_current_date();
     }
 
-    Date(std::string str)
+    Date(QString &str)
     {
-        year = int(str[0] + str[1] + str[2] + str[3]);
-        month = int(str[5] + str[6]);
-        day = int(str[8] + str[9]);
+        year = (str.left(4)).toInt();
+        month = (str.mid(6, 2)).toInt();
+        day = (str.right(2)).toInt();
     }
 
     Date(int year_, int month_, int day_) : year(year_), month(month_), day(day_){}
@@ -78,9 +79,9 @@ public:
     friend std::ostream& operator<<(std::ostream&, Date&);
     friend std::ostream& operator<<(std::ostream&, const Date&);
 
-    int get_year() { return year; }
-    int get_month() { return month; }
-    int get_day() { return day; }
+    QString get_year() { return QString::number(year); }
+    QString get_month() { return QString::number(month); }
+    QString get_day() { return QString::number(day); }
 
     Date get_current_date()
     {
@@ -90,6 +91,12 @@ public:
         time (&rawtime);
         timeinfo = localtime (&rawtime);
         return Date(timeinfo->tm_year+1900, timeinfo->tm_mon, timeinfo->tm_mday);
+    }
+
+    const QString get_date_in_QString_format()
+    {
+        //std::string x = std::to_string(year) + "." + std::to_string(month) + "." + std::to_string(day);
+        return QString::fromStdString(std::to_string(year) + "." + std::to_string(month) + "." + std::to_string(day));
     }
 };
 

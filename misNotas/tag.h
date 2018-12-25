@@ -2,14 +2,15 @@
 #define TAG_H
 
 #include <string>
+#include <QString>
 
 
 class Tag
 {
 private:
-    std::string name;
+    QString name;
 public:
-    Tag(std::string str_) : name(str_) {}
+    Tag(QString str_) : name(str_) {}
 };
 
 #endif // TAG_H

@@ -26,6 +26,7 @@ public:
     QLabel *label;
     QListWidget *listWidget;
     QPushButton *pushButton;
+    QPushButton *pushButton_2;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -43,7 +44,10 @@ public:
         listWidget->setAutoFillBackground(false);
         pushButton = new QPushButton(centralWidget);
         pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(150, 260, 80, 24));
+        pushButton->setGeometry(QRect(70, 260, 80, 24));
+        pushButton_2 = new QPushButton(centralWidget);
+        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
+        pushButton_2->setGeometry(QRect(230, 260, 80, 24));
         MainWindow->setCentralWidget(centralWidget);
 
         retranslateUi(MainWindow);
@@ -56,6 +60,7 @@ public:
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
         label->setText(QApplication::translate("MainWindow", "misNotas", nullptr));
         pushButton->setText(QApplication::translate("MainWindow", "ADD", nullptr));
+        pushButton_2->setText(QApplication::translate("MainWindow", "REFRESH", nullptr));
     } // retranslateUi
 
 };
