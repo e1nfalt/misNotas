@@ -11,7 +11,9 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
@@ -27,27 +29,55 @@ public:
     QListWidget *listWidget;
     QPushButton *pushButton;
     QPushButton *pushButton_2;
+    QPushButton *pushButton_3;
+    QPushButton *pushButton_4;
+    QPushButton *pushButton_5;
+    QLineEdit *lineEdit;
+    QLineEdit *lineEdit_2;
+    QComboBox *comboBox;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(400, 300);
+        MainWindow->resize(610, 500);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         label = new QLabel(centralWidget);
         label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(150, 20, 59, 16));
+        label->setGeometry(QRect(150, 0, 59, 16));
         listWidget = new QListWidget(centralWidget);
         listWidget->setObjectName(QStringLiteral("listWidget"));
-        listWidget->setGeometry(QRect(60, 50, 256, 192));
+        listWidget->setGeometry(QRect(10, 20, 381, 371));
+        QFont font;
+        font.setBold(true);
+        font.setWeight(75);
+        listWidget->setFont(font);
         listWidget->setAutoFillBackground(false);
         pushButton = new QPushButton(centralWidget);
         pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(70, 260, 80, 24));
+        pushButton->setGeometry(QRect(160, 400, 80, 24));
         pushButton_2 = new QPushButton(centralWidget);
         pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-        pushButton_2->setGeometry(QRect(230, 260, 80, 24));
+        pushButton_2->setGeometry(QRect(450, 400, 80, 24));
+        pushButton_3 = new QPushButton(centralWidget);
+        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
+        pushButton_3->setGeometry(QRect(400, 20, 80, 24));
+        pushButton_4 = new QPushButton(centralWidget);
+        pushButton_4->setObjectName(QStringLiteral("pushButton_4"));
+        pushButton_4->setGeometry(QRect(400, 130, 80, 24));
+        pushButton_5 = new QPushButton(centralWidget);
+        pushButton_5->setObjectName(QStringLiteral("pushButton_5"));
+        pushButton_5->setGeometry(QRect(460, 260, 80, 24));
+        lineEdit = new QLineEdit(centralWidget);
+        lineEdit->setObjectName(QStringLiteral("lineEdit"));
+        lineEdit->setGeometry(QRect(400, 90, 113, 24));
+        lineEdit_2 = new QLineEdit(centralWidget);
+        lineEdit_2->setObjectName(QStringLiteral("lineEdit_2"));
+        lineEdit_2->setGeometry(QRect(400, 220, 113, 24));
+        comboBox = new QComboBox(centralWidget);
+        comboBox->setObjectName(QStringLiteral("comboBox"));
+        comboBox->setGeometry(QRect(520, 220, 79, 24));
         MainWindow->setCentralWidget(centralWidget);
 
         retranslateUi(MainWindow);
@@ -61,6 +91,9 @@ public:
         label->setText(QApplication::translate("MainWindow", "misNotas", nullptr));
         pushButton->setText(QApplication::translate("MainWindow", "ADD", nullptr));
         pushButton_2->setText(QApplication::translate("MainWindow", "REFRESH", nullptr));
+        pushButton_3->setText(QApplication::translate("MainWindow", "EDIT", nullptr));
+        pushButton_4->setText(QApplication::translate("MainWindow", "TITLE FIND", nullptr));
+        pushButton_5->setText(QApplication::translate("MainWindow", "FILTER DATE", nullptr));
     } // retranslateUi
 
 };

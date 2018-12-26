@@ -6,7 +6,6 @@
 
 namespace Ui {
 class MainWindow;
-//std::string notes_list = ":/rec/img/notes_list.txt";
 }
 
 class MainWindow : public QMainWindow
@@ -17,13 +16,16 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    //template<class T>
-    //static void refresh(Ui::MainWindow *);
-
 private slots:
     void on_pushButton_clicked();
 
     void on_pushButton_2_clicked();
+
+    void on_pushButton_4_clicked();
+
+    void on_pushButton_5_clicked();
+
+    void on_pushButton_3_clicked();
 
 private:
     Ui::MainWindow *ui;

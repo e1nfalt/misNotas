@@ -6,6 +6,7 @@
 #include <QFile>
 #include <QTextStream>
 //#include "mainwindow.h"
+#include "date.h"
 
 new_note_window::new_note_window(QWidget *parent) :
     QWidget(parent),
@@ -25,56 +26,45 @@ new_note_window::~new_note_window()
     delete ui;
 }
 
-std::string get_current_date_str()
-{
-    time_t rawtime;
-    struct tm * timeinfo;
-
-    time (&rawtime);
-    timeinfo = localtime (&rawtime);
-    return std::to_string(timeinfo->tm_year+1900) + "." + std::to_string(timeinfo->tm_mon)
-            + "." +  std::to_string( timeinfo->tm_mday);
-}
-
 void new_note_window::on_pushButton_clicked()
 {
-    QString title = ui->lineEdit->text();
     QString type = ui->comboBox->currentText();
+    QString title = ui->lineEdit->text();
+    QString tags_list = ui->lineEdit_2->text();
 
+    unsigned long new_file_name = rand();
+    QString fname = "";
     if (type == "Text")
     {
-        unsigned long u = rand();
-
-        QString fname = QString::fromStdString("/Users/epidzhx/Staff/misNotas/misNotas/files/" + std::to_string(u) + ".txt");
-        QFile file(fname);
-        if (!file.exists())
-            std::cout << "File already exists!" << std::endl;
-        if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-
-            QTextStream textStream(&file);
-
-            textStream << title.toStdString().c_str() << "\n" << get_current_date_str().c_str() << "\n" << get_current_date_str().c_str();
-            file.close();
-
-            freopen("/Users/epidzhx/Staff/misNotas/misNotas/files/notes_list.txt", "a", stdout);
-            std::cout << "Text" << std::endl << fname.toStdString() << std::endl;
-
-        }
-
-        this->close();
-
+        fname = QString::fromStdString("/Users/epidzhx/Staff/misNotas/misNotas/files/" + std::to_string(new_file_name) + ".txt");
     }
     else if (type == "Graphic")
     {
-
+        fname = QString::fromStdString("/Users/epidzhx/Staff/misNotas/misNotas/files/" + std::to_string(new_file_name) + ".png");
     }
 
     else if (type == "Audio")
     {
-
+        fname = QString::fromStdString("/Users/epidzhx/Staff/misNotas/misNotas/files/" + std::to_string(new_file_name) + ".mp3");
     }
     else if (type == "Video")
     {
-
+        fname = QString::fromStdString("/Users/epidzhx/Staff/misNotas/misNotas/files/" + std::to_string(new_file_name) + ".mov");
     }
+
+    QFile file(fname);
+    if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        file.close();
+        QFile file2("/Users/epidzhx/Staff/misNotas/misNotas/files/notes_list.txt");
+        if (file2.open(QIODevice::Append))
+        {
+            QTextStream textStream2(&file2);
+
+            textStream2 << new_file_name << "\n" << type << "\n" << title << "\n" << Date::get_current_date_in_QString() << "\n" << Date::get_current_date_in_QString()
+                        << "\n" << tags_list << "\n" << fname << "\n";
+            file2.close();
+        }
+    }
+
+    this->close();
 }

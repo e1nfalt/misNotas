@@ -83,34 +83,25 @@ public:
     QString get_month() { return QString::number(month); }
     QString get_day() { return QString::number(day); }
 
-    Date get_current_date()
+    QString get_date_in_QString_format()
+    {
+        //std::string x = std::to_string(year) + "." + std::to_string(month) + "." + std::to_string(day);
+        return QString::fromStdString(std::to_string(year) + "." + std::to_string(month) + "." + std::to_string(day));
+    }
+
+
+    static QString get_current_date_in_QString()
     {
         time_t rawtime;
         struct tm * timeinfo;
 
         time (&rawtime);
         timeinfo = localtime (&rawtime);
-        return Date(timeinfo->tm_year+1900, timeinfo->tm_mon, timeinfo->tm_mday);
-    }
-
-    const QString get_date_in_QString_format()
-    {
-        //std::string x = std::to_string(year) + "." + std::to_string(month) + "." + std::to_string(day);
-        return QString::fromStdString(std::to_string(year) + "." + std::to_string(month) + "." + std::to_string(day));
+        QString s = QString::number(timeinfo->tm_year+1900) + "." + QString::number(timeinfo->tm_mon)
+                + "." + QString::number(timeinfo->tm_mday);
+        return s;
     }
 };
 
-
-std::ostream& operator<<(std::ostream& os, Date &date_)
-{
-    os << date_.year << "." << date_.month << "." << date_.day;
-    return os;
-}
-
-std::ostream& operator<<(std::ostream& os, const Date &date_)
-{
-    os << date_.year << "." << date_.month << "." << date_.day;
-    return os;
-}
 
 #endif // DATE_H

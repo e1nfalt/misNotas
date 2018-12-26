@@ -2,6 +2,7 @@
 #define NEW_NOTE_WINDOW_H
 
 #include <QWidget>
+//#include <note.h>
 
 namespace Ui {
 class new_note_window;

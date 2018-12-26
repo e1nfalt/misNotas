@@ -24,6 +24,7 @@ public:
     QComboBox *comboBox;
     QPushButton *pushButton;
     QLineEdit *lineEdit;
+    QLineEdit *lineEdit_2;
 
     void setupUi(QWidget *new_note_window)
     {
@@ -39,6 +40,9 @@ public:
         lineEdit = new QLineEdit(new_note_window);
         lineEdit->setObjectName(QStringLiteral("lineEdit"));
         lineEdit->setGeometry(QRect(130, 130, 113, 24));
+        lineEdit_2 = new QLineEdit(new_note_window);
+        lineEdit_2->setObjectName(QStringLiteral("lineEdit_2"));
+        lineEdit_2->setGeometry(QRect(130, 170, 113, 24));
 
         retranslateUi(new_note_window);
 

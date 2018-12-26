@@ -20,6 +20,7 @@ protected:
     Date editing_date;
     QStringList tags;
     QString data_file;
+    int id;
 public:
 
     Note(QString type_, QString title_, Date created_date_, Date editing_date_) : type(type_), title(title_),
@@ -28,7 +29,23 @@ public:
     Note(QString type_, QString title_) : type(type_), title(title_) {}
 
     QString get_title() { return title; }
+
     QString get_type() { return type; }
+
+    Date get_cr_date() { return created_date; }
+
+    Date get_ed_date() { return editing_date; }
+
+    int get_id() { return id; }
+
+    QString get_tags()
+    {
+        QString s = "";
+        for (auto i : tags)
+            s += i + "@";
+        return s.mid(0, s.length() - 2);
+    }
+
     QString get_file_path() { return data_file; }
 
     void set_title(QString str_) { title = str_; }
@@ -65,13 +82,14 @@ public:
         title = title_;
     }
 
-    TextNote(QString title_, Date cr_date, Date ed_date, QStringList tags_, QString data_file_path)
+    TextNote(int id_, QString title_, Date cr_date, Date ed_date, QStringList tags_, QString data_file_path)
         : Note("Text", title_)
     {
         created_date = cr_date;
         editing_date = ed_date;
         tags = tags_;
         data_file = data_file_path;
+        id = id_;
     }
 
     void save_into_file() override
@@ -130,11 +148,14 @@ std::vector<Note*> get_notes()
     QFile file("/Users/epidzhx/Staff/misNotas/misNotas/files/notes_list.txt");
     if (file.open(QIODevice::ReadOnly))
     {
-        int n = file.readLine().toInt();
-        for (int i = 0; i < n; i++)
-        {
-            QTextStream in(&file);
+        QTextStream in(&file);
 
+        QString s = in.readLine();
+        while (!s.isEmpty())
+        {
+            if (s.endsWith("\n"))
+                s.remove(s.size() - 1, 1);
+            int id = s.toInt();
             QString type = in.readLine();
             QString title = in.readLine();
             QString cr_date = in.readLine();
@@ -143,7 +164,7 @@ std::vector<Note*> get_notes()
             QString data_file_path = in.readLine();
             if (type == "Text")
             {
-                notes.push_back(new TextNote(title, cr_date, ed_date, tags_list, data_file_path));
+                notes.push_back(new TextNote(id, title, cr_date, ed_date, tags_list, data_file_path));
             }
             else if (type == "Graphic")
             {
@@ -157,6 +178,7 @@ std::vector<Note*> get_notes()
             {
 
             }
+            s = in.readLine();
         }
 
     }
@@ -173,9 +195,15 @@ void write_note_list(std::vector<Note*> &notes)
         for (auto i : notes)
         {
             QTextStream out(&file);
-            out << i->get_type() << "\n" << i->get_file_path() << "\n";
+            //Date t1 = i->get_created_date()
+            out << i->get_type() << "\n" << i->get_title() << "\n" << i->get_created_date()
+                << "\n" << i->get_editing_date() << "\n" << i->get_tags() << "\n"
+                << i->get_file_path() << "\n";
         }
+        file.close();
     }
 }
 
+
+std::vector<Note*> notes;
 #endif // NOTE_H

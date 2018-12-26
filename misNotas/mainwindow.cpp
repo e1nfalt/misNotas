@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <note.h>
 #include <QListWidget>
 #include <QDialog>
 #include <QMessageBox>
@@ -10,6 +9,7 @@
 //#include <string>
 #include <fstream>
 #include "new_note_window.h"
+#include "note.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -17,10 +17,14 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 
     ui->setupUi(this);
-    std::vector<Note*> notes;
     notes = get_notes();
     MainWindow::on_pushButton_2_clicked();
-
+    ui->comboBox->addItem(">");
+    ui->comboBox->addItem("<");
+    ui->comboBox->addItem(">=");
+    ui->comboBox->addItem("<=");
+    ui->comboBox->addItem("==");
+    ui->comboBox->addItem("!=");
 }
 
 MainWindow::~MainWindow()
@@ -28,20 +32,99 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_pushButton_clicked() // add
 {
     new_note_window *window = new new_note_window();
     window->show();
 }
 
-void MainWindow::on_pushButton_2_clicked()
+void MainWindow::on_pushButton_2_clicked() // refresh
 {
-    std::vector<Note*> notes = get_notes();
+    notes = get_notes();
     ui->listWidget->clear();
     for (auto i : notes)
     {
-        ui->listWidget->addItem("Type: " + i->get_type() +
-                                "; Title:" + i->get_title() +
-                                "; Editind date:" + i->get_editing_date());
+        ui->listWidget->addItem("ID: " + QString::number(i->get_id()) + "; Type: " + i->get_type() +
+                                "; Title:" + i->get_title());
     }
+}
+
+void MainWindow::on_pushButton_4_clicked() // title_find
+{
+    QString title = ui->lineEdit->text();
+    //std::vector<QString> ar;
+    ui->listWidget->clear();
+    for (auto i : notes)
+    {
+        if (i->get_title() == title)
+            ui->listWidget->addItem("ID: " + QString::number(i->get_id()) + "; Type: " + i->get_type() +
+                                    "; Title:" + i->get_title());
+    }
+}
+
+void MainWindow::on_pushButton_5_clicked() // filter_date
+{
+    QString action = ui->comboBox->currentText();
+    QString check = ui->lineEdit_2->text();
+    Date checked_date(check);
+    ui->listWidget->clear();
+    if (action == ">")
+    {
+        for (auto i : notes)
+        {
+            if (i->get_cr_date() > checked_date)
+                ui->listWidget->addItem("ID: " + QString::number(i->get_id()) + "; Type: " + i->get_type() +
+                                        "; Title:" + i->get_title());
+        }
+    }
+    else if (action == "<")
+    {
+        for (auto i : notes)
+        {
+            if (i->get_cr_date() < checked_date)
+                ui->listWidget->addItem("ID: " + QString::number(i->get_id()) + "; Type: " + i->get_type() +
+                                        "; Title:" + i->get_title());
+        }
+    }
+    else if (action == ">=")
+    {
+        for (auto i : notes)
+        {
+            if (i->get_cr_date() >= checked_date)
+                ui->listWidget->addItem("ID: " + QString::number(i->get_id()) + "; Type: " + i->get_type() +
+                                        "; Title:" + i->get_title());
+        }
+    }
+    else if (action == "<=")
+    {
+        for (auto i : notes)
+        {
+            if (i->get_cr_date() <= checked_date)
+                ui->listWidget->addItem("ID: " + QString::number(i->get_id()) + "; Type: " + i->get_type() +
+                                        "; Title:" + i->get_title());
+        }
+    }
+    else if (action == "==")
+    {
+        for (auto i : notes)
+        {
+            if (i->get_cr_date() == checked_date)
+                ui->listWidget->addItem("ID: " + QString::number(i->get_id()) + "; Type: " + i->get_type() +
+                                        "; Title:" + i->get_title());
+        }
+    }
+    else
+    {
+        for (auto i : notes)
+        {
+            if (i->get_cr_date() != checked_date)
+                ui->listWidget->addItem("ID: " + QString::number(i->get_id()) + "; Type: " + i->get_type() +
+                                        "; Title:" + i->get_title());
+        }
+    }
+}
+
+void MainWindow::on_pushButton_3_clicked() // edit
+{
+
 }
