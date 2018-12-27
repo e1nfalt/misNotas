@@ -14,9 +14,11 @@ class TextNoteForm : public QWidget
 public:
     explicit TextNoteForm(QWidget *parent = nullptr);
     ~TextNoteForm();
+    void set_title_file_path(QString title, QString path);
 
 private:
     Ui::TextNoteForm *ui;
+    QString file_path;
 };
 
 #endif // TEXTNOTEFORM_H

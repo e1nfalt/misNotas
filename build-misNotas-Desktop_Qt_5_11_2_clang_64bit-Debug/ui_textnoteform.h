@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QWidget>
@@ -23,6 +24,7 @@ public:
     QPlainTextEdit *plainTextEdit;
     QPushButton *pushButton;
     QPushButton *pushButton_2;
+    QLabel *label;
 
     void setupUi(QWidget *TextNoteForm)
     {
@@ -38,6 +40,9 @@ public:
         pushButton_2 = new QPushButton(TextNoteForm);
         pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
         pushButton_2->setGeometry(QRect(220, 250, 80, 24));
+        label = new QLabel(TextNoteForm);
+        label->setObjectName(QStringLiteral("label"));
+        label->setGeometry(QRect(160, 10, 59, 16));
 
         retranslateUi(TextNoteForm);
 
@@ -49,6 +54,7 @@ public:
         TextNoteForm->setWindowTitle(QApplication::translate("TextNoteForm", "Form", nullptr));
         pushButton->setText(QApplication::translate("TextNoteForm", "save", nullptr));
         pushButton_2->setText(QApplication::translate("TextNoteForm", "open", nullptr));
+        label->setText(QApplication::translate("TextNoteForm", "TextLabel", nullptr));
     } // retranslateUi
 
 };

@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include "textnoteform.h"
-//#include "note.h"
 
 namespace Ui {
 class MainWindow;
@@ -16,6 +15,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    static QString curr_file_name;
 
 
 private slots:
