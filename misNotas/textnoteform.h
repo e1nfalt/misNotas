@@ -16,9 +16,15 @@ public:
     ~TextNoteForm();
     void set_title_file_path(QString title, QString path);
 
+private slots:
+    void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
+
 private:
     Ui::TextNoteForm *ui;
     QString file_path;
+    QString text;
 };
 
 #endif // TEXTNOTEFORM_H

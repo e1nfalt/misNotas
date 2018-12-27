@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->comboBox->addItem("==");
     ui->comboBox->addItem("!=");
 
-    textForm = new TextNoteForm();
+    //textForm = new TextNoteForm();
     //connect(ui->pushButton_3, SIGNAL(clicked()), textForm, SLOT(show()));
 }
 
@@ -131,12 +131,15 @@ void MainWindow::on_pushButton_3_clicked() // edit
 {
     QStringList item = ui->listWidget->currentItem()->text().split(" ");
     QString id = item[1].remove(item[1].size() - 1, 1);
-    QString type = item[2].remove(item[2].size() - 1, 1);
+    QString type = item[3].remove(item[3].size() - 1, 1);
     Note *curr;
     for (auto i : notes)
     {
         if (i->get_id() == id.toInt())
+        {
             curr = i;
+            break;
+        }
     }
     if (type == "Text")
     {
@@ -144,10 +147,10 @@ void MainWindow::on_pushButton_3_clicked() // edit
         window->set_title_file_path(curr->get_title(), curr->get_file_path());
         window->show();
     }
-    else if (type == "Graphic")
-        connect(ui->pushButton_3, SIGNAL(clicked()), textForm, SLOT(show()));
-    else if (type == "Audio")
-        connect(ui->pushButton_3, SIGNAL(clicked()), textForm, SLOT(show()));
-    else if (type == "Video")
-        connect(ui->pushButton_3, SIGNAL(clicked()), textForm, SLOT(show()));
+//    else if (type == "Graphic")
+//        connect(ui->pushButton_3, SIGNAL(clicked()), textForm, SLOT(show()));
+//    else if (type == "Audio")
+//        connect(ui->pushButton_3, SIGNAL(clicked()), textForm, SLOT(show()));
+//    else if (type == "Video")
+//        connect(ui->pushButton_3, SIGNAL(clicked()), textForm, SLOT(show()));
 }

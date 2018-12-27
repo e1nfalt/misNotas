@@ -31,7 +31,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    TextNoteForm *textForm;
+    //TextNoteForm *textForm;
 };
 
 #endif // MAINWINDOW_H

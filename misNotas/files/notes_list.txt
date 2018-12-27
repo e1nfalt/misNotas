@@ -33,13 +33,6 @@ test5
 2018.11.27
 fff
 /Users/epidzhx/Staff/misNotas/misNotas/files/1458777923.txt
-114807987
-Text
-test6
-2018.11.27
-2018.11.27
-kokoko
-/Users/epidzhx/Staff/misNotas/misNotas/files/114807987.txt
 143542612
 Text
 test7
