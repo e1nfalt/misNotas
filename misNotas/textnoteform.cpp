@@ -2,7 +2,7 @@
 #include "ui_textnoteform.h"
 #include <QTextStream>
 #include <QFileDialog>
-
+//#include "note.h"
 TextNoteForm::TextNoteForm(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::TextNoteForm)

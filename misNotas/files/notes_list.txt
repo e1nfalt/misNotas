@@ -40,3 +40,17 @@ test7
 2018.11.27
 iii
 /Users/epidzhx/Staff/misNotas/misNotas/files/143542612.txt
+197493099
+Audio
+testaudio
+2018.11.27
+2018.11.27
+test1@ys
+/Users/epidzhx/Staff/misNotas/misNotas/files/197493099.wav
+585640194
+Audio
+test2
+2018.11.27
+2018.11.27
+test2
+/Users/epidzhx/Staff/misNotas/misNotas/files/585640194.wav

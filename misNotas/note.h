@@ -117,6 +117,7 @@ public:
                 text += line;
                 line = in.readLine();
             }
+            file.close();
         }
     }
 
@@ -125,19 +126,80 @@ public:
 
 class GraphicNote : public Note
 {
+public:
 
+    GraphicNote(int id_, QString title_, Date cr_date, Date ed_date, QStringList tags_, QString data_file_path)
+        : Note("Audio", title_)
+    {
+        created_date = cr_date;
+        editing_date = ed_date;
+        tags = tags_;
+        data_file = data_file_path;
+        id = id_;
+    }
+
+    void save_into_file() override
+    {
+
+    }
+
+    void load_data_from_file(QString &file_path) override // think about it
+    {
+
+    }
 };
 
 
 class AudioNote : public Note
 {
+private:
+    QByteArray arr;
+public:
 
+    AudioNote(int id_, QString title_, Date cr_date, Date ed_date, QStringList tags_, QString data_file_path)
+        : Note("Audio", title_)
+    {
+        created_date = cr_date;
+        editing_date = ed_date;
+        tags = tags_;
+        data_file = data_file_path;
+        id = id_;
+    }
+
+    void save_into_file() override
+    {
+
+    }
+
+    void load_data_from_file(QString &file_path) override // think about it
+    {
+
+    }
 };
 
 
 class VideoNote : public Note
 {
+public:
+    VideoNote(int id_, QString title_, Date cr_date, Date ed_date, QStringList tags_, QString data_file_path)
+        : Note("Audio", title_)
+    {
+        created_date = cr_date;
+        editing_date = ed_date;
+        tags = tags_;
+        data_file = data_file_path;
+        id = id_;
+    }
 
+    void save_into_file() override
+    {
+
+    }
+
+    void load_data_from_file(QString &file_path) override // think about it
+    {
+
+    }
 };
 
 
@@ -168,15 +230,15 @@ std::vector<Note*> get_notes()
             }
             else if (type == "Graphic")
             {
-
+                notes.push_back(new GraphicNote(id, title, cr_date, ed_date, tags_list, data_file_path));
             }
             else if (type == "Audio")
             {
-
+                notes.push_back(new AudioNote(id, title, cr_date, ed_date, tags_list, data_file_path));
             }
             else if (type == "Video")
             {
-
+                notes.push_back(new VideoNote(id, title, cr_date, ed_date, tags_list, data_file_path));
             }
             s = in.readLine();
         }

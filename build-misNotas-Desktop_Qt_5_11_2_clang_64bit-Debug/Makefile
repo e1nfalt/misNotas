@@ -12,10 +12,10 @@ MAKEFILE      = Makefile
 
 CC            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
 CXX           = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
-DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_MULTIMEDIA_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk -mmacosx-version-min=10.11 -Wall -W -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -stdlib=libc++ -g -std=gnu++11 $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk -mmacosx-version-min=10.11 -Wall -W -fPIC $(DEFINES)
-INCPATH       = -I../misNotas -I. -I../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers -I../../../Qt/5.11.2/clang_64/lib/QtGui.framework/Headers -I../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -I../../../Qt/5.11.2/clang_64/mkspecs/macx-clang -F/Users/epidzhx/Qt/5.11.2/clang_64/lib
+INCPATH       = -I../misNotas -I. -I../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers -I../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers -I../../../Qt/5.11.2/clang_64/lib/QtGui.framework/Headers -I../../../Qt/5.11.2/clang_64/lib/QtNetwork.framework/Headers -I../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -I../../../Qt/5.11.2/clang_64/mkspecs/macx-clang -F/Users/epidzhx/Qt/5.11.2/clang_64/lib
 QMAKE         = /Users/epidzhx/Qt/5.11.2/clang_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -38,7 +38,7 @@ DISTNAME      = misNotas1.0.0
 DISTDIR = /Users/epidzhx/Staff/misNotas/build-misNotas-Desktop_Qt_5_11_2_clang_64bit-Debug/.tmp/misNotas1.0.0
 LINK          = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
 LFLAGS        = -stdlib=libc++ -headerpad_max_install_names $(EXPORT_ARCH_ARGS) -Wl,-syslibroot,/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk -mmacosx-version-min=10.11 -Wl,-rpath,@executable_path/Frameworks -Wl,-rpath,/Users/epidzhx/Qt/5.11.2/clang_64/lib
-LIBS          = $(SUBLIBS) -F/Users/epidzhx/Qt/5.11.2/clang_64/lib -framework QtWidgets -framework QtGui -framework QtCore -framework DiskArbitration -framework IOKit -framework OpenGL -framework AGL 
+LIBS          = $(SUBLIBS) -F/Users/epidzhx/Qt/5.11.2/clang_64/lib -framework QtMultimedia -framework QtNetwork -framework QtCore -framework DiskArbitration -framework IOKit -framework QtGui -framework QtWidgets -framework OpenGL -framework AGL 
 AR            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar cq
 RANLIB        = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib -s
 SED           = sed
@@ -492,8 +492,10 @@ Makefile: ../misNotas/misNotas.pro ../../../Qt/5.11.2/clang_64/mkspecs/macx-clan
 		../../../Qt/5.11.2/clang_64/mkspecs/features/lex.prf \
 		../misNotas/misNotas.pro \
 		../misNotas/resources.qrc \
+		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/QtMultimedia.prl \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/QtWidgets.prl \
 		../../../Qt/5.11.2/clang_64/lib/QtGui.framework/QtGui.prl \
+		../../../Qt/5.11.2/clang_64/lib/QtNetwork.framework/QtNetwork.prl \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/QtCore.prl
 	$(QMAKE) -o Makefile ../misNotas/misNotas.pro -spec macx-clang CONFIG+=debug CONFIG+=x86_64 CONFIG+=qml_debug
 ../../../Qt/5.11.2/clang_64/mkspecs/features/spec_pre.prf:
@@ -687,8 +689,10 @@ Makefile: ../misNotas/misNotas.pro ../../../Qt/5.11.2/clang_64/mkspecs/macx-clan
 ../../../Qt/5.11.2/clang_64/mkspecs/features/lex.prf:
 ../misNotas/misNotas.pro:
 ../misNotas/resources.qrc:
+../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/QtMultimedia.prl:
 ../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/QtWidgets.prl:
 ../../../Qt/5.11.2/clang_64/lib/QtGui.framework/QtGui.prl:
+../../../Qt/5.11.2/clang_64/lib/QtNetwork.framework/QtNetwork.prl:
 ../../../Qt/5.11.2/clang_64/lib/QtCore.framework/QtCore.prl:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ../misNotas/misNotas.pro -spec macx-clang CONFIG+=debug CONFIG+=x86_64 CONFIG+=qml_debug
@@ -766,45 +770,50 @@ compiler_moc_header_clean:
 	-$(DEL_FILE) moc_mainwindow.cpp moc_textnoteform.cpp moc_graphicnoteform.cpp moc_audionoteform.cpp moc_videonoteform.cpp moc_new_note_window.cpp
 moc_mainwindow.cpp: ../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		../misNotas/textnoteform.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../misNotas/mainwindow.h \
 		moc_predefs.h \
 		../../../Qt/5.11.2/clang_64/bin/moc
-	/Users/epidzhx/Qt/5.11.2/clang_64/bin/moc $(DEFINES) --include /Users/epidzhx/Staff/misNotas/build-misNotas-Desktop_Qt_5_11_2_clang_64bit-Debug/moc_predefs.h -I/Users/epidzhx/Qt/5.11.2/clang_64/mkspecs/macx-clang -I/Users/epidzhx/Staff/misNotas/misNotas -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtGui.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include -F/Users/epidzhx/Qt/5.11.2/clang_64/lib ../misNotas/mainwindow.h -o moc_mainwindow.cpp
+	/Users/epidzhx/Qt/5.11.2/clang_64/bin/moc $(DEFINES) --include /Users/epidzhx/Staff/misNotas/build-misNotas-Desktop_Qt_5_11_2_clang_64bit-Debug/moc_predefs.h -I/Users/epidzhx/Qt/5.11.2/clang_64/mkspecs/macx-clang -I/Users/epidzhx/Staff/misNotas/misNotas -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtGui.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtNetwork.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include -F/Users/epidzhx/Qt/5.11.2/clang_64/lib ../misNotas/mainwindow.h -o moc_mainwindow.cpp
 
 moc_textnoteform.cpp: ../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../misNotas/textnoteform.h \
 		moc_predefs.h \
 		../../../Qt/5.11.2/clang_64/bin/moc
-	/Users/epidzhx/Qt/5.11.2/clang_64/bin/moc $(DEFINES) --include /Users/epidzhx/Staff/misNotas/build-misNotas-Desktop_Qt_5_11_2_clang_64bit-Debug/moc_predefs.h -I/Users/epidzhx/Qt/5.11.2/clang_64/mkspecs/macx-clang -I/Users/epidzhx/Staff/misNotas/misNotas -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtGui.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include -F/Users/epidzhx/Qt/5.11.2/clang_64/lib ../misNotas/textnoteform.h -o moc_textnoteform.cpp
+	/Users/epidzhx/Qt/5.11.2/clang_64/bin/moc $(DEFINES) --include /Users/epidzhx/Staff/misNotas/build-misNotas-Desktop_Qt_5_11_2_clang_64bit-Debug/moc_predefs.h -I/Users/epidzhx/Qt/5.11.2/clang_64/mkspecs/macx-clang -I/Users/epidzhx/Staff/misNotas/misNotas -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtGui.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtNetwork.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include -F/Users/epidzhx/Qt/5.11.2/clang_64/lib ../misNotas/textnoteform.h -o moc_textnoteform.cpp
 
 moc_graphicnoteform.cpp: ../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../misNotas/graphicnoteform.h \
 		moc_predefs.h \
 		../../../Qt/5.11.2/clang_64/bin/moc
-	/Users/epidzhx/Qt/5.11.2/clang_64/bin/moc $(DEFINES) --include /Users/epidzhx/Staff/misNotas/build-misNotas-Desktop_Qt_5_11_2_clang_64bit-Debug/moc_predefs.h -I/Users/epidzhx/Qt/5.11.2/clang_64/mkspecs/macx-clang -I/Users/epidzhx/Staff/misNotas/misNotas -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtGui.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include -F/Users/epidzhx/Qt/5.11.2/clang_64/lib ../misNotas/graphicnoteform.h -o moc_graphicnoteform.cpp
+	/Users/epidzhx/Qt/5.11.2/clang_64/bin/moc $(DEFINES) --include /Users/epidzhx/Staff/misNotas/build-misNotas-Desktop_Qt_5_11_2_clang_64bit-Debug/moc_predefs.h -I/Users/epidzhx/Qt/5.11.2/clang_64/mkspecs/macx-clang -I/Users/epidzhx/Staff/misNotas/misNotas -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtGui.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtNetwork.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include -F/Users/epidzhx/Qt/5.11.2/clang_64/lib ../misNotas/graphicnoteform.h -o moc_graphicnoteform.cpp
 
 moc_audionoteform.cpp: ../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlayer \
+		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
 		../misNotas/audionoteform.h \
 		moc_predefs.h \
 		../../../Qt/5.11.2/clang_64/bin/moc
-	/Users/epidzhx/Qt/5.11.2/clang_64/bin/moc $(DEFINES) --include /Users/epidzhx/Staff/misNotas/build-misNotas-Desktop_Qt_5_11_2_clang_64bit-Debug/moc_predefs.h -I/Users/epidzhx/Qt/5.11.2/clang_64/mkspecs/macx-clang -I/Users/epidzhx/Staff/misNotas/misNotas -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtGui.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include -F/Users/epidzhx/Qt/5.11.2/clang_64/lib ../misNotas/audionoteform.h -o moc_audionoteform.cpp
+	/Users/epidzhx/Qt/5.11.2/clang_64/bin/moc $(DEFINES) --include /Users/epidzhx/Staff/misNotas/build-misNotas-Desktop_Qt_5_11_2_clang_64bit-Debug/moc_predefs.h -I/Users/epidzhx/Qt/5.11.2/clang_64/mkspecs/macx-clang -I/Users/epidzhx/Staff/misNotas/misNotas -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtGui.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtNetwork.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include -F/Users/epidzhx/Qt/5.11.2/clang_64/lib ../misNotas/audionoteform.h -o moc_audionoteform.cpp
 
 moc_videonoteform.cpp: ../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../misNotas/videonoteform.h \
 		moc_predefs.h \
 		../../../Qt/5.11.2/clang_64/bin/moc
-	/Users/epidzhx/Qt/5.11.2/clang_64/bin/moc $(DEFINES) --include /Users/epidzhx/Staff/misNotas/build-misNotas-Desktop_Qt_5_11_2_clang_64bit-Debug/moc_predefs.h -I/Users/epidzhx/Qt/5.11.2/clang_64/mkspecs/macx-clang -I/Users/epidzhx/Staff/misNotas/misNotas -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtGui.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include -F/Users/epidzhx/Qt/5.11.2/clang_64/lib ../misNotas/videonoteform.h -o moc_videonoteform.cpp
+	/Users/epidzhx/Qt/5.11.2/clang_64/bin/moc $(DEFINES) --include /Users/epidzhx/Staff/misNotas/build-misNotas-Desktop_Qt_5_11_2_clang_64bit-Debug/moc_predefs.h -I/Users/epidzhx/Qt/5.11.2/clang_64/mkspecs/macx-clang -I/Users/epidzhx/Staff/misNotas/misNotas -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtGui.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtNetwork.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include -F/Users/epidzhx/Qt/5.11.2/clang_64/lib ../misNotas/videonoteform.h -o moc_videonoteform.cpp
 
 moc_new_note_window.cpp: ../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../misNotas/new_note_window.h \
 		moc_predefs.h \
 		../../../Qt/5.11.2/clang_64/bin/moc
-	/Users/epidzhx/Qt/5.11.2/clang_64/bin/moc $(DEFINES) --include /Users/epidzhx/Staff/misNotas/build-misNotas-Desktop_Qt_5_11_2_clang_64bit-Debug/moc_predefs.h -I/Users/epidzhx/Qt/5.11.2/clang_64/mkspecs/macx-clang -I/Users/epidzhx/Staff/misNotas/misNotas -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtGui.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include -F/Users/epidzhx/Qt/5.11.2/clang_64/lib ../misNotas/new_note_window.h -o moc_new_note_window.cpp
+	/Users/epidzhx/Qt/5.11.2/clang_64/bin/moc $(DEFINES) --include /Users/epidzhx/Staff/misNotas/build-misNotas-Desktop_Qt_5_11_2_clang_64bit-Debug/moc_predefs.h -I/Users/epidzhx/Qt/5.11.2/clang_64/mkspecs/macx-clang -I/Users/epidzhx/Staff/misNotas/misNotas -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtGui.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtNetwork.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include -F/Users/epidzhx/Qt/5.11.2/clang_64/lib ../misNotas/new_note_window.h -o moc_new_note_window.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -852,6 +861,9 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 main.o: ../misNotas/main.cpp ../misNotas/mainwindow.h \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		../misNotas/textnoteform.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QApplication \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../misNotas/main.cpp
@@ -859,25 +871,38 @@ main.o: ../misNotas/main.cpp ../misNotas/mainwindow.h \
 mainwindow.o: ../misNotas/mainwindow.cpp ../misNotas/mainwindow.h \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		../misNotas/textnoteform.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		ui_mainwindow.h \
-		../misNotas/note.h \
-		../misNotas/date.h \
-		../misNotas/tag.h \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QListWidget \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qlistwidget.h \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
 		../misNotas/new_note_window.h \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h
+		../misNotas/note.h \
+		../misNotas/date.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../misNotas/tag.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../misNotas/mainwindow.cpp
 
 textnoteform.o: ../misNotas/textnoteform.cpp ../misNotas/textnoteform.h \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
-		ui_textnoteform.h
+		ui_textnoteform.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o textnoteform.o ../misNotas/textnoteform.cpp
 
 graphicnoteform.o: ../misNotas/graphicnoteform.cpp ../misNotas/graphicnoteform.h \
@@ -889,6 +914,8 @@ graphicnoteform.o: ../misNotas/graphicnoteform.cpp ../misNotas/graphicnoteform.h
 audionoteform.o: ../misNotas/audionoteform.cpp ../misNotas/audionoteform.h \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlayer \
+		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
 		ui_audionoteform.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o audionoteform.o ../misNotas/audionoteform.cpp
 
@@ -901,7 +928,16 @@ videonoteform.o: ../misNotas/videonoteform.cpp ../misNotas/videonoteform.h \
 new_note_window.o: ../misNotas/new_note_window.cpp ../misNotas/new_note_window.h \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
-		ui_new_note_window.h
+		ui_new_note_window.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QComboBox \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qcombobox.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
+		../misNotas/date.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o new_note_window.o ../misNotas/new_note_window.cpp
 
 qrc_resources.o: qrc_resources.cpp 

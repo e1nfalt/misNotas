@@ -45,7 +45,7 @@ void new_note_window::on_pushButton_clicked()
 
     else if (type == "Audio")
     {
-        fname = QString::fromStdString("/Users/epidzhx/Staff/misNotas/misNotas/files/" + std::to_string(new_file_name) + ".mp3");
+        fname = QString::fromStdString("/Users/epidzhx/Staff/misNotas/misNotas/files/" + std::to_string(new_file_name) + ".wav");
     }
     else if (type == "Video")
     {

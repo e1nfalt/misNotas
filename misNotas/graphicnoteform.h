@@ -2,6 +2,8 @@
 #define GRAPHICNOTEFORM_H
 
 #include <QWidget>
+#include <QGraphicsScene>
+#include <QGraphicsView>
 
 namespace Ui {
 class GraphicNoteForm;
@@ -17,6 +19,8 @@ public:
 
 private:
     Ui::GraphicNoteForm *ui;
+    QGraphicsScene scene;
+    QGraphicsView view;
 };
 
 #endif // GRAPHICNOTEFORM_H

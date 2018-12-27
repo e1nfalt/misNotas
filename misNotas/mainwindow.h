@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include "textnoteform.h"
+#include "audionoteform.h"
+#include "videonoteform.h"
+#include "graphicnoteform.h"
 
 namespace Ui {
 class MainWindow;

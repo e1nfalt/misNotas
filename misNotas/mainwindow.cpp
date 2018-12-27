@@ -147,10 +147,10 @@ void MainWindow::on_pushButton_3_clicked() // edit
         window->set_title_file_path(curr->get_title(), curr->get_file_path());
         window->show();
     }
-//    else if (type == "Graphic")
-//        connect(ui->pushButton_3, SIGNAL(clicked()), textForm, SLOT(show()));
-//    else if (type == "Audio")
-//        connect(ui->pushButton_3, SIGNAL(clicked()), textForm, SLOT(show()));
-//    else if (type == "Video")
-//        connect(ui->pushButton_3, SIGNAL(clicked()), textForm, SLOT(show()));
+    else if (type == "Audio")
+    {
+        AudioNoteForm *window = new AudioNoteForm();
+        window->set_file_path(curr->get_file_path());
+        window->show();
+    }
 }
