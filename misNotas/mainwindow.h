@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "textnoteform.h"
 //#include "note.h"
 
 namespace Ui {
@@ -16,6 +17,7 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+
 private slots:
     void on_pushButton_clicked();
 
@@ -29,6 +31,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    TextNoteForm *textForm;
 };
 
 #endif // MAINWINDOW_H

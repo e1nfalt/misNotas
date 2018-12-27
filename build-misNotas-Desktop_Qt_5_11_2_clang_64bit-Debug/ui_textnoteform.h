@@ -11,6 +11,8 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QPlainTextEdit>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -18,12 +20,24 @@ QT_BEGIN_NAMESPACE
 class Ui_TextNoteForm
 {
 public:
+    QPlainTextEdit *plainTextEdit;
+    QPushButton *pushButton;
+    QPushButton *pushButton_2;
 
     void setupUi(QWidget *TextNoteForm)
     {
         if (TextNoteForm->objectName().isEmpty())
             TextNoteForm->setObjectName(QStringLiteral("TextNoteForm"));
         TextNoteForm->resize(400, 300);
+        plainTextEdit = new QPlainTextEdit(TextNoteForm);
+        plainTextEdit->setObjectName(QStringLiteral("plainTextEdit"));
+        plainTextEdit->setGeometry(QRect(70, 40, 241, 171));
+        pushButton = new QPushButton(TextNoteForm);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+        pushButton->setGeometry(QRect(70, 250, 80, 24));
+        pushButton_2 = new QPushButton(TextNoteForm);
+        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
+        pushButton_2->setGeometry(QRect(220, 250, 80, 24));
 
         retranslateUi(TextNoteForm);
 
@@ -33,6 +47,8 @@ public:
     void retranslateUi(QWidget *TextNoteForm)
     {
         TextNoteForm->setWindowTitle(QApplication::translate("TextNoteForm", "Form", nullptr));
+        pushButton->setText(QApplication::translate("TextNoteForm", "save", nullptr));
+        pushButton_2->setText(QApplication::translate("TextNoteForm", "open", nullptr));
     } // retranslateUi
 
 };

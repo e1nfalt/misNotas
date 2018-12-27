@@ -25,6 +25,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->comboBox->addItem("<=");
     ui->comboBox->addItem("==");
     ui->comboBox->addItem("!=");
+
+    textForm = new TextNoteForm();
+    //connect(ui->pushButton_3, SIGNAL(clicked()), textForm, SLOT(show()));
 }
 
 MainWindow::~MainWindow()
@@ -126,5 +129,16 @@ void MainWindow::on_pushButton_5_clicked() // filter_date
 
 void MainWindow::on_pushButton_3_clicked() // edit
 {
+    QStringList item = ui->listWidget->currentItem()->text().split(" ");
+    QString id = item[1].remove(item[1].size() - 1, 1);
+    QString type = item[2].remove(item[2].size() - 1, 1);
 
+    if (type == "Text")
+        connect(ui->pushButton_3, SIGNAL(clicked()), textForm, SLOT(show()));
+    else if (type == "Graphic")
+        connect(ui->pushButton_3, SIGNAL(clicked()), textForm, SLOT(show()));
+    else if (type == "Audio")
+        connect(ui->pushButton_3, SIGNAL(clicked()), textForm, SLOT(show()));
+    else if (type == "Video")
+        connect(ui->pushButton_3, SIGNAL(clicked()), textForm, SLOT(show()));
 }
