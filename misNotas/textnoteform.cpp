@@ -2,7 +2,7 @@
 #include "ui_textnoteform.h"
 #include <QTextStream>
 #include <QFileDialog>
-//#include "note.h"
+
 TextNoteForm::TextNoteForm(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::TextNoteForm)
@@ -15,47 +15,47 @@ TextNoteForm::~TextNoteForm()
     delete ui;
 }
 
-
-void TextNoteForm::set_title_file_path(QString title, QString path)
+void TextNoteForm::transfer_note(Note* n)
 {
-    ui->label->setText(title);
-    file_path = path;
-
-    QFile file(file_path);
+    note = dynamic_cast<TextNote*>(n);
+    ui->label->setText(note->get_title());
+    QFile file(note->get_file_path());
     if (file.open(QIODevice::ReadOnly))
     {
         QTextStream in(&file);
         QString line = in.readLine();
-        text = "";
+        QString text = "";
         while (!line.isEmpty())
         {
-            text += line;
+            text += line + "\n";
             line = in.readLine();
         }
         file.close();
+        note->set_text(text);
     }
-    ui->plainTextEdit->setPlainText(text);
+    ui->plainTextEdit->setPlainText(note->get_text());
 }
 
-void TextNoteForm::on_pushButton_clicked() // save button
+void TextNoteForm::on_saveButton_clicked()
 {
-    QFile file(file_path);
-    text = ui->plainTextEdit->toPlainText();
+    QFile file(note->get_file_path());
+    QString text = ui->plainTextEdit->toPlainText();
     if (file.open(QIODevice::WriteOnly))
     {
         QTextStream out(&file);
         out << text;
         file.close();
     }
+    note->set_text(text);
 }
 
-void TextNoteForm::on_pushButton_2_clicked() // open button
+void TextNoteForm::on_openButton_clicked()
 {
+    QString text = "";
     QString file_name = QFileDialog::getOpenFileName();
     QFile file(file_name);
     if (file.open(QIODevice::ReadOnly))
     {
-        text = "";
         QTextStream in(&file);
         QString line = in.readLine();
         while (!line.isEmpty())
@@ -67,5 +67,4 @@ void TextNoteForm::on_pushButton_2_clicked() // open button
     }
     ui->plainTextEdit->clear();
     ui->plainTextEdit->setPlainText(text);
-
 }

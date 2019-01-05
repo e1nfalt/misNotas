@@ -22,8 +22,8 @@ class Ui_TextNoteForm
 {
 public:
     QPlainTextEdit *plainTextEdit;
-    QPushButton *pushButton;
-    QPushButton *pushButton_2;
+    QPushButton *saveButton;
+    QPushButton *openButton;
     QLabel *label;
 
     void setupUi(QWidget *TextNoteForm)
@@ -34,12 +34,12 @@ public:
         plainTextEdit = new QPlainTextEdit(TextNoteForm);
         plainTextEdit->setObjectName(QStringLiteral("plainTextEdit"));
         plainTextEdit->setGeometry(QRect(70, 40, 241, 171));
-        pushButton = new QPushButton(TextNoteForm);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(70, 250, 80, 24));
-        pushButton_2 = new QPushButton(TextNoteForm);
-        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-        pushButton_2->setGeometry(QRect(220, 250, 80, 24));
+        saveButton = new QPushButton(TextNoteForm);
+        saveButton->setObjectName(QStringLiteral("saveButton"));
+        saveButton->setGeometry(QRect(70, 250, 80, 24));
+        openButton = new QPushButton(TextNoteForm);
+        openButton->setObjectName(QStringLiteral("openButton"));
+        openButton->setGeometry(QRect(220, 250, 80, 24));
         label = new QLabel(TextNoteForm);
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(160, 10, 59, 16));
@@ -52,8 +52,8 @@ public:
     void retranslateUi(QWidget *TextNoteForm)
     {
         TextNoteForm->setWindowTitle(QApplication::translate("TextNoteForm", "Form", nullptr));
-        pushButton->setText(QApplication::translate("TextNoteForm", "save", nullptr));
-        pushButton_2->setText(QApplication::translate("TextNoteForm", "open", nullptr));
+        saveButton->setText(QApplication::translate("TextNoteForm", "save", nullptr));
+        openButton->setText(QApplication::translate("TextNoteForm", "open", nullptr));
         label->setText(QApplication::translate("TextNoteForm", "TextLabel", nullptr));
     } // retranslateUi
 

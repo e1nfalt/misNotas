@@ -22,9 +22,9 @@ class Ui_new_note_window
 {
 public:
     QComboBox *comboBox;
-    QPushButton *pushButton;
-    QLineEdit *lineEdit;
-    QLineEdit *lineEdit_2;
+    QPushButton *createButton;
+    QLineEdit *new_title;
+    QLineEdit *new_tags_list;
 
     void setupUi(QWidget *new_note_window)
     {
@@ -34,15 +34,15 @@ public:
         comboBox = new QComboBox(new_note_window);
         comboBox->setObjectName(QStringLiteral("comboBox"));
         comboBox->setGeometry(QRect(140, 70, 79, 24));
-        pushButton = new QPushButton(new_note_window);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(140, 210, 80, 24));
-        lineEdit = new QLineEdit(new_note_window);
-        lineEdit->setObjectName(QStringLiteral("lineEdit"));
-        lineEdit->setGeometry(QRect(130, 130, 113, 24));
-        lineEdit_2 = new QLineEdit(new_note_window);
-        lineEdit_2->setObjectName(QStringLiteral("lineEdit_2"));
-        lineEdit_2->setGeometry(QRect(130, 170, 113, 24));
+        createButton = new QPushButton(new_note_window);
+        createButton->setObjectName(QStringLiteral("createButton"));
+        createButton->setGeometry(QRect(140, 210, 80, 24));
+        new_title = new QLineEdit(new_note_window);
+        new_title->setObjectName(QStringLiteral("new_title"));
+        new_title->setGeometry(QRect(130, 130, 113, 24));
+        new_tags_list = new QLineEdit(new_note_window);
+        new_tags_list->setObjectName(QStringLiteral("new_tags_list"));
+        new_tags_list->setGeometry(QRect(130, 170, 113, 24));
 
         retranslateUi(new_note_window);
 
@@ -52,7 +52,7 @@ public:
     void retranslateUi(QWidget *new_note_window)
     {
         new_note_window->setWindowTitle(QApplication::translate("new_note_window", "Form", nullptr));
-        pushButton->setText(QApplication::translate("new_note_window", "Create", nullptr));
+        createButton->setText(QApplication::translate("new_note_window", "Create", nullptr));
     } // retranslateUi
 
 };

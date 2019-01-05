@@ -4,8 +4,9 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui svg
 QT       += multimedia
+QT       += multimediawidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -29,29 +30,33 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     textnoteform.cpp \
-    graphicnoteform.cpp \
     audionoteform.cpp \
     videonoteform.cpp \
-    new_note_window.cpp
+    new_note_window.cpp \
+    graphicform.cpp
 
 HEADERS += \
         mainwindow.h \
     note.h \
     date.h \
-    tag.h \
     textnoteform.h \
     graphicnoteform.h \
     audionoteform.h \
     videonoteform.h \
-    new_note_window.h
+    new_note_window.h \
+    graphicform.h \
+    textnote.h \
+    graphicnote.h \
+    audionote.h \
+    videonote.h
 
 FORMS += \
         mainwindow.ui \
     textnoteform.ui \
-    graphicnoteform.ui \
     audionoteform.ui \
     videonoteform.ui \
-    new_note_window.ui
+    new_note_window.ui \
+    graphicform.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -5,7 +5,10 @@
 #include "textnoteform.h"
 #include "audionoteform.h"
 #include "videonoteform.h"
-#include "graphicnoteform.h"
+#include "graphicform.h"
+#include "new_note_window.h"
+#include <note.h>
+
 
 namespace Ui {
 class MainWindow;
@@ -18,23 +21,26 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    static QString curr_file_name;
+    //static QString curr_file_name;
 
 
 private slots:
-    void on_pushButton_clicked();
 
-    void on_pushButton_2_clicked();
+    void on_refreshButton_clicked();
 
-    void on_pushButton_4_clicked();
+    void on_filterButton_clicked();
 
-    void on_pushButton_5_clicked();
+    void on_findButton_clicked();
 
-    void on_pushButton_3_clicked();
+    void on_editButton_clicked();
+
+    void on_addButton_clicked();
 
 private:
     Ui::MainWindow *ui;
-    //TextNoteForm *textForm;
+    std::vector<Note*> notes;
+    void get_notes();
+    void write_note_list();
 };
 
 #endif // MAINWINDOW_H

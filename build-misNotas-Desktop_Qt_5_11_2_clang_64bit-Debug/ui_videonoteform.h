@@ -11,6 +11,8 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QGraphicsView>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -18,12 +20,24 @@ QT_BEGIN_NAMESPACE
 class Ui_VideoNoteForm
 {
 public:
+    QGraphicsView *graphicsView;
+    QPushButton *pushButton;
+    QPushButton *pushButton_2;
 
     void setupUi(QWidget *VideoNoteForm)
     {
         if (VideoNoteForm->objectName().isEmpty())
             VideoNoteForm->setObjectName(QStringLiteral("VideoNoteForm"));
         VideoNoteForm->resize(400, 300);
+        graphicsView = new QGraphicsView(VideoNoteForm);
+        graphicsView->setObjectName(QStringLiteral("graphicsView"));
+        graphicsView->setGeometry(QRect(50, 50, 256, 192));
+        pushButton = new QPushButton(VideoNoteForm);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+        pushButton->setGeometry(QRect(60, 260, 80, 24));
+        pushButton_2 = new QPushButton(VideoNoteForm);
+        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
+        pushButton_2->setGeometry(QRect(190, 260, 80, 24));
 
         retranslateUi(VideoNoteForm);
 
@@ -33,6 +47,8 @@ public:
     void retranslateUi(QWidget *VideoNoteForm)
     {
         VideoNoteForm->setWindowTitle(QApplication::translate("VideoNoteForm", "Form", nullptr));
+        pushButton->setText(QApplication::translate("VideoNoteForm", "play", nullptr));
+        pushButton_2->setText(QApplication::translate("VideoNoteForm", "open", nullptr));
     } // retranslateUi
 
 };

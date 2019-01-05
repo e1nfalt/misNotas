@@ -2,6 +2,7 @@
 #define TEXTNOTEFORM_H
 
 #include <QWidget>
+#include <textnote.h>
 
 namespace Ui {
 class TextNoteForm;
@@ -14,17 +15,16 @@ class TextNoteForm : public QWidget
 public:
     explicit TextNoteForm(QWidget *parent = nullptr);
     ~TextNoteForm();
-    void set_title_file_path(QString title, QString path);
+    void transfer_note(Note*);
 
 private slots:
-    void on_pushButton_clicked();
 
-    void on_pushButton_2_clicked();
+    void on_saveButton_clicked();
+    void on_openButton_clicked();
 
 private:
     Ui::TextNoteForm *ui;
-    QString file_path;
-    QString text;
+    TextNote *note;
 };
 
 #endif // TEXTNOTEFORM_H

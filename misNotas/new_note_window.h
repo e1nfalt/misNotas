@@ -2,7 +2,6 @@
 #define NEW_NOTE_WINDOW_H
 
 #include <QWidget>
-//#include <note.h>
 
 namespace Ui {
 class new_note_window;
@@ -17,7 +16,8 @@ public:
     ~new_note_window();
 
 private slots:
-    void on_pushButton_clicked();
+
+    void on_createButton_clicked();
 
 private:
     Ui::new_note_window *ui;

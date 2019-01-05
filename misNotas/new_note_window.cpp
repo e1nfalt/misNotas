@@ -12,8 +12,6 @@ new_note_window::new_note_window(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::new_note_window)
 {
-
-
     ui->setupUi(this);
     ui->comboBox->addItem("Text");
     ui->comboBox->addItem("Graphic");
@@ -26,13 +24,14 @@ new_note_window::~new_note_window()
     delete ui;
 }
 
-void new_note_window::on_pushButton_clicked()
+void new_note_window::on_createButton_clicked()
 {
     QString type = ui->comboBox->currentText();
-    QString title = ui->lineEdit->text();
-    QString tags_list = ui->lineEdit_2->text();
-
-    unsigned long new_file_name = rand();
+    QString title = ui->new_title->text();
+    QString tags_list = ui->new_tags_list->text();
+    if (tags_list.isEmpty())
+        tags_list = " ";
+    int new_file_name = rand();
     QString fname = "";
     if (type == "Text")
     {
