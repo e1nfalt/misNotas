@@ -1,11 +1,11 @@
 #include "textnoteform.h"
 #include "ui_textnoteform.h"
-#include <QTextStream>
 #include <QFileDialog>
+#include <QTextStream>
 
-TextNoteForm::TextNoteForm(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::TextNoteForm)
+TextNoteForm::TextNoteForm(QWidget* parent)
+    : QWidget(parent)
+    , ui(new Ui::TextNoteForm)
 {
     ui->setupUi(this);
 }
@@ -20,13 +20,11 @@ void TextNoteForm::transfer_note(Note* n)
     note = dynamic_cast<TextNote*>(n);
     ui->label->setText(note->get_title());
     QFile file(note->get_file_path());
-    if (file.open(QIODevice::ReadOnly))
-    {
+    if (file.open(QIODevice::ReadOnly)) {
         QTextStream in(&file);
         QString line = in.readLine();
         QString text = "";
-        while (!line.isEmpty())
-        {
+        while (!line.isEmpty()) {
             text += line + "\n";
             line = in.readLine();
         }
@@ -40,8 +38,7 @@ void TextNoteForm::on_saveButton_clicked()
 {
     QFile file(note->get_file_path());
     QString text = ui->plainTextEdit->toPlainText();
-    if (file.open(QIODevice::WriteOnly))
-    {
+    if (file.open(QIODevice::WriteOnly)) {
         QTextStream out(&file);
         out << text;
         file.close();
@@ -54,12 +51,10 @@ void TextNoteForm::on_openButton_clicked()
     QString text = "";
     QString file_name = QFileDialog::getOpenFileName();
     QFile file(file_name);
-    if (file.open(QIODevice::ReadOnly))
-    {
+    if (file.open(QIODevice::ReadOnly)) {
         QTextStream in(&file);
         QString line = in.readLine();
-        while (!line.isEmpty())
-        {
+        while (!line.isEmpty()) {
             text += line;
             line = in.readLine();
         }

@@ -6,7 +6,7 @@
 
 QT       += core gui svg
 QT       += multimedia
-QT       += multimediawidgets
+QT       += multimediawidgets printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -53,7 +53,8 @@ HEADERS += \
     textnote.h \
     graphicnote.h \
     audionote.h \
-    videonote.h
+    videonote.h \
+    file_formats.h
 
 FORMS += \
         mainwindow.ui \

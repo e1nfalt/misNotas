@@ -1,18 +1,21 @@
 #include "textnote.h"
 
-void TextNote::set_text(QString &s)
+void TextNote::set_text(QString& s)
 {
     text = s;
 }
 
-TextNote::TextNote(QString &title_) : Note("Text", title_) {}
+TextNote::TextNote(QString& title_)
+    : Note("Text", title_)
+{
+}
 
 QString TextNote::get_text()
 {
     return text;
 }
 
-TextNote::TextNote(int id_, QString &title_, Date cr_date, Date ed_date, QStringList &tags_, QString &data_file_path)
+TextNote::TextNote(int id_, QString& title_, Date cr_date, Date ed_date, QStringList& tags_, QString& data_file_path)
     : Note("Text", title_)
 {
     created_date = cr_date;
@@ -26,25 +29,23 @@ TextNote::TextNote(int id_, QString &title_, Date cr_date, Date ed_date, QString
 void TextNote::save_into_file()
 {
     QFile file(data_file);
-    if (file.open(QIODevice::WriteOnly))
-    {
+    if (file.open(QIODevice::WriteOnly)) {
         QTextStream out(&file);
         out << text;
+        editing_date.update_date();
     }
     file.close();
 }
 
-void TextNote::load_data_from_file(QString &file_path)
+void TextNote::load_data_from_file(QString& file_path)
 {
     data_file = file_path;
     text = "";
     QFile file(data_file);
-    if (file.open(QIODevice::ReadOnly))
-    {
+    if (file.open(QIODevice::ReadOnly)) {
         QTextStream in(&file);
         QString line = in.readLine();
-        while (!line.isEmpty())
-        {
+        while (!line.isEmpty()) {
             text += line;
             line = in.readLine();
         }

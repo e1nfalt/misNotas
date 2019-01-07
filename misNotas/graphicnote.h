@@ -2,12 +2,19 @@
 #define GRAPHICNOTE_H
 
 #include <note.h>
+#include <QImage>
 
 class GraphicNote : public Note
 {
+private:
+    QImage image;
 public:
 
     GraphicNote(int, QString &, Date, Date, QStringList &, QString &);
+
+    void update_image(QImage &);
+
+    QImage get_image();
 
     void save_into_file() override;
 

@@ -8,6 +8,44 @@ namespace Ui {
 class graphicform;
 }
 
+
+class DrawArea : public QWidget
+ {
+     Q_OBJECT
+
+ public:
+     DrawArea(QWidget *parent = 0);
+
+     bool openImage(const QString &fileName);
+     void setPenColor(const QColor &newColor);
+     void setPenWidth(int newWidth);
+
+     int penWidth() const { return myPenWidth; }
+     QImage get_image() { return image; }
+
+ public slots:
+     void clearImage();
+     void print();
+
+ protected:
+     void mousePressEvent(QMouseEvent *event);
+     void mouseMoveEvent(QMouseEvent *event);
+     void mouseReleaseEvent(QMouseEvent *event);
+     void paintEvent(QPaintEvent *event);
+     void resizeEvent(QResizeEvent *event);
+
+ private:
+     void drawLineTo(const QPoint &endPoint);
+     void resizeImage(QImage *image, const QSize &newSize);
+
+     bool drawing;
+     int myPenWidth;
+     QColor myPenColor;
+     QImage image;
+     QPoint lastPoint;
+ };
+
+
 class graphicform : public QMainWindow
 {
     Q_OBJECT
@@ -15,74 +53,25 @@ class graphicform : public QMainWindow
 public:
     explicit graphicform(QWidget *parent = nullptr);
     ~graphicform();
+    void get_note(Note*);
+
+private slots:
+
+    void on_saveButton_clicked();
+
+    void on_openButton_clicked();
+
+    void on_colorButton_clicked();
+
+    void on_penWidthSlider_valueChanged(int value);
+
+    void on_clearButton_clicked();
 
 private:
     Ui::graphicform *ui;
+
+    DrawArea *drawArea;
+    GraphicNote *note;
 };
 
 #endif // GRAPHICFORM_H
-
-//#ifndef GRAPHICNOTEFORM_H
-//#define GRAPHICNOTEFORM_H
-
-//#include <QWidget>
-//#include <QGraphicsScene>
-//#include <QGraphicsView>
-//#include <scribblearea.h>
-//#include <QTimer>
-//#include <QResizeEvent>
-//#include <QMenu>
-
-//namespace Ui {
-//class GraphicNoteForm;
-//}
-
-//class GraphicNoteForm : public QWidget
-//{
-//    Q_OBJECT
-
-//public:
-//    explicit GraphicNoteForm(QWidget *parent = nullptr);
-//    ~GraphicNoteForm();
-//    void set_file_path(QString);
-
-//private:
-//    Ui::GraphicNoteForm *ui;
-//    QString file_path;
-
-//    void slotTimer();
-//    void on_pushButton_clicked();
-//    void on_pushButton_2_clicked();
-//    void createActions();
-//    void createMenus();
-//    bool maybeSave();
-//    bool saveFile(const QByteArray &fileFormat);
-
-//    ScribbleArea *scribbleArea;
-
-//    QMenu *saveAsMenu;
-//    QMenu *fileMenu;
-//    QMenu *optionMenu;
-//    QMenu *helpMenu;
-
-//    QAction *openAct;
-//    QList<QAction *> saveAsActs;
-//    QAction *exitAct;
-//    QAction *penColorAct;
-//    QAction *penWidthAct;
-//    QAction *printAct;
-//    QAction *clearScreenAct;
-//    QAction *aboutAct;
-//    QAction *aboutQtAct;
-
-//private slots:
-
-
-//    void open();
-//    void save();
-//    void penColor();
-//    void penWidth();
-//    void about();
-//};
-
-//#endif // GRAPHICNOTEFORM_H

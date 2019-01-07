@@ -94,6 +94,14 @@ public:
                 + "." + QString::number(timeinfo->tm_mday);
         return s;
     }
+
+    void update_date()
+    {
+        QString str = get_current_date_in_QString();
+        year = (str.left(4)).toInt();
+        month = (str.mid(6, 2)).toInt();
+        day = (str.right(2)).toInt();
+    }
 };
 
 
