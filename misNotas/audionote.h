@@ -6,27 +6,12 @@
 class AudioNote : public Note
 {
 private:
-    QByteArray arr;
+    QByteArray data;
 public:
 
-    AudioNote(int id_, QString title_, Date cr_date, Date ed_date, QStringList tags_, QString data_file_path)
-        : Note("Audio", title_)
-    {
-        created_date = cr_date;
-        editing_date = ed_date;
-        tags = tags_;
-        data_file = data_file_path;
-        id = id_;
-    }
-
-    void save_into_file() override
-    {
-
-    }
-
-    void load_data_from_file(QString &file_path) override // think about it
-    {
-
-    }
+    AudioNote(int, QString &, Date, Date, QStringList &, QString &);
+    virtual void save_into_file() override;
+    virtual void load_data_from_file(QString &file_name) override;
+    QByteArray& get_data();
 };
 #endif // AUDIONOTE_H

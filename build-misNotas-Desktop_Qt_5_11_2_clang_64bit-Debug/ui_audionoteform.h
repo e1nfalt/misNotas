@@ -12,6 +12,8 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSlider>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -19,28 +21,34 @@ QT_BEGIN_NAMESPACE
 class Ui_AudioNoteForm
 {
 public:
-    QPushButton *rec_button;
-    QPushButton *save_button;
-    QPushButton *open_button;
+    QVBoxLayout *verticalLayout;
     QPushButton *play_button;
+    QPushButton *open_button;
+    QSlider *volumeControl;
 
     void setupUi(QWidget *AudioNoteForm)
     {
         if (AudioNoteForm->objectName().isEmpty())
             AudioNoteForm->setObjectName(QStringLiteral("AudioNoteForm"));
-        AudioNoteForm->resize(400, 300);
-        rec_button = new QPushButton(AudioNoteForm);
-        rec_button->setObjectName(QStringLiteral("rec_button"));
-        rec_button->setGeometry(QRect(80, 130, 80, 24));
-        save_button = new QPushButton(AudioNoteForm);
-        save_button->setObjectName(QStringLiteral("save_button"));
-        save_button->setGeometry(QRect(80, 170, 80, 24));
-        open_button = new QPushButton(AudioNoteForm);
-        open_button->setObjectName(QStringLiteral("open_button"));
-        open_button->setGeometry(QRect(230, 170, 80, 24));
+        AudioNoteForm->resize(352, 303);
+        verticalLayout = new QVBoxLayout(AudioNoteForm);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         play_button = new QPushButton(AudioNoteForm);
         play_button->setObjectName(QStringLiteral("play_button"));
-        play_button->setGeometry(QRect(230, 130, 80, 24));
+
+        verticalLayout->addWidget(play_button);
+
+        open_button = new QPushButton(AudioNoteForm);
+        open_button->setObjectName(QStringLiteral("open_button"));
+
+        verticalLayout->addWidget(open_button);
+
+        volumeControl = new QSlider(AudioNoteForm);
+        volumeControl->setObjectName(QStringLiteral("volumeControl"));
+        volumeControl->setOrientation(Qt::Horizontal);
+
+        verticalLayout->addWidget(volumeControl);
+
 
         retranslateUi(AudioNoteForm);
 
@@ -50,10 +58,8 @@ public:
     void retranslateUi(QWidget *AudioNoteForm)
     {
         AudioNoteForm->setWindowTitle(QApplication::translate("AudioNoteForm", "Form", nullptr));
-        rec_button->setText(QApplication::translate("AudioNoteForm", "rec", nullptr));
-        save_button->setText(QApplication::translate("AudioNoteForm", "save", nullptr));
-        open_button->setText(QApplication::translate("AudioNoteForm", "open", nullptr));
         play_button->setText(QApplication::translate("AudioNoteForm", "play", nullptr));
+        open_button->setText(QApplication::translate("AudioNoteForm", "open", nullptr));
     } // retranslateUi
 
 };

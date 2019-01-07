@@ -56,7 +56,12 @@ SOURCES       = ../misNotas/main.cpp \
 		../misNotas/audionoteform.cpp \
 		../misNotas/videonoteform.cpp \
 		../misNotas/new_note_window.cpp \
-		../misNotas/graphicform.cpp qrc_resources.cpp \
+		../misNotas/graphicform.cpp \
+		../misNotas/note.cpp \
+		../misNotas/textnote.cpp \
+		../misNotas/audionote.cpp \
+		../misNotas/graphicnote.cpp \
+		../misNotas/videonote.cpp qrc_resources.cpp \
 		moc_mainwindow.cpp \
 		moc_textnoteform.cpp \
 		moc_audionoteform.cpp \
@@ -70,6 +75,11 @@ OBJECTS       = main.o \
 		videonoteform.o \
 		new_note_window.o \
 		graphicform.o \
+		note.o \
+		textnote.o \
+		audionote.o \
+		graphicnote.o \
+		videonote.o \
 		qrc_resources.o \
 		moc_mainwindow.o \
 		moc_textnoteform.o \
@@ -284,7 +294,12 @@ DIST          = ../../../Qt/5.11.2/clang_64/mkspecs/features/spec_pre.prf \
 		../misNotas/audionoteform.cpp \
 		../misNotas/videonoteform.cpp \
 		../misNotas/new_note_window.cpp \
-		../misNotas/graphicform.cpp
+		../misNotas/graphicform.cpp \
+		../misNotas/note.cpp \
+		../misNotas/textnote.cpp \
+		../misNotas/audionote.cpp \
+		../misNotas/graphicnote.cpp \
+		../misNotas/videonote.cpp
 QMAKE_TARGET  = misNotas
 DESTDIR       = 
 TARGET        = misNotas.app/Contents/MacOS/misNotas
@@ -734,7 +749,7 @@ distdir: FORCE
 	$(COPY_FILE) --parents ../misNotas/resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../Qt/5.11.2/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../misNotas/mainwindow.h ../misNotas/note.h ../misNotas/date.h ../misNotas/textnoteform.h graphicnoteform.h ../misNotas/audionoteform.h ../misNotas/videonoteform.h ../misNotas/new_note_window.h ../misNotas/graphicform.h ../misNotas/textnote.h ../misNotas/graphicnote.h ../misNotas/audionote.h ../misNotas/videonote.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../misNotas/main.cpp ../misNotas/mainwindow.cpp ../misNotas/textnoteform.cpp ../misNotas/audionoteform.cpp ../misNotas/videonoteform.cpp ../misNotas/new_note_window.cpp ../misNotas/graphicform.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../misNotas/main.cpp ../misNotas/mainwindow.cpp ../misNotas/textnoteform.cpp ../misNotas/audionoteform.cpp ../misNotas/videonoteform.cpp ../misNotas/new_note_window.cpp ../misNotas/graphicform.cpp ../misNotas/note.cpp ../misNotas/textnote.cpp ../misNotas/audionote.cpp ../misNotas/graphicnote.cpp ../misNotas/videonote.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../misNotas/mainwindow.ui ../misNotas/textnoteform.ui ../misNotas/audionoteform.ui ../misNotas/videonoteform.ui ../misNotas/new_note_window.ui ../misNotas/graphicform.ui $(DISTDIR)/
 
 
@@ -793,6 +808,7 @@ moc_mainwindow.cpp: ../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
 		../misNotas/audionoteform.h \
+		../misNotas/audionote.h \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioInput \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudioinput.h \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlayer \
@@ -801,17 +817,17 @@ moc_mainwindow.cpp: ../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudiorecorder.h \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioProbe \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudioprobe.h \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioEncoderSettings \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qmediaencodersettings.h \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
-		../misNotas/audionote.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QBuffer \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qbuffer.h \
 		../misNotas/videonoteform.h \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QUrl \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qurl.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
 		../misNotas/videonote.h \
 		../misNotas/graphicform.h \
 		../misNotas/graphicnote.h \
+		../misNotas/new_note_window.h \
 		../misNotas/mainwindow.h \
 		moc_predefs.h \
 		../../../Qt/5.11.2/clang_64/bin/moc
@@ -837,18 +853,6 @@ moc_textnoteform.cpp: ../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Header
 
 moc_audionoteform.cpp: ../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioInput \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudioinput.h \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlayer \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioRecorder \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudiorecorder.h \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioProbe \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudioprobe.h \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioEncoderSettings \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qmediaencodersettings.h \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
 		../misNotas/audionote.h \
 		../misNotas/note.h \
 		../misNotas/date.h \
@@ -860,6 +864,16 @@ moc_audionoteform.cpp: ../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Heade
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
+		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioInput \
+		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudioinput.h \
+		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlayer \
+		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
+		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioRecorder \
+		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudiorecorder.h \
+		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioProbe \
+		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudioprobe.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QBuffer \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qbuffer.h \
 		../misNotas/audionoteform.h \
 		moc_predefs.h \
 		../../../Qt/5.11.2/clang_64/bin/moc
@@ -975,6 +989,7 @@ main.o: ../misNotas/main.cpp ../misNotas/mainwindow.h \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
 		../misNotas/audionoteform.h \
+		../misNotas/audionote.h \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioInput \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudioinput.h \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlayer \
@@ -983,17 +998,17 @@ main.o: ../misNotas/main.cpp ../misNotas/mainwindow.h \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudiorecorder.h \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioProbe \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudioprobe.h \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioEncoderSettings \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qmediaencodersettings.h \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
-		../misNotas/audionote.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QBuffer \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qbuffer.h \
 		../misNotas/videonoteform.h \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QUrl \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qurl.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
 		../misNotas/videonote.h \
 		../misNotas/graphicform.h \
 		../misNotas/graphicnote.h \
+		../misNotas/new_note_window.h \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QApplication \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../misNotas/main.cpp
@@ -1016,6 +1031,7 @@ mainwindow.o: ../misNotas/mainwindow.cpp ../misNotas/mainwindow.h \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
 		../misNotas/audionoteform.h \
+		../misNotas/audionote.h \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioInput \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudioinput.h \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlayer \
@@ -1024,25 +1040,24 @@ mainwindow.o: ../misNotas/mainwindow.cpp ../misNotas/mainwindow.h \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudiorecorder.h \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioProbe \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudioprobe.h \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioEncoderSettings \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qmediaencodersettings.h \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
-		../misNotas/audionote.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QBuffer \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qbuffer.h \
 		../misNotas/videonoteform.h \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QUrl \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qurl.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
 		../misNotas/videonote.h \
 		../misNotas/graphicform.h \
 		../misNotas/graphicnote.h \
+		../misNotas/new_note_window.h \
 		ui_mainwindow.h \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QListWidget \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qlistwidget.h \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
-		../misNotas/new_note_window.h
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../misNotas/mainwindow.cpp
 
 textnoteform.o: ../misNotas/textnoteform.cpp ../misNotas/textnoteform.h \
@@ -1067,18 +1082,6 @@ textnoteform.o: ../misNotas/textnoteform.cpp ../misNotas/textnoteform.h \
 audionoteform.o: ../misNotas/audionoteform.cpp ../misNotas/audionoteform.h \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioInput \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudioinput.h \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlayer \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioRecorder \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudiorecorder.h \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioProbe \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudioprobe.h \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioEncoderSettings \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qmediaencodersettings.h \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
 		../misNotas/audionote.h \
 		../misNotas/note.h \
 		../misNotas/date.h \
@@ -1090,7 +1093,23 @@ audionoteform.o: ../misNotas/audionoteform.cpp ../misNotas/audionoteform.h \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
-		ui_audionoteform.h
+		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioInput \
+		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudioinput.h \
+		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlayer \
+		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
+		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioRecorder \
+		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudiorecorder.h \
+		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioProbe \
+		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudioprobe.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QBuffer \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qbuffer.h \
+		ui_audionoteform.h \
+		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioEncoderSettings \
+		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qmediaencodersettings.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o audionoteform.o ../misNotas/audionoteform.cpp
 
 videonoteform.o: ../misNotas/videonoteform.cpp ../misNotas/videonoteform.h \
@@ -1157,6 +1176,70 @@ graphicform.o: ../misNotas/graphicform.cpp ../misNotas/graphicform.h \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
 		ui_graphicform.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o graphicform.o ../misNotas/graphicform.cpp
+
+note.o: ../misNotas/note.cpp ../misNotas/note.h \
+		../misNotas/date.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o note.o ../misNotas/note.cpp
+
+textnote.o: ../misNotas/textnote.cpp ../misNotas/textnote.h \
+		../misNotas/note.h \
+		../misNotas/date.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o textnote.o ../misNotas/textnote.cpp
+
+audionote.o: ../misNotas/audionote.cpp ../misNotas/audionote.h \
+		../misNotas/note.h \
+		../misNotas/date.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o audionote.o ../misNotas/audionote.cpp
+
+graphicnote.o: ../misNotas/graphicnote.cpp ../misNotas/graphicnote.h \
+		../misNotas/note.h \
+		../misNotas/date.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o graphicnote.o ../misNotas/graphicnote.cpp
+
+videonote.o: ../misNotas/videonote.cpp ../misNotas/videonote.h \
+		../misNotas/note.h \
+		../misNotas/date.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o videonote.o ../misNotas/videonote.cpp
 
 qrc_resources.o: qrc_resources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources.o qrc_resources.cpp

@@ -33,7 +33,12 @@ SOURCES += \
     audionoteform.cpp \
     videonoteform.cpp \
     new_note_window.cpp \
-    graphicform.cpp
+    graphicform.cpp \
+    note.cpp \
+    textnote.cpp \
+    audionote.cpp \
+    graphicnote.cpp \
+    videonote.cpp
 
 HEADERS += \
         mainwindow.h \

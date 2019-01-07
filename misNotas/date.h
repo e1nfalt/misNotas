@@ -13,10 +13,7 @@ private:
     int year, month, day;
 public:
 
-    Date()
-    {
-        //*this = this->get_current_date();
-    }
+    Date() {}
 
     Date(QString &str)
     {
@@ -25,7 +22,7 @@ public:
         day = (str.right(2)).toInt();
     }
 
-    Date(int year_, int month_, int day_) : year(year_), month(month_), day(day_){}
+    Date(int year_, int month_, int day_) : year(year_), month(month_), day(day_) {}
 
     Date(Date const &date_)
     {
@@ -34,50 +31,47 @@ public:
         day = date_.day;
     }
 
-    bool operator>(Date date_)
+    bool operator>(Date &date_)
     {
         int tmp1 = year * 13 + month * 32 + day;
         int tmp2 = date_.year * 13 + date_.month * 32 + date_.day;
         return tmp1 > tmp2;
     }
 
-    bool operator<(Date date_)
+    bool operator<(Date &date_)
     {
         int tmp1 = year * 13 + month * 32 + day;
         int tmp2 = date_.year * 13 + date_.month * 32 + date_.day;
         return tmp1 < tmp2;
     }
 
-    bool operator!=(Date date_)
+    bool operator!=(Date &date_)
     {
         int tmp1 = year * 13 + month * 32 + day;
         int tmp2 = date_.year * 13 + date_.month * 32 + date_.day;
         return tmp1 != tmp2;
     }
 
-    bool operator==(Date date_)
+    bool operator==(Date &date_)
     {
         int tmp1 = year * 13 + month * 32 + day;
         int tmp2 = date_.year * 13 + date_.month * 32 + date_.day;
         return tmp1 == tmp2;
     }
 
-    bool operator<=(Date date_)
+    bool operator<=(Date &date_)
     {
         int tmp1 = year * 13 + month * 32 + day;
         int tmp2 = date_.year * 13 + date_.month * 32 + date_.day;
         return tmp1 <= tmp2;
     }
 
-    bool operator>=(Date date_)
+    bool operator>=(Date &date_)
     {
         int tmp1 = year * 13 + month * 32 + day;
         int tmp2 = date_.year * 13 + date_.month * 32 + date_.day;
         return tmp1 >= tmp2;
     }
-
-    friend std::ostream& operator<<(std::ostream&, Date&);
-    friend std::ostream& operator<<(std::ostream&, const Date&);
 
     QString get_year() { return QString::number(year); }
     QString get_month() { return QString::number(month); }
@@ -85,7 +79,6 @@ public:
 
     QString get_date_in_QString_format()
     {
-        //std::string x = std::to_string(year) + "." + std::to_string(month) + "." + std::to_string(day);
         return QString::fromStdString(std::to_string(year) + "." + std::to_string(month) + "." + std::to_string(day));
     }
 

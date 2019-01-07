@@ -22,46 +22,33 @@ protected:
     int id;
 public:
 
-    Note(QString type_, QString title_, Date created_date_, Date editing_date_) : type(type_), title(title_),
-        created_date(created_date_), editing_date(editing_date_) {}
+    Note(QString &, QString &, Date &, Date &);
 
-    Note(QString type_, QString title_) : type(type_), title(title_) {}
+    Note(const char *, QString &);
 
-    QString get_title() { return title; }
+    QString get_title();
 
-    QString get_type() { return type; }
+    QString get_type();
 
-    Date get_cr_date() { return created_date; }
+    Date get_cr_date();
 
-    Date get_ed_date() { return editing_date; }
+    Date get_ed_date();
 
-    int get_id() { return id; }
+    int get_id();
 
-    QString get_tags()
-    {
-        QString s = "";
-        for (auto i : tags)
-            s += i + "@";
-        return s.mid(0, s.length() - 2);
-    }
+    QString get_tags();
 
-    QString get_file_path() { return data_file; }
+    QString get_file_path();
 
-    void set_title(QString str_) { title = str_; }
+    void set_title(QString &);
 
-    void update_editing_date(Date new_date) { editing_date = new_date; }
+    void update_editing_date(Date &);
 
-    QString get_editing_date()
-    {
-        return editing_date.get_date_in_QString_format();
-    }
+    QString get_editing_date();
 
-    QString get_created_date()
-    {
-        return created_date.get_date_in_QString_format();
-    }
+    QString get_created_date();
 
-    virtual ~Note() {}
+    virtual ~Note();
     virtual void save_into_file() = 0;
 
     virtual void load_data_from_file(QString &) = 0;

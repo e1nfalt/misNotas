@@ -47,6 +47,7 @@ void MainWindow::write_note_list()
 
 void MainWindow::get_notes()
 {
+    notes.clear();
     QFile file("/Users/epidzhx/Staff/misNotas/misNotas/files/notes_list.txt");
     if (file.open(QIODevice::ReadOnly))
     {
@@ -65,7 +66,7 @@ void MainWindow::get_notes()
             QStringList tags_list = in.readLine().split("@");
             QString data_file_path = in.readLine();
             if (type == "Text")
-                notes.push_back(new TextNote(id, title, cr_date, ed_date, tags_list, data_file_path));
+                notes.push_back(new TextNote(id, title, Date(cr_date), Date(ed_date), tags_list, data_file_path));
             else if (type == "Graphic")
                 notes.push_back(new GraphicNote(id, title, cr_date, ed_date, tags_list, data_file_path));
             else if (type == "Audio")
@@ -176,7 +177,7 @@ void MainWindow::on_editButton_clicked()
     else if (type == "Audio")
     {
         AudioNoteForm *window = new AudioNoteForm();
-        window->set_file_path(curr->get_file_path());
+        window->transfer_note(curr);
         window->show();
     }
     else if (type == "Graphic")

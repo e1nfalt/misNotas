@@ -9,59 +9,17 @@ private:
     QString text;
 public:
 
-    void set_text(QString &s)
-    {
-        text = s;
-    }
+    void set_text(QString &);
 
-    TextNote(QString &title_) : Note("Text", title_)
-    {
-        //title = title_;
-    }
+    TextNote(QString &);
 
-    QString get_text()
-    {
-        return text;
-    }
+    QString get_text();
 
-    TextNote(int id_, QString &title_, Date cr_date, Date ed_date, QStringList &tags_, QString &data_file_path)
-        : Note("Text", title_)
-    {
-        created_date = cr_date;
-        editing_date = ed_date;
-        tags = tags_;
-        data_file = data_file_path;
-        id = id_;
-    }
+    TextNote(int, QString &, Date, Date, QStringList &, QString &);
 
-    void save_into_file() override
-    {
-        QFile file(data_file);
-        if (file.open(QIODevice::WriteOnly))
-        {
-            QTextStream out(&file);
-            out << text;
-        }
-        file.close();
-    }
+    virtual void save_into_file() override;
 
-    void load_data_from_file(QString &file_path) override // think about it
-    {
-        data_file = file_path;
-        text = "";
-        QFile file(data_file);
-        if (file.open(QIODevice::ReadOnly))
-        {
-            QTextStream in(&file);
-            QString line = in.readLine();
-            while (!line.isEmpty())
-            {
-                text += line;
-                line = in.readLine();
-            }
-            file.close();
-        }
-    }
+    virtual void load_data_from_file(QString &file_path) override;
 
 };
 

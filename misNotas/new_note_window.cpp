@@ -33,23 +33,15 @@ void new_note_window::on_createButton_clicked()
         tags_list = " ";
     int new_file_name = rand();
     QString fname = "";
-    if (type == "Text")
-    {
-        fname = QString::fromStdString("/Users/epidzhx/Staff/misNotas/misNotas/files/" + std::to_string(new_file_name) + ".txt");
-    }
-    else if (type == "Graphic")
-    {
-        fname = QString::fromStdString("/Users/epidzhx/Staff/misNotas/misNotas/files/" + std::to_string(new_file_name) + ".png");
-    }
 
+    if (type == "Text")
+        fname = QString::fromStdString("/Users/epidzhx/Staff/misNotas/misNotas/files/" + std::to_string(new_file_name) + "." + text_format.toStdString());
+    else if (type == "Graphic")
+        fname = QString::fromStdString("/Users/epidzhx/Staff/misNotas/misNotas/files/" + std::to_string(new_file_name) + "." + graphic_format.toStdString());
     else if (type == "Audio")
-    {
-        fname = QString::fromStdString("/Users/epidzhx/Staff/misNotas/misNotas/files/" + std::to_string(new_file_name) + ".wav");
-    }
+        fname = QString::fromStdString("/Users/epidzhx/Staff/misNotas/misNotas/files/" + std::to_string(new_file_name) + "." + audio_format.toStdString());
     else if (type == "Video")
-    {
-        fname = QString::fromStdString("/Users/epidzhx/Staff/misNotas/misNotas/files/" + std::to_string(new_file_name) + ".mov");
-    }
+        fname = QString::fromStdString("/Users/epidzhx/Staff/misNotas/misNotas/files/" + std::to_string(new_file_name) + "." + video_format.toStdString());
 
     QFile file(fname);
     if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
@@ -59,8 +51,8 @@ void new_note_window::on_createButton_clicked()
         {
             QTextStream textStream2(&file2);
 
-            textStream2 << new_file_name << "\n" << type << "\n" << title << "\n" << Date::get_current_date_in_QString() << "\n" << Date::get_current_date_in_QString()
-                        << "\n" << tags_list << "\n" << fname << "\n";
+            textStream2 << new_file_name << "\n" << type << "\n" << title << "\n" << Date::get_current_date_in_QString() << "\n"
+                        << Date::get_current_date_in_QString() << "\n" << tags_list << "\n" << fname << "\n";
             file2.close();
         }
     }
