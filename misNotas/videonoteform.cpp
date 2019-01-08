@@ -39,6 +39,7 @@ VideoNoteForm::VideoNoteForm(QWidget* parent)
     layout->addWidget(videoWidget);
     layout->addLayout(controlLayout);
     setLayout(layout);
+    this->setFixedSize(640, 480);
 }
 
 VideoNoteForm::~VideoNoteForm()
