@@ -11,6 +11,8 @@ TextNoteForm::TextNoteForm(QWidget* parent)
     QPalette pal;
     pal.setColor(QPalette::Text, Qt::gray);
     ui->plainTextEdit->setPalette(pal);
+    connect(ui->openButton, &QPushButton::clicked, this, &TextNoteForm::open);
+    connect(ui->saveButton, &QPushButton::clicked, this, &TextNoteForm::save);
 }
 
 TextNoteForm::~TextNoteForm()
@@ -37,14 +39,14 @@ void TextNoteForm::transfer_note(Note* n)
     ui->plainTextEdit->setPlainText(note->get_text());
 }
 
-void TextNoteForm::on_saveButton_clicked()
+void TextNoteForm::save()
 {
     QString text = ui->plainTextEdit->toPlainText();
     note->set_text(text);
     note->save_into_file();
 }
 
-void TextNoteForm::on_openButton_clicked()
+void TextNoteForm::open()
 {
     QString text = "";
     QString file_name = QFileDialog::getOpenFileName();

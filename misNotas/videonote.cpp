@@ -14,8 +14,7 @@ VideoNote::VideoNote(QString& id_, QString& title_, Date cr_date, Date ed_date, 
 void VideoNote::save_into_file()
 {
     QFile file(data_file);
-    if (file.open(QIODevice::WriteOnly))
-    {
+    if (file.open(QIODevice::WriteOnly)) {
         file.resize(0);
         file.write(data);
     }
@@ -25,8 +24,7 @@ void VideoNote::save_into_file()
 void VideoNote::load_data_from_file(QString& file_path)
 {
     QFile file(file_path);
-    if (file.open(QIODevice::ReadOnly))
-    {
+    if (file.open(QIODevice::ReadOnly)) {
         data = file.readAll();
         file.close();
     }

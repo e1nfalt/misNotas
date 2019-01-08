@@ -116,7 +116,7 @@ int DrawArea::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 struct qt_meta_stringdata_graphicform_t {
     QByteArrayData data[8];
-    char stringdata0[140];
+    char stringdata0[72];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -126,19 +126,17 @@ struct qt_meta_stringdata_graphicform_t {
 static const qt_meta_stringdata_graphicform_t qt_meta_stringdata_graphicform = {
     {
 QT_MOC_LITERAL(0, 0, 11), // "graphicform"
-QT_MOC_LITERAL(1, 12, 21), // "on_saveButton_clicked"
-QT_MOC_LITERAL(2, 34, 0), // ""
-QT_MOC_LITERAL(3, 35, 21), // "on_openButton_clicked"
-QT_MOC_LITERAL(4, 57, 22), // "on_colorButton_clicked"
-QT_MOC_LITERAL(5, 80, 30), // "on_penWidthSlider_valueChanged"
-QT_MOC_LITERAL(6, 111, 5), // "value"
-QT_MOC_LITERAL(7, 117, 22) // "on_clearButton_clicked"
+QT_MOC_LITERAL(1, 12, 4), // "save"
+QT_MOC_LITERAL(2, 17, 0), // ""
+QT_MOC_LITERAL(3, 18, 4), // "open"
+QT_MOC_LITERAL(4, 23, 5), // "color"
+QT_MOC_LITERAL(5, 29, 5), // "clear"
+QT_MOC_LITERAL(6, 35, 30), // "on_penWidthSlider_valueChanged"
+QT_MOC_LITERAL(7, 66, 5) // "value"
 
     },
-    "graphicform\0on_saveButton_clicked\0\0"
-    "on_openButton_clicked\0on_colorButton_clicked\0"
-    "on_penWidthSlider_valueChanged\0value\0"
-    "on_clearButton_clicked"
+    "graphicform\0save\0\0open\0color\0clear\0"
+    "on_penWidthSlider_valueChanged\0value"
 };
 #undef QT_MOC_LITERAL
 
@@ -159,15 +157,15 @@ static const uint qt_meta_data_graphicform[] = {
        1,    0,   39,    2, 0x08 /* Private */,
        3,    0,   40,    2, 0x08 /* Private */,
        4,    0,   41,    2, 0x08 /* Private */,
-       5,    1,   42,    2, 0x08 /* Private */,
-       7,    0,   45,    2, 0x08 /* Private */,
+       5,    0,   42,    2, 0x08 /* Private */,
+       6,    1,   43,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,    6,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,    7,
 
        0        // eod
 };
@@ -178,11 +176,11 @@ void graphicform::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         graphicform *_t = static_cast<graphicform *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->on_saveButton_clicked(); break;
-        case 1: _t->on_openButton_clicked(); break;
-        case 2: _t->on_colorButton_clicked(); break;
-        case 3: _t->on_penWidthSlider_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 4: _t->on_clearButton_clicked(); break;
+        case 0: _t->save(); break;
+        case 1: _t->open(); break;
+        case 2: _t->color(); break;
+        case 3: _t->clear(); break;
+        case 4: _t->on_penWidthSlider_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     }

@@ -7,20 +7,16 @@ namespace Ui {
 class new_note_window;
 }
 
-class new_note_window : public QWidget
-{
+class new_note_window : public QWidget {
     Q_OBJECT
-
 public:
-    explicit new_note_window(QWidget *parent = nullptr);
+    explicit new_note_window(QWidget* parent = nullptr);
     ~new_note_window();
-
 private slots:
-
-    void on_createButton_clicked();
+    void create();
 
 private:
-    Ui::new_note_window *ui;
+    Ui::new_note_window* ui;
 };
 
 #endif // NEW_NOTE_WINDOW_H

@@ -34,13 +34,13 @@ graphicform::~graphicform()
     delete ui;
 }
 
-DrawArea::DrawArea(QWidget* parent) : QWidget(parent)
+DrawArea::DrawArea(QWidget* parent)
+    : QWidget(parent)
 {
     setAttribute(Qt::WA_StaticContents);
     drawing = false;
     myPenWidth = 1;
     myPenColor = Qt::blue;
-
 }
 
 bool DrawArea::openImage(const QString& fileName)
@@ -74,8 +74,7 @@ void DrawArea::clearImage()
 
 void DrawArea::mousePressEvent(QMouseEvent* event)
 {
-    if (event->button() == Qt::LeftButton)
-    {
+    if (event->button() == Qt::LeftButton) {
         lastPoint = event->pos();
         drawing = true;
     }
@@ -89,8 +88,7 @@ void DrawArea::mouseMoveEvent(QMouseEvent* event)
 
 void DrawArea::mouseReleaseEvent(QMouseEvent* event)
 {
-    if (event->button() == Qt::LeftButton && drawing)
-    {
+    if (event->button() == Qt::LeftButton && drawing) {
         drawLineTo(event->pos());
         drawing = false;
     }
@@ -120,7 +118,6 @@ void DrawArea::drawLineTo(const QPoint& endPoint)
     painter.setPen(QPen(myPenColor, myPenWidth, Qt::SolidLine, Qt::RoundCap,
         Qt::RoundJoin));
     painter.drawLine(lastPoint, endPoint);
-
     int rad = (myPenWidth / 2) + 2;
     update(QRect(lastPoint, endPoint).normalized().adjusted(-rad, -rad, +rad, +rad));
     lastPoint = endPoint;
@@ -130,7 +127,6 @@ void DrawArea::resizeImage(QImage* image, const QSize& newSize)
 {
     if (image->size() == newSize)
         return;
-
     QImage newImage(newSize, QImage::Format_RGB32);
     newImage.fill(qRgb(255, 255, 255));
     QPainter painter(&newImage);
@@ -140,7 +136,6 @@ void DrawArea::resizeImage(QImage* image, const QSize& newSize)
 
 void DrawArea::print()
 {
-//#ifndef QT_NO_PRINTER
     QPrinter printer(QPrinter::HighResolution);
 
     QPrintDialog* printDialog = new QPrintDialog(&printer, this);
@@ -153,22 +148,20 @@ void DrawArea::print()
         painter.setWindow(image.rect());
         painter.drawImage(0, 0, image);
     }
-//#endif // QT_NO_PRINTER
 }
 
-void graphicform::on_saveButton_clicked()
+void graphicform::save()
 {
     QImage image = drawArea->get_image();
     note->update_image(image);
     note->save_into_file();
 }
 
-void graphicform::on_openButton_clicked()
+void graphicform::open()
 {
     QString fileName = QFileDialog::getOpenFileName(this,
         tr("Open File"), QDir::currentPath());
-    if (!fileName.isEmpty())
-    {
+    if (!fileName.isEmpty()) {
         note->load_data_from_file(fileName);
         drawArea->openImage(fileName);
     }
@@ -179,20 +172,19 @@ void graphicform::on_penWidthSlider_valueChanged(int value)
     drawArea->setPenWidth(value);
 }
 
-void graphicform::on_colorButton_clicked()
+void graphicform::color()
 {
     QColor color = QColorDialog::getColor();
     if (color.isValid())
         drawArea->setPenColor(color);
-    else
-    {
+    else {
         QMessageBox msgBox;
         msgBox.setText("This color is unsupported!");
         msgBox.exec();
     }
 }
 
-void graphicform::on_clearButton_clicked()
+void graphicform::clear()
 {
     drawArea->clearImage();
 }

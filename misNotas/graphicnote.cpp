@@ -1,6 +1,6 @@
 #include "graphicnote.h"
 
-GraphicNote::GraphicNote(QString &id_, QString& title_, Date cr_date, Date ed_date, QStringList& tags_, QString& data_file_path)
+GraphicNote::GraphicNote(QString& id_, QString& title_, Date cr_date, Date ed_date, QStringList& tags_, QString& data_file_path)
     : Note("Graphic", title_)
 {
     created_date = cr_date;
@@ -21,18 +21,15 @@ void GraphicNote::save_into_file()
 void GraphicNote::load_data_from_file(QString& file_path)
 {
     QImage loadedImage;
-    if (!loadedImage.load(file_path))
-    {
+    if (!loadedImage.load(file_path)) {
         image = loadedImage;
-        //data_file = file_path;
     }
 }
 
-void GraphicNote::update_image(QImage &new_image)
+void GraphicNote::update_image(QImage& new_image)
 {
     image = new_image;
 }
-
 
 QImage GraphicNote::get_image()
 {

@@ -1,72 +1,61 @@
 #ifndef DATE_H
 #define DATE_H
 
+#include <QString>
 #include <iostream>
 #include <stdio.h>
 #include <time.h>
-#include <QString>
 
-
-class Date
-{
+class Date {
 private:
     QString year, month, day;
-public:
 
+public:
     Date() {}
 
-    Date(QString &str)
+    Date(QString& str)
     {
         year = str.left(4);
         month = str.mid(5, 2);
         day = str.right(2);
     }
 
-    Date(int year_, int month_, int day_) : year(year_), month(month_), day(day_) {}
-
-    Date(Date const &date_)
-    {
-        year = date_.year;
-        month = date_.month;
-        day = date_.day;
-    }
-
-    bool operator>(Date &date_)
+    bool operator>(Date& date_)
     {
         int tmp1 = get_date_in_int_format();
         int tmp2 = date_.get_date_in_int_format();
         return tmp1 > tmp2;
     }
 
-    bool operator<(Date &date_)
+    bool operator<(Date& date_)
     {
         int tmp1 = get_date_in_int_format();
         int tmp2 = date_.get_date_in_int_format();
         return tmp1 < tmp2;
     }
 
-    bool operator!=(Date &date_)
+    bool operator!=(Date& date_)
     {
         int tmp1 = get_date_in_int_format();
         int tmp2 = date_.get_date_in_int_format();
         return tmp1 != tmp2;
     }
 
-    bool operator==(Date &date_)
+    bool operator==(Date& date_)
     {
         int tmp1 = get_date_in_int_format();
         int tmp2 = date_.get_date_in_int_format();
         return tmp1 == tmp2;
     }
 
-    bool operator<=(Date &date_)
+    bool operator<=(Date& date_)
     {
         int tmp1 = get_date_in_int_format();
         int tmp2 = date_.get_date_in_int_format();
         return tmp1 <= tmp2;
     }
 
-    bool operator>=(Date &date_)
+    bool operator>=(Date& date_)
     {
         int tmp1 = get_date_in_int_format();
         int tmp2 = date_.get_date_in_int_format();
@@ -107,19 +96,18 @@ public:
     static QString get_current_date_in_QString()
     {
         time_t rawtime;
-        struct tm * timeinfo;
-
-        time (&rawtime);
-        timeinfo = localtime (&rawtime);
-        QString year = QString::number(timeinfo->tm_year+1900);
+        struct tm* timeinfo;
+        time(&rawtime);
+        timeinfo = localtime(&rawtime);
+        QString year = QString::number(timeinfo->tm_year + 1900);
         QString month;
-        if (timeinfo->tm_mon+1 < 10)
-            month = "0"+ QString::number(timeinfo->tm_mon+1);
+        if (timeinfo->tm_mon + 1 < 10)
+            month = "0" + QString::number(timeinfo->tm_mon + 1);
         else
-            month = QString::number(timeinfo->tm_mon+1);
+            month = QString::number(timeinfo->tm_mon + 1);
         QString day;
         if (timeinfo->tm_mday < 10)
-            day = "0"+ QString::number(timeinfo->tm_mday);
+            day = "0" + QString::number(timeinfo->tm_mday);
         else
             day = QString::number(timeinfo->tm_mday);
         QString s = year + "." + month + "." + day;
@@ -134,6 +122,5 @@ public:
         day = str.right(2);
     }
 };
-
 
 #endif // DATE_H

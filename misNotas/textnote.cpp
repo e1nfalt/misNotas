@@ -1,19 +1,15 @@
 #include "textnote.h"
 
-void TextNote::set_text(QString& s)
-{
-    text = s;
-}
+void TextNote::set_text(QString& s) { text = s; }
 
 TextNote::TextNote(QString& title_)
-    : Note("Text", title_) {}
-
-QString TextNote::get_text()
+    : Note("Text", title_)
 {
-    return text;
 }
 
-TextNote::TextNote(QString &id_, QString& title_, Date cr_date, Date ed_date, QStringList& tags_, QString& data_file_path)
+QString TextNote::get_text() { return text; }
+
+TextNote::TextNote(QString& id_, QString& title_, Date cr_date, Date ed_date, QStringList& tags_, QString& data_file_path)
     : Note("Text", title_)
 {
     created_date = cr_date;

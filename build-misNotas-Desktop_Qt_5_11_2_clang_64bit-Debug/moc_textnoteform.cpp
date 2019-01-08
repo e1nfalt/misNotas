@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_TextNoteForm_t {
     QByteArrayData data[4];
-    char stringdata0[58];
+    char stringdata0[24];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,13 +32,12 @@ struct qt_meta_stringdata_TextNoteForm_t {
 static const qt_meta_stringdata_TextNoteForm_t qt_meta_stringdata_TextNoteForm = {
     {
 QT_MOC_LITERAL(0, 0, 12), // "TextNoteForm"
-QT_MOC_LITERAL(1, 13, 21), // "on_saveButton_clicked"
-QT_MOC_LITERAL(2, 35, 0), // ""
-QT_MOC_LITERAL(3, 36, 21) // "on_openButton_clicked"
+QT_MOC_LITERAL(1, 13, 4), // "save"
+QT_MOC_LITERAL(2, 18, 0), // ""
+QT_MOC_LITERAL(3, 19, 4) // "open"
 
     },
-    "TextNoteForm\0on_saveButton_clicked\0\0"
-    "on_openButton_clicked"
+    "TextNoteForm\0save\0\0open"
 };
 #undef QT_MOC_LITERAL
 
@@ -72,8 +71,8 @@ void TextNoteForm::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         TextNoteForm *_t = static_cast<TextNoteForm *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->on_saveButton_clicked(); break;
-        case 1: _t->on_openButton_clicked(); break;
+        case 0: _t->save(); break;
+        case 1: _t->open(); break;
         default: ;
         }
     }

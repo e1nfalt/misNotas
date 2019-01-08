@@ -1,15 +1,15 @@
 #include "videonoteform.h"
 #include "ui_videonoteform.h"
+#include <QAbstractSlider>
+#include <QBoxLayout>
 #include <QCamera>
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QMediaPlaylist>
-#include <QVideoWidget>
-#include <QStandardPaths>
-#include <QAbstractSlider>
-#include <QBoxLayout>
 #include <QPushButton>
+#include <QStandardPaths>
 #include <QToolButton>
+#include <QVideoWidget>
 
 VideoNoteForm::VideoNoteForm(QWidget* parent)
     : QWidget(parent)
@@ -18,34 +18,26 @@ VideoNoteForm::VideoNoteForm(QWidget* parent)
     this->setAttribute(Qt::WA_DeleteOnClose);
     openButton = new QPushButton("Open");
     connect(openButton, &QPushButton::clicked, this, &VideoNoteForm::openFile);
-
     playButton = new QPushButton("Play");
     connect(playButton, &QPushButton::clicked, this, &VideoNoteForm::play);
-
     saveButton = new QPushButton("Save");
     connect(playButton, &QPushButton::clicked, this, &VideoNoteForm::save);
-
     positionSlider = new QSlider(Qt::Horizontal);
     connect(positionSlider, &QSlider::sliderMoved, this, &VideoNoteForm::setPosition);
-
     mediaPlayer = new QMediaPlayer(this, QMediaPlayer::VideoSurface);
     videoWidget = new QVideoWidget;
     mediaPlayer->setVideoOutput(videoWidget);
     connect(mediaPlayer, &QMediaPlayer::stateChanged, this, &VideoNoteForm::mediaStateChanged);
     connect(mediaPlayer, &QMediaPlayer::positionChanged, this, &VideoNoteForm::positionChanged);
     connect(mediaPlayer, &QMediaPlayer::durationChanged, this, &VideoNoteForm::durationChanged);
-
-
-    QBoxLayout *controlLayout = new QHBoxLayout;
+    QBoxLayout* controlLayout = new QHBoxLayout;
     controlLayout->setMargin(0);
     controlLayout->addWidget(openButton);
     controlLayout->addWidget(playButton);
     controlLayout->addWidget(positionSlider);
-
-    QBoxLayout *layout = new QVBoxLayout;
+    QBoxLayout* layout = new QVBoxLayout;
     layout->addWidget(videoWidget);
     layout->addLayout(controlLayout);
-
     setLayout(layout);
 }
 
@@ -65,7 +57,7 @@ void VideoNoteForm::save()
     note->save_into_file();
 }
 
-void VideoNoteForm::setUrl(const QUrl &url)
+void VideoNoteForm::setUrl(const QUrl& url)
 {
     setWindowFilePath(url.isLocalFile() ? url.toLocalFile() : QString());
     mediaPlayer->setMedia(url);
@@ -92,7 +84,7 @@ void VideoNoteForm::openFile()
 
 void VideoNoteForm::mediaStateChanged(QMediaPlayer::State state)
 {
-    switch(state) {
+    switch (state) {
     case QMediaPlayer::PlayingState:
         playButton->setText("Pause");
         break;

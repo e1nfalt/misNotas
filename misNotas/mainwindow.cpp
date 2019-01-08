@@ -21,7 +21,6 @@ MainWindow::MainWindow(QWidget* parent)
     ui->comboBox->addItem("<=");
     ui->comboBox->addItem("==");
     ui->comboBox->addItem("!=");
-
     QPalette pal = palette();
     pal.setColor(QPalette::Text, Qt::gray);
     ui->listWidget->setPalette(pal);
@@ -32,16 +31,16 @@ MainWindow::MainWindow(QWidget* parent)
     connect(ui->refreshButton, &QPushButton::clicked, this, &MainWindow::refresh);
     connect(ui->filterButton, &QPushButton::clicked, this, &MainWindow::filter);
     connect(ui->findButton, &QPushButton::clicked, this, &MainWindow::find);
-
     refresh();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    notes.clear();
 }
 
-void MainWindow::closeEvent (QCloseEvent *event)
+void MainWindow::closeEvent(QCloseEvent* event)
 {
     write_note_list();
 }
@@ -74,7 +73,6 @@ void MainWindow::get_notes()
     QFile file("/Users/epidzhx/Staff/misNotas/misNotas/files/notes_list.txt");
     if (file.open(QIODevice::ReadOnly)) {
         QTextStream in(&file);
-
         QString id = in.readLine();
         while (!id.isEmpty()) {
             if (id.endsWith("\n"))
@@ -92,8 +90,7 @@ void MainWindow::get_notes()
             if (ed_date.endsWith("\n"))
                 delete_n(ed_date);
             QStringList tags_list = in.readLine().split("@");
-            for (int j = 0; j < tags_list.size(); j++)
-            {
+            for (int j = 0; j < tags_list.size(); j++) {
                 if (tags_list.at(j).isEmpty())
                     tags_list.removeAt(j);
             }
@@ -108,7 +105,6 @@ void MainWindow::get_notes()
                 notes.push_back(new AudioNote(id, title, Date(cr_date), Date(ed_date), tags_list, data_file_path));
             else if (type == "Video")
                 notes.push_back(new VideoNote(id, title, Date(cr_date), Date(ed_date), tags_list, data_file_path));
-
             id = in.readLine();
         }
     }
@@ -180,7 +176,6 @@ void MainWindow::edit()
     }
     if (!curr)
         return;
-
     if (type == "Text") {
         TextNoteForm* window = new TextNoteForm();
         window->transfer_note(curr);

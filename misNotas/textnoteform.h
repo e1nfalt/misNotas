@@ -8,23 +8,21 @@ namespace Ui {
 class TextNoteForm;
 }
 
-class TextNoteForm : public QWidget
-{
+class TextNoteForm : public QWidget {
     Q_OBJECT
 
 public:
-    explicit TextNoteForm(QWidget *parent = nullptr);
+    explicit TextNoteForm(QWidget* parent = nullptr);
     ~TextNoteForm();
     void transfer_note(Note*);
-
 private slots:
 
-    void on_saveButton_clicked();
-    void on_openButton_clicked();
+    void save();
+    void open();
 
 private:
-    Ui::TextNoteForm *ui;
-    TextNote *note;
+    Ui::TextNoteForm* ui;
+    TextNote* note;
 };
 
 #endif // TEXTNOTEFORM_H

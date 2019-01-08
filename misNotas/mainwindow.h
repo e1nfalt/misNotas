@@ -1,29 +1,25 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
-#include "textnoteform.h"
 #include "audionoteform.h"
-#include "videonoteform.h"
 #include "graphicform.h"
 #include "new_note_window.h"
-#include <note.h>
+#include "textnoteform.h"
+#include "videonoteform.h"
 #include <QCloseEvent>
+#include <QMainWindow>
+#include <note.h>
 
 namespace Ui {
 class MainWindow;
 }
 
-class MainWindow : public QMainWindow
-{
+class MainWindow : public QMainWindow {
     Q_OBJECT
-
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
-
 private slots:
-
     void refresh();
     void add();
     void filter();
@@ -32,7 +28,7 @@ private slots:
     void closeEvent(QCloseEvent*);
 
 private:
-    Ui::MainWindow *ui;
+    Ui::MainWindow* ui;
     std::vector<Note*> notes;
     void get_notes();
     void write_note_list();

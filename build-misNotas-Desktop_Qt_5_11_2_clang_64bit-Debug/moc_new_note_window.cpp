@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_new_note_window_t {
     QByteArrayData data[3];
-    char stringdata0[41];
+    char stringdata0[24];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,12 +32,11 @@ struct qt_meta_stringdata_new_note_window_t {
 static const qt_meta_stringdata_new_note_window_t qt_meta_stringdata_new_note_window = {
     {
 QT_MOC_LITERAL(0, 0, 15), // "new_note_window"
-QT_MOC_LITERAL(1, 16, 23), // "on_createButton_clicked"
-QT_MOC_LITERAL(2, 40, 0) // ""
+QT_MOC_LITERAL(1, 16, 6), // "create"
+QT_MOC_LITERAL(2, 23, 0) // ""
 
     },
-    "new_note_window\0on_createButton_clicked\0"
-    ""
+    "new_note_window\0create\0"
 };
 #undef QT_MOC_LITERAL
 
@@ -69,7 +68,7 @@ void new_note_window::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         new_note_window *_t = static_cast<new_note_window *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->on_createButton_clicked(); break;
+        case 0: _t->create(); break;
         default: ;
         }
     }

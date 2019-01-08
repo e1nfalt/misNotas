@@ -12,10 +12,8 @@ AudioNoteForm::AudioNoteForm(QWidget* parent)
     ui->setupUi(this);
     this->setFixedSize(640, 480);
     ui->play_button->setText("Play");
-    audioRecorder = new QAudioRecorder();
     player = new QMediaPlayer;
     ui->volumeControl->setValue(50);
-
     connect(ui->positionSlider, &QSlider::sliderMoved, this, &AudioNoteForm::setPosition);
     connect(player, &QMediaPlayer::stateChanged, this, &AudioNoteForm::mediaStateChanged);
     connect(player, &QMediaPlayer::positionChanged, this, &AudioNoteForm::positionChanged);
@@ -25,10 +23,8 @@ AudioNoteForm::AudioNoteForm(QWidget* parent)
 AudioNoteForm::~AudioNoteForm()
 {
     delete ui;
-    delete audioRecorder;
-    if (player->state() == QMediaPlayer::StoppedState) {
+    if (player->state() == QMediaPlayer::StoppedState)
         player->stop();
-    }
     delete player;
 }
 
@@ -84,7 +80,7 @@ void AudioNoteForm::setPosition(int position)
 
 void AudioNoteForm::mediaStateChanged(QMediaPlayer::State state)
 {
-    switch(state) {
+    switch (state) {
     case QMediaPlayer::PlayingState:
         ui->play_button->setText("Pause");
         break;
