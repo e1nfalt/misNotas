@@ -12,6 +12,8 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QComboBox>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QWidget>
@@ -21,28 +23,45 @@ QT_BEGIN_NAMESPACE
 class Ui_new_note_window
 {
 public:
-    QComboBox *comboBox;
-    QPushButton *createButton;
+    QHBoxLayout *horizontalLayout;
+    QGridLayout *gridLayout;
     QLineEdit *new_title;
+    QComboBox *comboBox;
     QLineEdit *new_tags_list;
+    QPushButton *createButton;
 
     void setupUi(QWidget *new_note_window)
     {
         if (new_note_window->objectName().isEmpty())
             new_note_window->setObjectName(QStringLiteral("new_note_window"));
         new_note_window->resize(400, 300);
-        comboBox = new QComboBox(new_note_window);
-        comboBox->setObjectName(QStringLiteral("comboBox"));
-        comboBox->setGeometry(QRect(140, 70, 79, 24));
-        createButton = new QPushButton(new_note_window);
-        createButton->setObjectName(QStringLiteral("createButton"));
-        createButton->setGeometry(QRect(140, 210, 80, 24));
+        horizontalLayout = new QHBoxLayout(new_note_window);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        gridLayout = new QGridLayout();
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
         new_title = new QLineEdit(new_note_window);
         new_title->setObjectName(QStringLiteral("new_title"));
-        new_title->setGeometry(QRect(130, 130, 113, 24));
+
+        gridLayout->addWidget(new_title, 1, 0, 1, 1);
+
+        comboBox = new QComboBox(new_note_window);
+        comboBox->setObjectName(QStringLiteral("comboBox"));
+
+        gridLayout->addWidget(comboBox, 0, 0, 1, 1);
+
         new_tags_list = new QLineEdit(new_note_window);
         new_tags_list->setObjectName(QStringLiteral("new_tags_list"));
-        new_tags_list->setGeometry(QRect(130, 170, 113, 24));
+
+        gridLayout->addWidget(new_tags_list, 2, 0, 1, 1);
+
+        createButton = new QPushButton(new_note_window);
+        createButton->setObjectName(QStringLiteral("createButton"));
+
+        gridLayout->addWidget(createButton, 3, 0, 1, 1);
+
+
+        horizontalLayout->addLayout(gridLayout);
+
 
         retranslateUi(new_note_window);
 

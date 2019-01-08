@@ -11,9 +11,11 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -21,28 +23,45 @@ QT_BEGIN_NAMESPACE
 class Ui_TextNoteForm
 {
 public:
-    QPlainTextEdit *plainTextEdit;
+    QVBoxLayout *verticalLayout;
+    QGridLayout *gridLayout;
+    QLabel *label;
     QPushButton *saveButton;
     QPushButton *openButton;
-    QLabel *label;
+    QPlainTextEdit *plainTextEdit;
 
     void setupUi(QWidget *TextNoteForm)
     {
         if (TextNoteForm->objectName().isEmpty())
             TextNoteForm->setObjectName(QStringLiteral("TextNoteForm"));
-        TextNoteForm->resize(400, 300);
-        plainTextEdit = new QPlainTextEdit(TextNoteForm);
-        plainTextEdit->setObjectName(QStringLiteral("plainTextEdit"));
-        plainTextEdit->setGeometry(QRect(70, 40, 241, 171));
-        saveButton = new QPushButton(TextNoteForm);
-        saveButton->setObjectName(QStringLiteral("saveButton"));
-        saveButton->setGeometry(QRect(70, 250, 80, 24));
-        openButton = new QPushButton(TextNoteForm);
-        openButton->setObjectName(QStringLiteral("openButton"));
-        openButton->setGeometry(QRect(220, 250, 80, 24));
+        TextNoteForm->resize(640, 480);
+        verticalLayout = new QVBoxLayout(TextNoteForm);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        gridLayout = new QGridLayout();
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
         label = new QLabel(TextNoteForm);
         label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(160, 10, 59, 16));
+
+        gridLayout->addWidget(label, 0, 0, 1, 1);
+
+        saveButton = new QPushButton(TextNoteForm);
+        saveButton->setObjectName(QStringLiteral("saveButton"));
+
+        gridLayout->addWidget(saveButton, 2, 0, 1, 1);
+
+        openButton = new QPushButton(TextNoteForm);
+        openButton->setObjectName(QStringLiteral("openButton"));
+
+        gridLayout->addWidget(openButton, 2, 1, 1, 1);
+
+        plainTextEdit = new QPlainTextEdit(TextNoteForm);
+        plainTextEdit->setObjectName(QStringLiteral("plainTextEdit"));
+
+        gridLayout->addWidget(plainTextEdit, 1, 0, 1, 2);
+
+
+        verticalLayout->addLayout(gridLayout);
+
 
         retranslateUi(TextNoteForm);
 
@@ -52,9 +71,9 @@ public:
     void retranslateUi(QWidget *TextNoteForm)
     {
         TextNoteForm->setWindowTitle(QApplication::translate("TextNoteForm", "Form", nullptr));
+        label->setText(QApplication::translate("TextNoteForm", "TextLabel", nullptr));
         saveButton->setText(QApplication::translate("TextNoteForm", "save", nullptr));
         openButton->setText(QApplication::translate("TextNoteForm", "open", nullptr));
-        label->setText(QApplication::translate("TextNoteForm", "TextLabel", nullptr));
     } // retranslateUi
 
 };

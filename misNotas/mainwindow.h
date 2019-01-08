@@ -24,15 +24,11 @@ public:
 
 private slots:
 
-    void on_refreshButton_clicked();
-
-    void on_filterButton_clicked();
-
-    void on_findButton_clicked();
-
-    void on_editButton_clicked();
-
-    void on_addButton_clicked();
+    void refresh();
+    void add();
+    void filter();
+    void find();
+    void edit();
     void closeEvent(QCloseEvent*);
 
 private:

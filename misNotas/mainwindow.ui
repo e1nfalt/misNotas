@@ -50,13 +50,6 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="1">
-       <widget class="QPushButton" name="refreshButton">
-        <property name="text">
-         <string>REFRESH</string>
-        </property>
-       </widget>
-      </item>
       <item row="4" column="0" colspan="3">
        <widget class="QListWidget" name="listWidget">
         <property name="autoFillBackground">
@@ -81,6 +74,13 @@
        <widget class="QPushButton" name="filterButton">
         <property name="text">
          <string>FILTER DATE</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QPushButton" name="refreshButton">
+        <property name="text">
+         <string>REFRESH</string>
         </property>
        </widget>
       </item>

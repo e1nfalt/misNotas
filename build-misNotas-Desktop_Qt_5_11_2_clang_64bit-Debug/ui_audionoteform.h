@@ -11,9 +11,10 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSlider>
-#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -21,33 +22,52 @@ QT_BEGIN_NAMESPACE
 class Ui_AudioNoteForm
 {
 public:
-    QVBoxLayout *verticalLayout;
-    QPushButton *play_button;
+    QHBoxLayout *horizontalLayout;
+    QGridLayout *gridLayout;
     QPushButton *open_button;
+    QPushButton *play_button;
     QSlider *volumeControl;
+    QPushButton *saveButton;
+    QSlider *positionSlider;
 
     void setupUi(QWidget *AudioNoteForm)
     {
         if (AudioNoteForm->objectName().isEmpty())
             AudioNoteForm->setObjectName(QStringLiteral("AudioNoteForm"));
-        AudioNoteForm->resize(352, 303);
-        verticalLayout = new QVBoxLayout(AudioNoteForm);
-        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        play_button = new QPushButton(AudioNoteForm);
-        play_button->setObjectName(QStringLiteral("play_button"));
-
-        verticalLayout->addWidget(play_button);
-
+        AudioNoteForm->resize(640, 480);
+        horizontalLayout = new QHBoxLayout(AudioNoteForm);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        gridLayout = new QGridLayout();
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
         open_button = new QPushButton(AudioNoteForm);
         open_button->setObjectName(QStringLiteral("open_button"));
 
-        verticalLayout->addWidget(open_button);
+        gridLayout->addWidget(open_button, 3, 3, 1, 1);
+
+        play_button = new QPushButton(AudioNoteForm);
+        play_button->setObjectName(QStringLiteral("play_button"));
+
+        gridLayout->addWidget(play_button, 3, 2, 1, 1);
 
         volumeControl = new QSlider(AudioNoteForm);
         volumeControl->setObjectName(QStringLiteral("volumeControl"));
         volumeControl->setOrientation(Qt::Horizontal);
 
-        verticalLayout->addWidget(volumeControl);
+        gridLayout->addWidget(volumeControl, 4, 1, 1, 3);
+
+        saveButton = new QPushButton(AudioNoteForm);
+        saveButton->setObjectName(QStringLiteral("saveButton"));
+
+        gridLayout->addWidget(saveButton, 3, 1, 1, 1);
+
+        positionSlider = new QSlider(AudioNoteForm);
+        positionSlider->setObjectName(QStringLiteral("positionSlider"));
+        positionSlider->setOrientation(Qt::Horizontal);
+
+        gridLayout->addWidget(positionSlider, 5, 1, 1, 3);
+
+
+        horizontalLayout->addLayout(gridLayout);
 
 
         retranslateUi(AudioNoteForm);
@@ -58,8 +78,9 @@ public:
     void retranslateUi(QWidget *AudioNoteForm)
     {
         AudioNoteForm->setWindowTitle(QApplication::translate("AudioNoteForm", "Form", nullptr));
-        play_button->setText(QApplication::translate("AudioNoteForm", "play", nullptr));
-        open_button->setText(QApplication::translate("AudioNoteForm", "open", nullptr));
+        open_button->setText(QApplication::translate("AudioNoteForm", "Open", nullptr));
+        play_button->setText(QApplication::translate("AudioNoteForm", "Play", nullptr));
+        saveButton->setText(QApplication::translate("AudioNoteForm", "Save", nullptr));
     } // retranslateUi
 
 };

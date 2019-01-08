@@ -1,6 +1,6 @@
 #include "videonote.h"
 
-VideoNote::VideoNote(QString id_, QString& title_, Date cr_date, Date ed_date, QStringList& tags_, QString& data_file_path)
+VideoNote::VideoNote(QString& id_, QString& title_, Date cr_date, Date ed_date, QStringList& tags_, QString& data_file_path)
     : Note("Video", title_)
 {
     created_date = cr_date;

@@ -12,6 +12,8 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QComboBox>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QListWidget>
@@ -25,59 +27,90 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralWidget;
-    QLabel *label;
-    QListWidget *listWidget;
+    QHBoxLayout *horizontalLayout;
+    QGridLayout *gridLayout;
     QPushButton *addButton;
-    QPushButton *refreshButton;
-    QPushButton *editButton;
-    QPushButton *findButton;
-    QPushButton *filterButton;
-    QLineEdit *lineEdit;
-    QLineEdit *lineEdit_2;
+    QLabel *label;
     QComboBox *comboBox;
+    QLineEdit *findLine;
+    QPushButton *findButton;
+    QListWidget *listWidget;
+    QPushButton *editButton;
+    QLineEdit *filterLine;
+    QPushButton *filterButton;
+    QPushButton *refreshButton;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(610, 500);
+        MainWindow->resize(640, 480);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        label = new QLabel(centralWidget);
-        label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(150, 0, 59, 16));
-        listWidget = new QListWidget(centralWidget);
-        listWidget->setObjectName(QStringLiteral("listWidget"));
-        listWidget->setGeometry(QRect(10, 20, 381, 371));
-        QFont font;
-        font.setBold(true);
-        font.setWeight(75);
-        listWidget->setFont(font);
-        listWidget->setAutoFillBackground(false);
+        horizontalLayout = new QHBoxLayout(centralWidget);
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        gridLayout = new QGridLayout();
+        gridLayout->setSpacing(6);
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        gridLayout->setSizeConstraint(QLayout::SetNoConstraint);
+        gridLayout->setHorizontalSpacing(6);
         addButton = new QPushButton(centralWidget);
         addButton->setObjectName(QStringLiteral("addButton"));
-        addButton->setGeometry(QRect(160, 400, 80, 24));
-        refreshButton = new QPushButton(centralWidget);
-        refreshButton->setObjectName(QStringLiteral("refreshButton"));
-        refreshButton->setGeometry(QRect(450, 400, 80, 24));
-        editButton = new QPushButton(centralWidget);
-        editButton->setObjectName(QStringLiteral("editButton"));
-        editButton->setGeometry(QRect(400, 20, 80, 24));
-        findButton = new QPushButton(centralWidget);
-        findButton->setObjectName(QStringLiteral("findButton"));
-        findButton->setGeometry(QRect(400, 130, 80, 24));
-        filterButton = new QPushButton(centralWidget);
-        filterButton->setObjectName(QStringLiteral("filterButton"));
-        filterButton->setGeometry(QRect(420, 270, 80, 24));
-        lineEdit = new QLineEdit(centralWidget);
-        lineEdit->setObjectName(QStringLiteral("lineEdit"));
-        lineEdit->setGeometry(QRect(400, 90, 113, 24));
-        lineEdit_2 = new QLineEdit(centralWidget);
-        lineEdit_2->setObjectName(QStringLiteral("lineEdit_2"));
-        lineEdit_2->setGeometry(QRect(400, 220, 113, 24));
+
+        gridLayout->addWidget(addButton, 12, 0, 1, 1);
+
+        label = new QLabel(centralWidget);
+        label->setObjectName(QStringLiteral("label"));
+
+        gridLayout->addWidget(label, 1, 0, 1, 2);
+
         comboBox = new QComboBox(centralWidget);
         comboBox->setObjectName(QStringLiteral("comboBox"));
-        comboBox->setGeometry(QRect(520, 220, 79, 24));
+
+        gridLayout->addWidget(comboBox, 12, 2, 1, 1);
+
+        findLine = new QLineEdit(centralWidget);
+        findLine->setObjectName(QStringLiteral("findLine"));
+
+        gridLayout->addWidget(findLine, 1, 2, 1, 1);
+
+        findButton = new QPushButton(centralWidget);
+        findButton->setObjectName(QStringLiteral("findButton"));
+
+        gridLayout->addWidget(findButton, 2, 2, 1, 1);
+
+        listWidget = new QListWidget(centralWidget);
+        listWidget->setObjectName(QStringLiteral("listWidget"));
+        listWidget->setAutoFillBackground(false);
+        listWidget->setAlternatingRowColors(false);
+
+        gridLayout->addWidget(listWidget, 4, 0, 1, 3);
+
+        editButton = new QPushButton(centralWidget);
+        editButton->setObjectName(QStringLiteral("editButton"));
+
+        gridLayout->addWidget(editButton, 12, 1, 1, 1);
+
+        filterLine = new QLineEdit(centralWidget);
+        filterLine->setObjectName(QStringLiteral("filterLine"));
+
+        gridLayout->addWidget(filterLine, 13, 2, 1, 1);
+
+        filterButton = new QPushButton(centralWidget);
+        filterButton->setObjectName(QStringLiteral("filterButton"));
+
+        gridLayout->addWidget(filterButton, 14, 2, 1, 1);
+
+        refreshButton = new QPushButton(centralWidget);
+        refreshButton->setObjectName(QStringLiteral("refreshButton"));
+
+        gridLayout->addWidget(refreshButton, 2, 1, 1, 1);
+
+
+        horizontalLayout->addLayout(gridLayout);
+
         MainWindow->setCentralWidget(centralWidget);
 
         retranslateUi(MainWindow);
@@ -88,12 +121,12 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
-        label->setText(QApplication::translate("MainWindow", "misNotas", nullptr));
         addButton->setText(QApplication::translate("MainWindow", "ADD", nullptr));
-        refreshButton->setText(QApplication::translate("MainWindow", "REFRESH", nullptr));
-        editButton->setText(QApplication::translate("MainWindow", "EDIT", nullptr));
+        label->setText(QApplication::translate("MainWindow", "misNotas", nullptr));
         findButton->setText(QApplication::translate("MainWindow", "TITLE FIND", nullptr));
+        editButton->setText(QApplication::translate("MainWindow", "EDIT", nullptr));
         filterButton->setText(QApplication::translate("MainWindow", "FILTER DATE", nullptr));
+        refreshButton->setText(QApplication::translate("MainWindow", "REFRESH", nullptr));
     } // retranslateUi
 
 };

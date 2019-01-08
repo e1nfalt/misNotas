@@ -13,7 +13,7 @@ QString TextNote::get_text()
     return text;
 }
 
-TextNote::TextNote(QString id_, QString& title_, Date cr_date, Date ed_date, QStringList& tags_, QString& data_file_path)
+TextNote::TextNote(QString &id_, QString& title_, Date cr_date, Date ed_date, QStringList& tags_, QString& data_file_path)
     : Note("Text", title_)
 {
     created_date = cr_date;

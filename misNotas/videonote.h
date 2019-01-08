@@ -8,7 +8,7 @@ class VideoNote : public Note
 private:
     QByteArray data;
 public:
-    VideoNote(QString, QString &, Date, Date, QStringList &, QString &);
+    VideoNote(QString&, QString &, Date, Date, QStringList &, QString &);
 
     void save_into_file();
 

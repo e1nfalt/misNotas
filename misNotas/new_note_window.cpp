@@ -18,6 +18,13 @@ new_note_window::new_note_window(QWidget* parent)
     ui->comboBox->addItem("Graphic");
     ui->comboBox->addItem("Audio");
     ui->comboBox->addItem("Video");
+
+    ui->new_title->setText("Input title...");
+    ui->new_tags_list->setText("Input tags list throught @...");
+    QPalette pal;
+    pal.setColor(QPalette::Text, Qt::gray);
+    ui->new_title->setPalette(pal);
+    ui->new_tags_list->setPalette(pal);
 }
 
 new_note_window::~new_note_window()

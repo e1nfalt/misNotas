@@ -15,7 +15,6 @@ MainWindow::MainWindow(QWidget* parent)
 
     ui->setupUi(this);
     this->setFixedSize(640, 480);
-    MainWindow::on_refreshButton_clicked();
     ui->comboBox->addItem(">");
     ui->comboBox->addItem("<");
     ui->comboBox->addItem(">=");
@@ -25,10 +24,16 @@ MainWindow::MainWindow(QWidget* parent)
 
     QPalette pal = palette();
     pal.setColor(QPalette::Text, Qt::gray);
-    //ui->listWidget->setAutoFillBackground(true);
     ui->listWidget->setPalette(pal);
     ui->findLine->setPalette(pal);
     ui->filterLine->setPalette(pal);
+    connect(ui->addButton, &QPushButton::clicked, this, &MainWindow::add);
+    connect(ui->editButton, &QPushButton::clicked, this, &MainWindow::edit);
+    connect(ui->refreshButton, &QPushButton::clicked, this, &MainWindow::refresh);
+    connect(ui->filterButton, &QPushButton::clicked, this, &MainWindow::filter);
+    connect(ui->findButton, &QPushButton::clicked, this, &MainWindow::find);
+
+    refresh();
 }
 
 MainWindow::~MainWindow()
@@ -110,7 +115,7 @@ void MainWindow::get_notes()
     file.close();
 }
 
-void MainWindow::on_refreshButton_clicked()
+void MainWindow::refresh()
 {
     get_notes();
     ui->listWidget->clear();
@@ -118,7 +123,7 @@ void MainWindow::on_refreshButton_clicked()
         ui->listWidget->addItem("ID: " + i->get_id() + "; Type: " + i->get_type() + "; Title:" + i->get_title());
 }
 
-void MainWindow::on_filterButton_clicked()
+void MainWindow::filter()
 {
     QString action = ui->comboBox->currentText();
     QString check = ui->filterLine->text();
@@ -151,7 +156,7 @@ void MainWindow::on_filterButton_clicked()
     }
 }
 
-void MainWindow::on_findButton_clicked()
+void MainWindow::find()
 {
     QString title = ui->findLine->text();
     ui->listWidget->clear();
@@ -161,7 +166,7 @@ void MainWindow::on_findButton_clicked()
     }
 }
 
-void MainWindow::on_editButton_clicked()
+void MainWindow::edit()
 {
     QStringList item = ui->listWidget->currentItem()->text().split(" ");
     QString id = item[1].remove(item[1].size() - 1, 1);
@@ -195,7 +200,7 @@ void MainWindow::on_editButton_clicked()
     }
 }
 
-void MainWindow::on_addButton_clicked()
+void MainWindow::add()
 {
     new_note_window* window = new new_note_window();
     window->show();

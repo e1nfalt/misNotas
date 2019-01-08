@@ -21,10 +21,6 @@ private slots:
 
 private:
     Ui::new_note_window *ui;
-//    QString text_format = "txt";
-//    QString audio_format = "wav";
-//    QString graphic_format = "png";
-//    QString video_format = "mp4";
 };
 
 #endif // NEW_NOTE_WINDOW_H

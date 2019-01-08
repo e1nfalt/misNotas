@@ -8,6 +8,9 @@ TextNoteForm::TextNoteForm(QWidget* parent)
     , ui(new Ui::TextNoteForm)
 {
     ui->setupUi(this);
+    QPalette pal;
+    pal.setColor(QPalette::Text, Qt::gray);
+    ui->plainTextEdit->setPalette(pal);
 }
 
 TextNoteForm::~TextNoteForm()
