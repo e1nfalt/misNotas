@@ -16,11 +16,14 @@ graphicform::graphicform(QWidget* parent)
     , ui(new Ui::graphicform)
 {
     ui->setupUi(this);
-    setFixedSize(640, 480);
     drawArea = new DrawArea;
     ui->gridLayout->addWidget(drawArea);
     setWindowTitle(tr("This is PAINTER!!!"));
-    resize(500, 500);
+    connect(ui->colorButton, &QPushButton::clicked, this, &graphicform::color);
+    connect(ui->saveButton, &QPushButton::clicked, this, &graphicform::save);
+    connect(ui->clearButton, &QPushButton::clicked, this, &graphicform::clear);
+    connect(ui->openButton, &QPushButton::clicked, this, &graphicform::open);
+    resize(600, 600);
 }
 
 void graphicform::get_note(Note* n)

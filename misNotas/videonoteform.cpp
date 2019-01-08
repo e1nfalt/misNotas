@@ -12,34 +12,25 @@
 #include <QVideoWidget>
 
 VideoNoteForm::VideoNoteForm(QWidget* parent)
-    : QWidget(parent)
-    , ui(new Ui::VideoNoteForm)
+    : QWidget(parent), ui(new Ui::VideoNoteForm)
 {
+    ui->setupUi(this);
     this->setAttribute(Qt::WA_DeleteOnClose);
-    openButton = new QPushButton("Open");
+    openButton = ui->openButton;
     connect(openButton, &QPushButton::clicked, this, &VideoNoteForm::openFile);
-    playButton = new QPushButton("Play");
+    playButton = ui->playButton;
     connect(playButton, &QPushButton::clicked, this, &VideoNoteForm::play);
-    saveButton = new QPushButton("Save");
+    saveButton = ui->saveButton;
     connect(playButton, &QPushButton::clicked, this, &VideoNoteForm::save);
-    positionSlider = new QSlider(Qt::Horizontal);
+    positionSlider = ui->timeSlider;
     connect(positionSlider, &QSlider::sliderMoved, this, &VideoNoteForm::setPosition);
     mediaPlayer = new QMediaPlayer(this, QMediaPlayer::VideoSurface);
     videoWidget = new QVideoWidget;
+    ui->videoLayout->addWidget(videoWidget);
     mediaPlayer->setVideoOutput(videoWidget);
     connect(mediaPlayer, &QMediaPlayer::stateChanged, this, &VideoNoteForm::mediaStateChanged);
     connect(mediaPlayer, &QMediaPlayer::positionChanged, this, &VideoNoteForm::positionChanged);
     connect(mediaPlayer, &QMediaPlayer::durationChanged, this, &VideoNoteForm::durationChanged);
-    QBoxLayout* controlLayout = new QHBoxLayout;
-    controlLayout->setMargin(0);
-    controlLayout->addWidget(openButton);
-    controlLayout->addWidget(playButton);
-    controlLayout->addWidget(positionSlider);
-    QBoxLayout* layout = new QVBoxLayout;
-    layout->addWidget(videoWidget);
-    layout->addLayout(controlLayout);
-    setLayout(layout);
-    this->setFixedSize(640, 480);
 }
 
 VideoNoteForm::~VideoNoteForm()
@@ -66,7 +57,8 @@ void VideoNoteForm::setUrl(const QUrl& url)
 
 void VideoNoteForm::play()
 {
-    switch (mediaPlayer->state()) {
+    switch (mediaPlayer->state())
+    {
     case QMediaPlayer::PlayingState:
         mediaPlayer->pause();
         break;

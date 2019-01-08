@@ -12,11 +12,10 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSlider>
-#include <QtWidgets/QStatusBar>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -25,53 +24,61 @@ class Ui_graphicform
 {
 public:
     QWidget *centralwidget;
-    QWidget *gridLayoutWidget;
-    QGridLayout *gridLayout;
-    QSlider *penWidthSlider;
-    QPushButton *saveButton;
+    QHBoxLayout *horizontalLayout;
+    QGridLayout *gridLayout_2;
     QPushButton *openButton;
-    QPushButton *colorButton;
     QPushButton *clearButton;
-    QMenuBar *menubar;
-    QStatusBar *statusbar;
+    QPushButton *colorButton;
+    QPushButton *saveButton;
+    QSlider *penWidthSlider;
+    QGridLayout *gridLayout;
 
     void setupUi(QMainWindow *graphicform)
     {
         if (graphicform->objectName().isEmpty())
             graphicform->setObjectName(QStringLiteral("graphicform"));
-        graphicform->resize(767, 675);
+        graphicform->resize(434, 387);
         centralwidget = new QWidget(graphicform);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
-        gridLayoutWidget = new QWidget(centralwidget);
-        gridLayoutWidget->setObjectName(QStringLiteral("gridLayoutWidget"));
-        gridLayoutWidget->setGeometry(QRect(20, 10, 651, 451));
-        gridLayout = new QGridLayout(gridLayoutWidget);
-        gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        gridLayout->setContentsMargins(0, 0, 0, 0);
-        penWidthSlider = new QSlider(centralwidget);
-        penWidthSlider->setObjectName(QStringLiteral("penWidthSlider"));
-        penWidthSlider->setGeometry(QRect(470, 530, 160, 16));
-        penWidthSlider->setOrientation(Qt::Horizontal);
-        saveButton = new QPushButton(centralwidget);
-        saveButton->setObjectName(QStringLiteral("saveButton"));
-        saveButton->setGeometry(QRect(60, 530, 80, 24));
+        horizontalLayout = new QHBoxLayout(centralwidget);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        gridLayout_2 = new QGridLayout();
+        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
         openButton = new QPushButton(centralwidget);
         openButton->setObjectName(QStringLiteral("openButton"));
-        openButton->setGeometry(QRect(200, 530, 80, 24));
-        colorButton = new QPushButton(centralwidget);
-        colorButton->setObjectName(QStringLiteral("colorButton"));
-        colorButton->setGeometry(QRect(340, 530, 80, 24));
+
+        gridLayout_2->addWidget(openButton, 2, 1, 1, 1);
+
         clearButton = new QPushButton(centralwidget);
         clearButton->setObjectName(QStringLiteral("clearButton"));
-        clearButton->setGeometry(QRect(190, 490, 80, 24));
+
+        gridLayout_2->addWidget(clearButton, 1, 0, 1, 1);
+
+        colorButton = new QPushButton(centralwidget);
+        colorButton->setObjectName(QStringLiteral("colorButton"));
+
+        gridLayout_2->addWidget(colorButton, 2, 2, 1, 1);
+
+        saveButton = new QPushButton(centralwidget);
+        saveButton->setObjectName(QStringLiteral("saveButton"));
+
+        gridLayout_2->addWidget(saveButton, 2, 0, 1, 1);
+
+        penWidthSlider = new QSlider(centralwidget);
+        penWidthSlider->setObjectName(QStringLiteral("penWidthSlider"));
+        penWidthSlider->setOrientation(Qt::Horizontal);
+
+        gridLayout_2->addWidget(penWidthSlider, 1, 1, 1, 2);
+
+        gridLayout = new QGridLayout();
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
+
+        gridLayout_2->addLayout(gridLayout, 0, 0, 1, 3);
+
+
+        horizontalLayout->addLayout(gridLayout_2);
+
         graphicform->setCentralWidget(centralwidget);
-        menubar = new QMenuBar(graphicform);
-        menubar->setObjectName(QStringLiteral("menubar"));
-        menubar->setGeometry(QRect(0, 0, 767, 22));
-        graphicform->setMenuBar(menubar);
-        statusbar = new QStatusBar(graphicform);
-        statusbar->setObjectName(QStringLiteral("statusbar"));
-        graphicform->setStatusBar(statusbar);
 
         retranslateUi(graphicform);
 
@@ -81,10 +88,10 @@ public:
     void retranslateUi(QMainWindow *graphicform)
     {
         graphicform->setWindowTitle(QApplication::translate("graphicform", "MainWindow", nullptr));
-        saveButton->setText(QApplication::translate("graphicform", "Save", nullptr));
         openButton->setText(QApplication::translate("graphicform", "Open", nullptr));
-        colorButton->setText(QApplication::translate("graphicform", "Color", nullptr));
         clearButton->setText(QApplication::translate("graphicform", "Clear", nullptr));
+        colorButton->setText(QApplication::translate("graphicform", "Color", nullptr));
+        saveButton->setText(QApplication::translate("graphicform", "Save", nullptr));
     } // retranslateUi
 
 };

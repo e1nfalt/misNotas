@@ -11,8 +11,10 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QGraphicsView>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSlider>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -20,24 +22,52 @@ QT_BEGIN_NAMESPACE
 class Ui_VideoNoteForm
 {
 public:
-    QGraphicsView *graphicsView;
-    QPushButton *pushButton;
-    QPushButton *pushButton_2;
+    QVBoxLayout *verticalLayout;
+    QGridLayout *gridLayout;
+    QPushButton *openButton;
+    QPushButton *playButton;
+    QPushButton *saveButton;
+    QSlider *timeSlider;
+    QGridLayout *videoLayout;
 
     void setupUi(QWidget *VideoNoteForm)
     {
         if (VideoNoteForm->objectName().isEmpty())
             VideoNoteForm->setObjectName(QStringLiteral("VideoNoteForm"));
-        VideoNoteForm->resize(400, 300);
-        graphicsView = new QGraphicsView(VideoNoteForm);
-        graphicsView->setObjectName(QStringLiteral("graphicsView"));
-        graphicsView->setGeometry(QRect(50, 50, 256, 192));
-        pushButton = new QPushButton(VideoNoteForm);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(60, 260, 80, 24));
-        pushButton_2 = new QPushButton(VideoNoteForm);
-        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-        pushButton_2->setGeometry(QRect(190, 260, 80, 24));
+        VideoNoteForm->resize(566, 449);
+        verticalLayout = new QVBoxLayout(VideoNoteForm);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        gridLayout = new QGridLayout();
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        openButton = new QPushButton(VideoNoteForm);
+        openButton->setObjectName(QStringLiteral("openButton"));
+
+        gridLayout->addWidget(openButton, 2, 1, 1, 1);
+
+        playButton = new QPushButton(VideoNoteForm);
+        playButton->setObjectName(QStringLiteral("playButton"));
+
+        gridLayout->addWidget(playButton, 2, 2, 1, 1);
+
+        saveButton = new QPushButton(VideoNoteForm);
+        saveButton->setObjectName(QStringLiteral("saveButton"));
+
+        gridLayout->addWidget(saveButton, 2, 0, 1, 1);
+
+        timeSlider = new QSlider(VideoNoteForm);
+        timeSlider->setObjectName(QStringLiteral("timeSlider"));
+        timeSlider->setOrientation(Qt::Horizontal);
+
+        gridLayout->addWidget(timeSlider, 1, 0, 1, 3);
+
+        videoLayout = new QGridLayout();
+        videoLayout->setObjectName(QStringLiteral("videoLayout"));
+
+        gridLayout->addLayout(videoLayout, 0, 0, 1, 3);
+
+
+        verticalLayout->addLayout(gridLayout);
+
 
         retranslateUi(VideoNoteForm);
 
@@ -47,8 +77,9 @@ public:
     void retranslateUi(QWidget *VideoNoteForm)
     {
         VideoNoteForm->setWindowTitle(QApplication::translate("VideoNoteForm", "Form", nullptr));
-        pushButton->setText(QApplication::translate("VideoNoteForm", "play", nullptr));
-        pushButton_2->setText(QApplication::translate("VideoNoteForm", "open", nullptr));
+        openButton->setText(QApplication::translate("VideoNoteForm", "Open", nullptr));
+        playButton->setText(QApplication::translate("VideoNoteForm", "Play", nullptr));
+        saveButton->setText(QApplication::translate("VideoNoteForm", "Save", nullptr));
     } // retranslateUi
 
 };
