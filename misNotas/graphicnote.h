@@ -10,7 +10,7 @@ private:
     QImage image;
 public:
 
-    GraphicNote(int, QString &, Date, Date, QStringList &, QString &);
+    GraphicNote(QString, QString &, Date, Date, QStringList &, QString &);
 
     void update_image(QImage &);
 

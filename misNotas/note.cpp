@@ -34,7 +34,7 @@ Date Note::get_ed_date()
     return editing_date;
 }
 
-int Note::get_id()
+QString Note::get_id()
 {
     return id;
 }
@@ -44,7 +44,7 @@ QString Note::get_tags()
     QString s = "";
     for (auto i : tags)
         s += i + "@";
-    return s.mid(0, s.length() - 2);
+    return s;
 }
 
 QString Note::get_file_path()

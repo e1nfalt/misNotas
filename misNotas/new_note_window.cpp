@@ -36,13 +36,13 @@ void new_note_window::on_createButton_clicked()
     QString fname = "";
 
     if (type == "Text")
-        fname = QString::fromStdString("/Users/epidzhx/Staff/misNotas/misNotas/files/" + std::to_string(new_file_name) + "." + text_format.toStdString());
+        fname = QString::fromStdString("/Users/epidzhx/Staff/misNotas/misNotas/files/Text" + std::to_string(new_file_name) + "." + text_format.toStdString());
     else if (type == "Graphic")
-        fname = QString::fromStdString("/Users/epidzhx/Staff/misNotas/misNotas/files/" + std::to_string(new_file_name) + "." + graphic_format.toStdString());
+        fname = QString::fromStdString("/Users/epidzhx/Staff/misNotas/misNotas/files/Graphic" + std::to_string(new_file_name) + "." + graphic_format.toStdString());
     else if (type == "Audio")
-        fname = QString::fromStdString("/Users/epidzhx/Staff/misNotas/misNotas/files/" + std::to_string(new_file_name) + "." + audio_format.toStdString());
+        fname = QString::fromStdString("/Users/epidzhx/Staff/misNotas/misNotas/files/Audio" + std::to_string(new_file_name) + "." + audio_format.toStdString());
     else if (type == "Video")
-        fname = QString::fromStdString("/Users/epidzhx/Staff/misNotas/misNotas/files/" + std::to_string(new_file_name) + "." + video_format.toStdString());
+        fname = QString::fromStdString("/Users/epidzhx/Staff/misNotas/misNotas/files/Video" + std::to_string(new_file_name) + "." + video_format.toStdString());
 
     QFile file(fname);
     if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {

@@ -6,34 +6,52 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>352</width>
-    <height>303</height>
+    <width>640</width>
+    <height>480</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
-    <widget class="QPushButton" name="play_button">
-     <property name="text">
-      <string>play</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QPushButton" name="open_button">
-     <property name="text">
-      <string>open</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QSlider" name="volumeControl">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-    </widget>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="4" column="1" colspan="3">
+      <widget class="QSlider" name="volumeControl">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="2">
+      <widget class="QPushButton" name="play_button">
+       <property name="text">
+        <string>Play</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="3">
+      <widget class="QPushButton" name="open_button">
+       <property name="text">
+        <string>Open</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QPushButton" name="saveButton">
+       <property name="text">
+        <string>Save</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1" colspan="3">
+      <widget class="QSlider" name="positionSlider">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>

@@ -8,6 +8,7 @@
 #include "graphicform.h"
 #include "new_note_window.h"
 #include <note.h>
+#include <QCloseEvent>
 
 namespace Ui {
 class MainWindow;
@@ -32,6 +33,7 @@ private slots:
     void on_editButton_clicked();
 
     void on_addButton_clicked();
+    void closeEvent(QCloseEvent*);
 
 private:
     Ui::MainWindow *ui;

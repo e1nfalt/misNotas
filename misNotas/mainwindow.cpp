@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget* parent)
 {
 
     ui->setupUi(this);
-    get_notes();
+    this->setFixedSize(640, 480);
     MainWindow::on_refreshButton_clicked();
     ui->comboBox->addItem(">");
     ui->comboBox->addItem("<");
@@ -22,11 +22,23 @@ MainWindow::MainWindow(QWidget* parent)
     ui->comboBox->addItem("<=");
     ui->comboBox->addItem("==");
     ui->comboBox->addItem("!=");
+
+    QPalette pal = palette();
+    pal.setColor(QPalette::Text, Qt::gray);
+    //ui->listWidget->setAutoFillBackground(true);
+    ui->listWidget->setPalette(pal);
+    ui->findLine->setPalette(pal);
+    ui->filterLine->setPalette(pal);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::closeEvent (QCloseEvent *event)
+{
+    write_note_list();
 }
 
 void MainWindow::write_note_list()
@@ -35,10 +47,10 @@ void MainWindow::write_note_list()
     if (file.open(QIODevice::WriteOnly)) {
         for (auto i : notes) {
             QTextStream out(&file);
-            out << i->get_type() << "\n"
+            out << i->get_id() << "\n"
+                << i->get_type() << "\n"
                 << i->get_title() << "\n"
-                << i->get_created_date()
-                << "\n"
+                << i->get_created_date() << "\n"
                 << i->get_editing_date() << "\n"
                 << i->get_tags() << "\n"
                 << i->get_file_path() << "\n";
@@ -47,6 +59,10 @@ void MainWindow::write_note_list()
     }
 }
 
+void delete_n(QString& s)
+{
+    s.remove(s.size() - 1, 1);
+}
 void MainWindow::get_notes()
 {
     notes.clear();
@@ -54,27 +70,41 @@ void MainWindow::get_notes()
     if (file.open(QIODevice::ReadOnly)) {
         QTextStream in(&file);
 
-        QString s = in.readLine();
-        while (!s.isEmpty()) {
-            if (s.endsWith("\n"))
-                s.remove(s.size() - 1, 1);
-            int id = s.toInt();
+        QString id = in.readLine();
+        while (!id.isEmpty()) {
+            if (id.endsWith("\n"))
+                delete_n(id);
             QString type = in.readLine();
+            if (type.endsWith("\n"))
+                delete_n(type);
             QString title = in.readLine();
+            if (title.endsWith("\n"))
+                delete_n(title);
             QString cr_date = in.readLine();
+            if (cr_date.endsWith("\n"))
+                delete_n(cr_date);
             QString ed_date = in.readLine();
+            if (ed_date.endsWith("\n"))
+                delete_n(ed_date);
             QStringList tags_list = in.readLine().split("@");
+            for (int j = 0; j < tags_list.size(); j++)
+            {
+                if (tags_list.at(j).isEmpty())
+                    tags_list.removeAt(j);
+            }
             QString data_file_path = in.readLine();
+            if (data_file_path.endsWith("\n"))
+                delete_n(data_file_path);
             if (type == "Text")
                 notes.push_back(new TextNote(id, title, Date(cr_date), Date(ed_date), tags_list, data_file_path));
             else if (type == "Graphic")
-                notes.push_back(new GraphicNote(id, title, cr_date, ed_date, tags_list, data_file_path));
+                notes.push_back(new GraphicNote(id, title, Date(cr_date), Date(ed_date), tags_list, data_file_path));
             else if (type == "Audio")
-                notes.push_back(new AudioNote(id, title, cr_date, ed_date, tags_list, data_file_path));
+                notes.push_back(new AudioNote(id, title, Date(cr_date), Date(ed_date), tags_list, data_file_path));
             else if (type == "Video")
-                notes.push_back(new VideoNote(id, title, cr_date, ed_date, tags_list, data_file_path));
+                notes.push_back(new VideoNote(id, title, Date(cr_date), Date(ed_date), tags_list, data_file_path));
 
-            s = in.readLine();
+            id = in.readLine();
         }
     }
     file.close();
@@ -85,49 +115,49 @@ void MainWindow::on_refreshButton_clicked()
     get_notes();
     ui->listWidget->clear();
     for (auto i : notes)
-        ui->listWidget->addItem("ID: " + QString::number(i->get_id()) + "; Type: " + i->get_type() + "; Title:" + i->get_title());
+        ui->listWidget->addItem("ID: " + i->get_id() + "; Type: " + i->get_type() + "; Title:" + i->get_title());
 }
 
 void MainWindow::on_filterButton_clicked()
 {
     QString action = ui->comboBox->currentText();
-    QString check = ui->lineEdit_2->text();
+    QString check = ui->filterLine->text();
     Date checked_date(check);
     ui->listWidget->clear();
     if (action == ">") {
         for (auto i : notes)
             if (i->get_cr_date() > checked_date)
-                ui->listWidget->addItem("ID: " + QString::number(i->get_id()) + "; Type: " + i->get_type() + "; Title:" + i->get_title());
+                ui->listWidget->addItem("ID: " + i->get_id() + "; Type: " + i->get_type() + "; Title:" + i->get_title());
     } else if (action == "<") {
         for (auto i : notes)
             if (i->get_cr_date() < checked_date)
-                ui->listWidget->addItem("ID: " + QString::number(i->get_id()) + "; Type: " + i->get_type() + "; Title:" + i->get_title());
+                ui->listWidget->addItem("ID: " + i->get_id() + "; Type: " + i->get_type() + "; Title:" + i->get_title());
     } else if (action == ">=") {
         for (auto i : notes)
             if (i->get_cr_date() >= checked_date)
-                ui->listWidget->addItem("ID: " + QString::number(i->get_id()) + "; Type: " + i->get_type() + "; Title:" + i->get_title());
+                ui->listWidget->addItem("ID: " + i->get_id() + "; Type: " + i->get_type() + "; Title:" + i->get_title());
     } else if (action == "<=") {
         for (auto i : notes)
             if (i->get_cr_date() <= checked_date)
-                ui->listWidget->addItem("ID: " + QString::number(i->get_id()) + "; Type: " + i->get_type() + "; Title:" + i->get_title());
+                ui->listWidget->addItem("ID: " + i->get_id() + "; Type: " + i->get_type() + "; Title:" + i->get_title());
     } else if (action == "==") {
         for (auto i : notes)
             if (i->get_cr_date() == checked_date)
-                ui->listWidget->addItem("ID: " + QString::number(i->get_id()) + "; Type: " + i->get_type() + "; Title:" + i->get_title());
+                ui->listWidget->addItem("ID: " + i->get_id() + "; Type: " + i->get_type() + "; Title:" + i->get_title());
     } else {
         for (auto i : notes)
             if (i->get_cr_date() != checked_date)
-                ui->listWidget->addItem("ID: " + QString::number(i->get_id()) + "; Type: " + i->get_type() + "; Title:" + i->get_title());
+                ui->listWidget->addItem("ID: " + i->get_id() + "; Type: " + i->get_type() + "; Title:" + i->get_title());
     }
 }
 
 void MainWindow::on_findButton_clicked()
 {
-    QString title = ui->lineEdit->text();
+    QString title = ui->findLine->text();
     ui->listWidget->clear();
     for (auto i : notes) {
         if (i->get_title() == title)
-            ui->listWidget->addItem("ID: " + QString::number(i->get_id()) + "; Type: " + i->get_type() + "; Title:" + i->get_title());
+            ui->listWidget->addItem("ID: " + i->get_id() + "; Type: " + i->get_type() + "; Title:" + i->get_title());
     }
 }
 
@@ -138,7 +168,7 @@ void MainWindow::on_editButton_clicked()
     QString type = item[3].remove(item[3].size() - 1, 1);
     Note* curr;
     for (auto i : notes) {
-        if (i->get_id() == id.toInt()) {
+        if (i->get_id() == id) {
             curr = i;
             break;
         }
@@ -160,7 +190,7 @@ void MainWindow::on_editButton_clicked()
         window->show();
     } else if (type == "Video") {
         VideoNoteForm* window = new VideoNoteForm();
-        window->set_file_path(curr->get_file_path());
+        window->get_note(curr);
         window->show();
     }
 }

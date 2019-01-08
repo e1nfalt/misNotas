@@ -5,26 +5,48 @@
 #include <QGraphicsView>
 #include <QMediaPlaylist>
 #include <QVideoWidget>
+#include <QStandardPaths>
+#include <QAbstractSlider>
+#include <QBoxLayout>
+#include <QPushButton>
+#include <QToolButton>
 
 VideoNoteForm::VideoNoteForm(QWidget* parent)
     : QWidget(parent)
     , ui(new Ui::VideoNoteForm)
 {
-    ui->setupUi(this);
-    //    QGraphicsView *view = new QGraphicsView();
-    //    QGraphicsScene *scene = new QGraphicsScene();
-    //    QVideoWidget *widget = new QVideoWidget();
-    //    view->setScene(scene);
-    //    scene->addWidget(widget);
-    //    view->show();
+    this->setAttribute(Qt::WA_DeleteOnClose);
+    openButton = new QPushButton("Open");
+    connect(openButton, &QPushButton::clicked, this, &VideoNoteForm::openFile);
 
-    //    QCamera *camera;
-    //    if(QCamera::availableDevices().count() > 0) {
-    //        camera = new QCamera();
-    //        camera->setViewfinder(widget);
-    //        camera->start();
-    //    }
-    player = new QMediaPlayer();
+    playButton = new QPushButton("Play");
+    connect(playButton, &QPushButton::clicked, this, &VideoNoteForm::play);
+
+    saveButton = new QPushButton("Save");
+    connect(playButton, &QPushButton::clicked, this, &VideoNoteForm::save);
+
+    positionSlider = new QSlider(Qt::Horizontal);
+    connect(positionSlider, &QSlider::sliderMoved, this, &VideoNoteForm::setPosition);
+
+    mediaPlayer = new QMediaPlayer(this, QMediaPlayer::VideoSurface);
+    videoWidget = new QVideoWidget;
+    mediaPlayer->setVideoOutput(videoWidget);
+    connect(mediaPlayer, &QMediaPlayer::stateChanged, this, &VideoNoteForm::mediaStateChanged);
+    connect(mediaPlayer, &QMediaPlayer::positionChanged, this, &VideoNoteForm::positionChanged);
+    connect(mediaPlayer, &QMediaPlayer::durationChanged, this, &VideoNoteForm::durationChanged);
+
+
+    QBoxLayout *controlLayout = new QHBoxLayout;
+    controlLayout->setMargin(0);
+    controlLayout->addWidget(openButton);
+    controlLayout->addWidget(playButton);
+    controlLayout->addWidget(positionSlider);
+
+    QBoxLayout *layout = new QVBoxLayout;
+    layout->addWidget(videoWidget);
+    layout->addLayout(controlLayout);
+
+    setLayout(layout);
 }
 
 VideoNoteForm::~VideoNoteForm()
@@ -32,41 +54,65 @@ VideoNoteForm::~VideoNoteForm()
     delete ui;
 }
 
-void VideoNoteForm::set_file_path(QString path)
+void VideoNoteForm::get_note(Note* n)
 {
-    file_path = path;
+    note = dynamic_cast<VideoNote*>(n);
+    setUrl(QUrl::fromLocalFile(note->get_file_path()));
 }
 
-void VideoNoteForm::on_pushButton_2_clicked()
+void VideoNoteForm::save()
+{
+    note->save_into_file();
+}
+
+void VideoNoteForm::setUrl(const QUrl &url)
+{
+    setWindowFilePath(url.isLocalFile() ? url.toLocalFile() : QString());
+    mediaPlayer->setMedia(url);
+}
+
+void VideoNoteForm::play()
+{
+    switch (mediaPlayer->state()) {
+    case QMediaPlayer::PlayingState:
+        mediaPlayer->pause();
+        break;
+    default:
+        mediaPlayer->play();
+        break;
+    }
+}
+
+void VideoNoteForm::openFile()
 {
     QString file_name = QFileDialog::getOpenFileName();
-    QFile file(file_name);
-    QByteArray arr;
-    if (file.open(QIODevice::ReadOnly)) {
-        arr = file.readAll();
-        file.close();
-    }
-    QFile file2(file_path);
-    if (file2.open(QIODevice::WriteOnly)) {
-        file2.write(arr);
-        file2.close();
+    note->load_data_from_file(file_name);
+    setUrl(QUrl::fromLocalFile(file_name));
+}
+
+void VideoNoteForm::mediaStateChanged(QMediaPlayer::State state)
+{
+    switch(state) {
+    case QMediaPlayer::PlayingState:
+        playButton->setText("Pause");
+        break;
+    default:
+        playButton->setText("Play");
+        break;
     }
 }
 
-void VideoNoteForm::on_pushButton_clicked()
+void VideoNoteForm::positionChanged(qint64 position)
 {
-    //    player->setMedia(QUrl::fromLocalFile(file_path));
-    //    //player->setMedia(QUrl::fromLocalFile("/Users/epidzhx/Downloads/1530917387_05_-gods-plan.mp3"));
-    //    player->setVolume(50);
-    //    player->play();
-    QMediaPlaylist* playlist = new QMediaPlaylist(player);
-    playlist->addMedia(QUrl::fromLocalFile((file_path)));
-    //playlist->addMedia(QUrl::fromLocalFile(file_path));
+    positionSlider->setValue(position);
+}
 
-    QVideoWidget* videoWidget = new QVideoWidget;
-    player->setVideoOutput(videoWidget);
+void VideoNoteForm::durationChanged(qint64 duration)
+{
+    positionSlider->setRange(0, duration);
+}
 
-    videoWidget->show();
-    playlist->setCurrentIndex(1);
-    player->play();
+void VideoNoteForm::setPosition(int position)
+{
+    mediaPlayer->setPosition(position);
 }

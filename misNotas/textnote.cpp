@@ -6,16 +6,14 @@ void TextNote::set_text(QString& s)
 }
 
 TextNote::TextNote(QString& title_)
-    : Note("Text", title_)
-{
-}
+    : Note("Text", title_) {}
 
 QString TextNote::get_text()
 {
     return text;
 }
 
-TextNote::TextNote(int id_, QString& title_, Date cr_date, Date ed_date, QStringList& tags_, QString& data_file_path)
+TextNote::TextNote(QString id_, QString& title_, Date cr_date, Date ed_date, QStringList& tags_, QString& data_file_path)
     : Note("Text", title_)
 {
     created_date = cr_date;
@@ -39,9 +37,8 @@ void TextNote::save_into_file()
 
 void TextNote::load_data_from_file(QString& file_path)
 {
-    data_file = file_path;
     text = "";
-    QFile file(data_file);
+    QFile file(file_path);
     if (file.open(QIODevice::ReadOnly)) {
         QTextStream in(&file);
         QString line = in.readLine();

@@ -9,7 +9,7 @@ private:
     QByteArray data;
 public:
 
-    AudioNote(int, QString &, Date, Date, QStringList &, QString &);
+    AudioNote(QString, QString &, Date, Date, QStringList &, QString &);
     virtual void save_into_file() override;
     virtual void load_data_from_file(QString &file_name) override;
     QByteArray& get_data();

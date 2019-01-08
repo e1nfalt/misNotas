@@ -15,7 +15,7 @@ public:
 
     QString get_text();
 
-    TextNote(int, QString &, Date, Date, QStringList &, QString &);
+    TextNote(QString, QString &, Date, Date, QStringList &, QString &);
 
     virtual void save_into_file() override;
 

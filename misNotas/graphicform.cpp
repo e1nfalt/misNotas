@@ -16,6 +16,7 @@ graphicform::graphicform(QWidget* parent)
     , ui(new Ui::graphicform)
 {
     ui->setupUi(this);
+    setFixedSize(640, 480);
     drawArea = new DrawArea;
     ui->gridLayout->addWidget(drawArea);
     setWindowTitle(tr("This is PAINTER!!!"));

@@ -36,30 +36,17 @@ void TextNoteForm::transfer_note(Note* n)
 
 void TextNoteForm::on_saveButton_clicked()
 {
-    QFile file(note->get_file_path());
     QString text = ui->plainTextEdit->toPlainText();
-    if (file.open(QIODevice::WriteOnly)) {
-        QTextStream out(&file);
-        out << text;
-        file.close();
-    }
     note->set_text(text);
+    note->save_into_file();
 }
 
 void TextNoteForm::on_openButton_clicked()
 {
     QString text = "";
     QString file_name = QFileDialog::getOpenFileName();
-    QFile file(file_name);
-    if (file.open(QIODevice::ReadOnly)) {
-        QTextStream in(&file);
-        QString line = in.readLine();
-        while (!line.isEmpty()) {
-            text += line;
-            line = in.readLine();
-        }
-        file.close();
-    }
+    note->load_data_from_file(file_name);
+    text = note->get_text();
     ui->plainTextEdit->clear();
     ui->plainTextEdit->setPlainText(text);
 }

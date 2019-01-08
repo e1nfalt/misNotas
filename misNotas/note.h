@@ -19,7 +19,7 @@ protected:
     Date editing_date;
     QStringList tags;
     QString data_file;
-    int id;
+    QString id;
 public:
 
     Note(QString &, QString &, Date &, Date &);
@@ -34,7 +34,7 @@ public:
 
     Date get_ed_date();
 
-    int get_id();
+    QString get_id();
 
     QString get_tags();
 

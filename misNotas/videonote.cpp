@@ -1,6 +1,6 @@
 #include "videonote.h"
 
-VideoNote::VideoNote(int id_, QString& title_, Date cr_date, Date ed_date, QStringList& tags_, QString& data_file_path)
+VideoNote::VideoNote(QString id_, QString& title_, Date cr_date, Date ed_date, QStringList& tags_, QString& data_file_path)
     : Note("Video", title_)
 {
     created_date = cr_date;
@@ -13,9 +13,21 @@ VideoNote::VideoNote(int id_, QString& title_, Date cr_date, Date ed_date, QStri
 
 void VideoNote::save_into_file()
 {
+    QFile file(data_file);
+    if (file.open(QIODevice::WriteOnly))
+    {
+        file.resize(0);
+        file.write(data);
+    }
     editing_date.update_date();
 }
 
 void VideoNote::load_data_from_file(QString& file_path)
 {
+    QFile file(file_path);
+    if (file.open(QIODevice::ReadOnly))
+    {
+        data = file.readAll();
+        file.close();
+    }
 }

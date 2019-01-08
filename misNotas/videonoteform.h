@@ -7,6 +7,8 @@
 #include <QFile>
 #include <QFileDialog>
 #include <videonote.h>
+#include <QPushButton>
+#include <QSlider>
 
 namespace Ui {
 class VideoNoteForm;
@@ -19,18 +21,31 @@ class VideoNoteForm : public QWidget
 public:
     explicit VideoNoteForm(QWidget *parent = nullptr);
     ~VideoNoteForm();
-    void set_file_path(QString);
+    void get_note(Note*);
+    void setUrl(const QUrl &url);
 
 private slots:
-    void on_pushButton_2_clicked();
 
-    void on_pushButton_clicked();
+    void openFile();
+    void play();
+    void save();
+
+    void mediaStateChanged(QMediaPlayer::State);
+
+    void positionChanged(qint64 position);
+    void durationChanged(qint64 duration);
+    void setPosition(int position);
 
 private:
     Ui::VideoNoteForm *ui;
-    //QCamera camera;
-    QString file_path;
-    QMediaPlayer *player;
+    VideoNote *note;
+
+    QMediaPlayer* mediaPlayer;
+    QVideoWidget *videoWidget;
+    QPushButton *playButton;
+    QPushButton *openButton;
+    QPushButton *saveButton;
+    QSlider *positionSlider;
 };
 
 #endif // VIDEONOTEFORM_H

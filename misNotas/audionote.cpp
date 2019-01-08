@@ -1,6 +1,6 @@
 #include "audionote.h"
 
-AudioNote::AudioNote(int id_, QString& title_, Date cr_date, Date ed_date, QStringList& tags_, QString& data_file_path)
+AudioNote::AudioNote(QString id_, QString& title_, Date cr_date, Date ed_date, QStringList& tags_, QString& data_file_path)
     : Note("Audio", title_)
 {
     created_date = cr_date;
@@ -29,7 +29,6 @@ void AudioNote::load_data_from_file(QString& file_name)
         data = file.readAll();
         file.close();
     }
-    save_into_file();
 }
 
 QByteArray& AudioNote::get_data()

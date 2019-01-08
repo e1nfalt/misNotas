@@ -10,16 +10,16 @@
 class Date
 {
 private:
-    int year, month, day;
+    QString year, month, day;
 public:
 
     Date() {}
 
     Date(QString &str)
     {
-        year = (str.left(4)).toInt();
-        month = (str.mid(6, 2)).toInt();
-        day = (str.right(2)).toInt();
+        year = str.left(4);
+        month = str.mid(5, 2);
+        day = str.right(2);
     }
 
     Date(int year_, int month_, int day_) : year(year_), month(month_), day(day_) {}
@@ -33,55 +33,76 @@ public:
 
     bool operator>(Date &date_)
     {
-        int tmp1 = year * 13 + month * 32 + day;
-        int tmp2 = date_.year * 13 + date_.month * 32 + date_.day;
+        int tmp1 = get_date_in_int_format();
+        int tmp2 = date_.get_date_in_int_format();
         return tmp1 > tmp2;
     }
 
     bool operator<(Date &date_)
     {
-        int tmp1 = year * 13 + month * 32 + day;
-        int tmp2 = date_.year * 13 + date_.month * 32 + date_.day;
+        int tmp1 = get_date_in_int_format();
+        int tmp2 = date_.get_date_in_int_format();
         return tmp1 < tmp2;
     }
 
     bool operator!=(Date &date_)
     {
-        int tmp1 = year * 13 + month * 32 + day;
-        int tmp2 = date_.year * 13 + date_.month * 32 + date_.day;
+        int tmp1 = get_date_in_int_format();
+        int tmp2 = date_.get_date_in_int_format();
         return tmp1 != tmp2;
     }
 
     bool operator==(Date &date_)
     {
-        int tmp1 = year * 13 + month * 32 + day;
-        int tmp2 = date_.year * 13 + date_.month * 32 + date_.day;
+        int tmp1 = get_date_in_int_format();
+        int tmp2 = date_.get_date_in_int_format();
         return tmp1 == tmp2;
     }
 
     bool operator<=(Date &date_)
     {
-        int tmp1 = year * 13 + month * 32 + day;
-        int tmp2 = date_.year * 13 + date_.month * 32 + date_.day;
+        int tmp1 = get_date_in_int_format();
+        int tmp2 = date_.get_date_in_int_format();
         return tmp1 <= tmp2;
     }
 
     bool operator>=(Date &date_)
     {
-        int tmp1 = year * 13 + month * 32 + day;
-        int tmp2 = date_.year * 13 + date_.month * 32 + date_.day;
+        int tmp1 = get_date_in_int_format();
+        int tmp2 = date_.get_date_in_int_format();
         return tmp1 >= tmp2;
     }
 
-    QString get_year() { return QString::number(year); }
-    QString get_month() { return QString::number(month); }
-    QString get_day() { return QString::number(day); }
+    int get_year()
+    {
+        return year.toInt();
+    }
+
+    int get_month()
+    {
+        QString res = month;
+        if (res.at(0) == "0")
+            res.remove(0, 1);
+        return res.toInt();
+    }
+
+    int get_day()
+    {
+        QString res = day;
+        if (res.at(0) == "0")
+            res.remove(0, 1);
+        return res.toInt();
+    }
 
     QString get_date_in_QString_format()
     {
-        return QString::fromStdString(std::to_string(year) + "." + std::to_string(month) + "." + std::to_string(day));
+        return year + "." + month + "." + day;
     }
 
+    int get_date_in_int_format()
+    {
+        return get_year() * 400 + get_month() * 32 + get_day();
+    }
 
     static QString get_current_date_in_QString()
     {
@@ -90,17 +111,27 @@ public:
 
         time (&rawtime);
         timeinfo = localtime (&rawtime);
-        QString s = QString::number(timeinfo->tm_year+1900) + "." + QString::number(timeinfo->tm_mon)
-                + "." + QString::number(timeinfo->tm_mday);
+        QString year = QString::number(timeinfo->tm_year+1900);
+        QString month;
+        if (timeinfo->tm_mon+1 < 10)
+            month = "0"+ QString::number(timeinfo->tm_mon+1);
+        else
+            month = QString::number(timeinfo->tm_mon+1);
+        QString day;
+        if (timeinfo->tm_mday < 10)
+            day = "0"+ QString::number(timeinfo->tm_mday);
+        else
+            day = QString::number(timeinfo->tm_mday);
+        QString s = year + "." + month + "." + day;
         return s;
     }
 
     void update_date()
     {
         QString str = get_current_date_in_QString();
-        year = (str.left(4)).toInt();
-        month = (str.mid(6, 2)).toInt();
-        day = (str.right(2)).toInt();
+        year = str.left(4);
+        month = str.mid(5, 2);
+        day = str.right(2);
     }
 };
 

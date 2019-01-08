@@ -6,141 +6,87 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>610</width>
-    <height>500</height>
+    <width>640</width>
+    <height>480</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>0</y>
-      <width>59</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>misNotas</string>
-    </property>
-   </widget>
-   <widget class="QListWidget" name="listWidget">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>20</y>
-      <width>381</width>
-      <height>371</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="autoFillBackground">
-     <bool>false</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="addButton">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>400</y>
-      <width>80</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>ADD</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="refreshButton">
-    <property name="geometry">
-     <rect>
-      <x>450</x>
-      <y>400</y>
-      <width>80</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>REFRESH</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="editButton">
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>20</y>
-      <width>80</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>EDIT</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="findButton">
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>130</y>
-      <width>80</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TITLE FIND</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="filterButton">
-    <property name="geometry">
-     <rect>
-      <x>420</x>
-      <y>270</y>
-      <width>80</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>FILTER DATE</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit">
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>90</y>
-      <width>113</width>
-      <height>24</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>220</y>
-      <width>113</width>
-      <height>24</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QComboBox" name="comboBox">
-    <property name="geometry">
-     <rect>
-      <x>520</x>
-      <y>220</y>
-      <width>79</width>
-      <height>24</height>
-     </rect>
-    </property>
-   </widget>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <layout class="QGridLayout" name="gridLayout">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetNoConstraint</enum>
+      </property>
+      <property name="horizontalSpacing">
+       <number>6</number>
+      </property>
+      <item row="12" column="0">
+       <widget class="QPushButton" name="addButton">
+        <property name="text">
+         <string>ADD</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="2">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>misNotas</string>
+        </property>
+       </widget>
+      </item>
+      <item row="12" column="2">
+       <widget class="QComboBox" name="comboBox"/>
+      </item>
+      <item row="1" column="2">
+       <widget class="QLineEdit" name="findLine"/>
+      </item>
+      <item row="2" column="2">
+       <widget class="QPushButton" name="findButton">
+        <property name="text">
+         <string>TITLE FIND</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QPushButton" name="refreshButton">
+        <property name="text">
+         <string>REFRESH</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0" colspan="3">
+       <widget class="QListWidget" name="listWidget">
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="alternatingRowColors">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="12" column="1">
+       <widget class="QPushButton" name="editButton">
+        <property name="text">
+         <string>EDIT</string>
+        </property>
+       </widget>
+      </item>
+      <item row="13" column="2">
+       <widget class="QLineEdit" name="filterLine"/>
+      </item>
+      <item row="14" column="2">
+       <widget class="QPushButton" name="filterButton">
+        <property name="text">
+         <string>FILTER DATE</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
