@@ -1,7 +1,5 @@
 #include "textnoteform.h"
 #include "ui_textnoteform.h"
-#include <QFileDialog>
-#include <QTextStream>
 
 TextNoteForm::TextNoteForm(QWidget* parent)
     : QWidget(parent)
@@ -25,7 +23,8 @@ void TextNoteForm::transfer_note(Note* n)
     note = dynamic_cast<TextNote*>(n);
     ui->label->setText(note->get_title());
     QFile file(note->get_file_path());
-    if (file.open(QIODevice::ReadOnly)) {
+    if (file.open(QIODevice::ReadOnly))
+    {
         QTextStream in(&file);
         QString line = in.readLine();
         QString text = "";

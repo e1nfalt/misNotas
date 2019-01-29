@@ -1,12 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QDialog>
-#include <QFile>
-#include <QListWidget>
-#include <QMessageBox>
-#include <QTextStream>
-#include <fstream>
-#include <iostream>
 
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
@@ -40,16 +33,15 @@ MainWindow::~MainWindow()
     notes.clear();
 }
 
-void MainWindow::closeEvent(QCloseEvent* event)
-{
-    write_note_list();
-}
+void MainWindow::closeEvent(QCloseEvent* event) { write_note_list(); }
 
 void MainWindow::write_note_list()
 {
     QFile file("/Users/epidzhx/Staff/misNotas/misNotas/files/notes_list.txt");
-    if (file.open(QIODevice::WriteOnly)) {
-        for (auto i : notes) {
+    if (file.open(QIODevice::WriteOnly))
+    {
+        for (auto i : notes)
+        {
             QTextStream out(&file);
             out << i->get_id() << "\n"
                 << i->get_type() << "\n"
@@ -63,18 +55,18 @@ void MainWindow::write_note_list()
     }
 }
 
-void delete_n(QString& s)
-{
-    s.remove(s.size() - 1, 1);
-}
+void delete_n(QString& s) { s.remove(s.size() - 1, 1); }
+
 void MainWindow::get_notes()
 {
     notes.clear();
     QFile file("/Users/epidzhx/Staff/misNotas/misNotas/files/notes_list.txt");
-    if (file.open(QIODevice::ReadOnly)) {
+    if (file.open(QIODevice::ReadOnly))
+    {
         QTextStream in(&file);
         QString id = in.readLine();
-        while (!id.isEmpty()) {
+        while (!id.isEmpty())
+        {
             if (id.endsWith("\n"))
                 delete_n(id);
             QString type = in.readLine();
@@ -90,7 +82,8 @@ void MainWindow::get_notes()
             if (ed_date.endsWith("\n"))
                 delete_n(ed_date);
             QStringList tags_list = in.readLine().split("@");
-            for (int j = 0; j < tags_list.size(); j++) {
+            for (int j = 0; j < tags_list.size(); j++)
+            {
                 if (tags_list.at(j).isEmpty())
                     tags_list.removeAt(j);
             }
@@ -125,27 +118,38 @@ void MainWindow::filter()
     QString check = ui->filterLine->text();
     Date checked_date(check);
     ui->listWidget->clear();
-    if (action == ">") {
+    if (action == ">")
+    {
         for (auto i : notes)
             if (i->get_cr_date() > checked_date)
                 ui->listWidget->addItem("ID: " + i->get_id() + "; Type: " + i->get_type() + "; Title:" + i->get_title());
-    } else if (action == "<") {
+    }
+    else if (action == "<")
+    {
         for (auto i : notes)
             if (i->get_cr_date() < checked_date)
                 ui->listWidget->addItem("ID: " + i->get_id() + "; Type: " + i->get_type() + "; Title:" + i->get_title());
-    } else if (action == ">=") {
+    }
+    else if (action == ">=")
+    {
         for (auto i : notes)
             if (i->get_cr_date() >= checked_date)
                 ui->listWidget->addItem("ID: " + i->get_id() + "; Type: " + i->get_type() + "; Title:" + i->get_title());
-    } else if (action == "<=") {
+    }
+    else if (action == "<=")
+    {
         for (auto i : notes)
             if (i->get_cr_date() <= checked_date)
                 ui->listWidget->addItem("ID: " + i->get_id() + "; Type: " + i->get_type() + "; Title:" + i->get_title());
-    } else if (action == "==") {
+    }
+    else if (action == "==")
+    {
         for (auto i : notes)
             if (i->get_cr_date() == checked_date)
                 ui->listWidget->addItem("ID: " + i->get_id() + "; Type: " + i->get_type() + "; Title:" + i->get_title());
-    } else {
+    }
+    else
+    {
         for (auto i : notes)
             if (i->get_cr_date() != checked_date)
                 ui->listWidget->addItem("ID: " + i->get_id() + "; Type: " + i->get_type() + "; Title:" + i->get_title());
@@ -156,7 +160,8 @@ void MainWindow::find()
 {
     QString title = ui->findLine->text();
     ui->listWidget->clear();
-    for (auto i : notes) {
+    for (auto i : notes)
+    {
         if (i->get_title() == title)
             ui->listWidget->addItem("ID: " + i->get_id() + "; Type: " + i->get_type() + "; Title:" + i->get_title());
     }
@@ -176,19 +181,26 @@ void MainWindow::edit()
     }
     if (!curr)
         return;
-    if (type == "Text") {
+    if (type == "Text")
+    {
         TextNoteForm* window = new TextNoteForm();
         window->transfer_note(curr);
         window->show();
-    } else if (type == "Audio") {
+    }
+    else if (type == "Audio")
+    {
         AudioNoteForm* window = new AudioNoteForm();
         window->transfer_note(curr);
         window->show();
-    } else if (type == "Graphic") {
+    }
+    else if (type == "Graphic")
+    {
         graphicform* window = new graphicform();
         window->get_note(curr);
         window->show();
-    } else if (type == "Video") {
+    }
+    else if (type == "Video")
+    {
         VideoNoteForm* window = new VideoNoteForm();
         window->get_note(curr);
         window->show();

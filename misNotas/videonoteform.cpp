@@ -1,29 +1,15 @@
 #include "videonoteform.h"
 #include "ui_videonoteform.h"
-#include <QAbstractSlider>
-#include <QBoxLayout>
-#include <QCamera>
-#include <QGraphicsScene>
-#include <QGraphicsView>
-#include <QMediaPlaylist>
-#include <QPushButton>
-#include <QStandardPaths>
-#include <QToolButton>
-#include <QVideoWidget>
 
 VideoNoteForm::VideoNoteForm(QWidget* parent)
     : QWidget(parent), ui(new Ui::VideoNoteForm)
 {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_DeleteOnClose);
-    openButton = ui->openButton;
-    connect(openButton, &QPushButton::clicked, this, &VideoNoteForm::openFile);
-    playButton = ui->playButton;
-    connect(playButton, &QPushButton::clicked, this, &VideoNoteForm::play);
-    saveButton = ui->saveButton;
-    connect(playButton, &QPushButton::clicked, this, &VideoNoteForm::save);
-    positionSlider = ui->timeSlider;
-    connect(positionSlider, &QSlider::sliderMoved, this, &VideoNoteForm::setPosition);
+    connect(ui->openButton, &QPushButton::clicked, this, &VideoNoteForm::openFile);
+    connect(ui->playButton, &QPushButton::clicked, this, &VideoNoteForm::play);
+    connect(ui->playButton, &QPushButton::clicked, this, &VideoNoteForm::save);
+    connect(ui->timeSlider, &QSlider::sliderMoved, this, &VideoNoteForm::setPosition);
     mediaPlayer = new QMediaPlayer(this, QMediaPlayer::VideoSurface);
     videoWidget = new QVideoWidget;
     ui->videoLayout->addWidget(videoWidget);
@@ -35,6 +21,8 @@ VideoNoteForm::VideoNoteForm(QWidget* parent)
 
 VideoNoteForm::~VideoNoteForm()
 {
+    delete mediaPlayer;
+    delete videoWidget;
     delete ui;
 }
 
@@ -44,10 +32,7 @@ void VideoNoteForm::get_note(Note* n)
     setUrl(QUrl::fromLocalFile(note->get_file_path()));
 }
 
-void VideoNoteForm::save()
-{
-    note->save_into_file();
-}
+void VideoNoteForm::save() { note->save_into_file(); }
 
 void VideoNoteForm::setUrl(const QUrl& url)
 {
@@ -79,22 +64,22 @@ void VideoNoteForm::mediaStateChanged(QMediaPlayer::State state)
 {
     switch (state) {
     case QMediaPlayer::PlayingState:
-        playButton->setText("Pause");
+        ui->playButton->setText("Pause");
         break;
     default:
-        playButton->setText("Play");
+        ui->playButton->setText("Play");
         break;
     }
 }
 
 void VideoNoteForm::positionChanged(qint64 position)
 {
-    positionSlider->setValue(position);
+    ui->timeSlider->setValue(position);
 }
 
 void VideoNoteForm::durationChanged(qint64 duration)
 {
-    positionSlider->setRange(0, duration);
+    ui->timeSlider->setRange(0, duration);
 }
 
 void VideoNoteForm::setPosition(int position)

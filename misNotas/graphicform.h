@@ -3,6 +3,11 @@
 
 #include <QMainWindow>
 #include <graphicnote.h>
+#include <QColorDialog>
+#include <QFileDialog>
+#include <QMessageBox>
+#include <QMouseEvent>
+#include <QPainter>
 
 namespace Ui {
 class graphicform;
@@ -19,8 +24,6 @@ public:
     QImage get_image() { return image; }
 public slots:
     void clearImage();
-    void print();
-
 protected:
     void mousePressEvent(QMouseEvent* event);
     void mouseMoveEvent(QMouseEvent* event);

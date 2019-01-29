@@ -2,11 +2,8 @@
 #define NOTE_H
 
 #include <QFile>
-#include <QStringList>
 #include <QTextStream>
 #include <date.h>
-#include <iostream>
-#include <string>
 #include <vector>
 
 class Note {
@@ -20,7 +17,6 @@ protected:
     QString id;
 
 public:
-    Note(QString&, QString&, Date&, Date&);
     Note(const char*, QString&);
     QString get_title();
     QString get_type();

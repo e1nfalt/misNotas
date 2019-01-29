@@ -1,18 +1,8 @@
 #include "note.h"
 
-Note::Note(QString& type_, QString& title_, Date& created_date_, Date& editing_date_)
-    : type(type_)
-    , title(title_)
-    , created_date(created_date_)
-    , editing_date(editing_date_)
-{
-}
-
 Note::Note(const char* type_, QString& title_)
     : type(type_)
-    , title(title_)
-{
-}
+    , title(title_) {}
 
 QString Note::get_title() { return title; }
 

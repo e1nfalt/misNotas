@@ -61,7 +61,8 @@ SOURCES       = ../misNotas/main.cpp \
 		../misNotas/textnote.cpp \
 		../misNotas/audionote.cpp \
 		../misNotas/graphicnote.cpp \
-		../misNotas/videonote.cpp qrc_resources.cpp \
+		../misNotas/videonote.cpp \
+		../misNotas/date.cpp qrc_resources.cpp \
 		moc_mainwindow.cpp \
 		moc_textnoteform.cpp \
 		moc_audionoteform.cpp \
@@ -80,6 +81,7 @@ OBJECTS       = main.o \
 		audionote.o \
 		graphicnote.o \
 		videonote.o \
+		date.o \
 		qrc_resources.o \
 		moc_mainwindow.o \
 		moc_textnoteform.o \
@@ -300,7 +302,8 @@ DIST          = ../../../Qt/5.11.2/clang_64/mkspecs/features/spec_pre.prf \
 		../misNotas/textnote.cpp \
 		../misNotas/audionote.cpp \
 		../misNotas/graphicnote.cpp \
-		../misNotas/videonote.cpp
+		../misNotas/videonote.cpp \
+		../misNotas/date.cpp
 QMAKE_TARGET  = misNotas
 DESTDIR       = 
 TARGET        = misNotas.app/Contents/MacOS/misNotas
@@ -752,7 +755,7 @@ distdir: FORCE
 	$(COPY_FILE) --parents ../misNotas/resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../Qt/5.11.2/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../misNotas/mainwindow.h ../misNotas/note.h ../misNotas/date.h ../misNotas/textnoteform.h graphicnoteform.h ../misNotas/audionoteform.h ../misNotas/videonoteform.h ../misNotas/new_note_window.h ../misNotas/graphicform.h ../misNotas/textnote.h ../misNotas/graphicnote.h ../misNotas/audionote.h ../misNotas/videonote.h ../misNotas/file_formats.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../misNotas/main.cpp ../misNotas/mainwindow.cpp ../misNotas/textnoteform.cpp ../misNotas/audionoteform.cpp ../misNotas/videonoteform.cpp ../misNotas/new_note_window.cpp ../misNotas/graphicform.cpp ../misNotas/note.cpp ../misNotas/textnote.cpp ../misNotas/audionote.cpp ../misNotas/graphicnote.cpp ../misNotas/videonote.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../misNotas/main.cpp ../misNotas/mainwindow.cpp ../misNotas/textnoteform.cpp ../misNotas/audionoteform.cpp ../misNotas/videonoteform.cpp ../misNotas/new_note_window.cpp ../misNotas/graphicform.cpp ../misNotas/note.cpp ../misNotas/textnote.cpp ../misNotas/audionote.cpp ../misNotas/graphicnote.cpp ../misNotas/videonote.cpp ../misNotas/date.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../misNotas/mainwindow.ui ../misNotas/textnoteform.ui ../misNotas/audionoteform.ui ../misNotas/videonoteform.ui ../misNotas/new_note_window.ui ../misNotas/graphicform.ui $(DISTDIR)/
 
 
@@ -794,45 +797,45 @@ moc_predefs.h: ../../../Qt/5.11.2/clang_64/mkspecs/features/data/dummy.cpp
 compiler_moc_header_make_all: moc_mainwindow.cpp moc_textnoteform.cpp moc_audionoteform.cpp moc_videonoteform.cpp moc_new_note_window.cpp moc_graphicform.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) moc_mainwindow.cpp moc_textnoteform.cpp moc_audionoteform.cpp moc_videonoteform.cpp moc_new_note_window.cpp moc_graphicform.cpp
-moc_mainwindow.cpp: ../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		../misNotas/textnoteform.h \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
-		../misNotas/textnote.h \
-		../misNotas/note.h \
-		../misNotas/date.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
-		../misNotas/audionoteform.h \
-		../misNotas/audionote.h \
+moc_mainwindow.cpp: ../misNotas/audionoteform.h \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioInput \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudioinput.h \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlayer \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioRecorder \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudiorecorder.h \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioProbe \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudioprobe.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QBuffer \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qbuffer.h \
-		../misNotas/videonoteform.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QUrl \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qurl.h \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
-		../misNotas/videonote.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../misNotas/audionote.h \
+		../misNotas/note.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
+		../misNotas/date.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
 		../misNotas/graphicform.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		../misNotas/graphicnote.h \
 		../../../Qt/5.11.2/clang_64/lib/QtGui.framework/Headers/QImage \
 		../../../Qt/5.11.2/clang_64/lib/QtGui.framework/Headers/qimage.h \
 		../misNotas/new_note_window.h \
+		../misNotas/textnoteform.h \
+		../misNotas/textnote.h \
+		../misNotas/videonoteform.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QSlider \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qslider.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QUrl \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qurl.h \
+		../misNotas/videonote.h \
+		../../../Qt/5.11.2/clang_64/lib/QtGui.framework/Headers/QCloseEvent \
+		../../../Qt/5.11.2/clang_64/lib/QtGui.framework/Headers/qevent.h \
 		../misNotas/mainwindow.h \
 		moc_predefs.h \
 		../../../Qt/5.11.2/clang_64/bin/moc
@@ -842,67 +845,65 @@ moc_textnoteform.cpp: ../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Header
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../misNotas/textnote.h \
 		../misNotas/note.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
 		../misNotas/date.h \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
 		../misNotas/textnoteform.h \
 		moc_predefs.h \
 		../../../Qt/5.11.2/clang_64/bin/moc
 	/Users/epidzhx/Qt/5.11.2/clang_64/bin/moc $(DEFINES) --include /Users/epidzhx/Staff/misNotas/build-misNotas-Desktop_Qt_5_11_2_clang_64bit-Debug/moc_predefs.h -I/Users/epidzhx/Qt/5.11.2/clang_64/mkspecs/macx-clang -I/Users/epidzhx/Staff/misNotas/misNotas -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtSvg.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtMultimediaWidgets.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtGui.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtNetwork.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include -F/Users/epidzhx/Qt/5.11.2/clang_64/lib ../misNotas/textnoteform.h -o moc_textnoteform.cpp
 
-moc_audionoteform.cpp: ../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
-		../misNotas/audionote.h \
-		../misNotas/note.h \
-		../misNotas/date.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioInput \
+moc_audionoteform.cpp: ../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioInput \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudioinput.h \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlayer \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioRecorder \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudiorecorder.h \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioProbe \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudioprobe.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QBuffer \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qbuffer.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../misNotas/audionote.h \
+		../misNotas/note.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
+		../misNotas/date.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
 		../misNotas/audionoteform.h \
 		moc_predefs.h \
 		../../../Qt/5.11.2/clang_64/bin/moc
 	/Users/epidzhx/Qt/5.11.2/clang_64/bin/moc $(DEFINES) --include /Users/epidzhx/Staff/misNotas/build-misNotas-Desktop_Qt_5_11_2_clang_64bit-Debug/moc_predefs.h -I/Users/epidzhx/Qt/5.11.2/clang_64/mkspecs/macx-clang -I/Users/epidzhx/Staff/misNotas/misNotas -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtSvg.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtMultimediaWidgets.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtGui.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtNetwork.framework/Headers -I/Users/epidzhx/Qt/5.11.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include -F/Users/epidzhx/Qt/5.11.2/clang_64/lib ../misNotas/audionoteform.h -o moc_audionoteform.cpp
 
-moc_videonoteform.cpp: ../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlayer \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QUrl \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qurl.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
+moc_videonoteform.cpp: ../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
+		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlayer \
+		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QSlider \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qslider.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QUrl \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qurl.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../misNotas/videonote.h \
 		../misNotas/note.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
 		../misNotas/date.h \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
 		../misNotas/videonoteform.h \
 		moc_predefs.h \
 		../../../Qt/5.11.2/clang_64/bin/moc
@@ -918,18 +919,18 @@ moc_new_note_window.cpp: ../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Hea
 moc_graphicform.cpp: ../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		../misNotas/graphicnote.h \
+		../../../Qt/5.11.2/clang_64/lib/QtGui.framework/Headers/QImage \
+		../../../Qt/5.11.2/clang_64/lib/QtGui.framework/Headers/qimage.h \
 		../misNotas/note.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
 		../misNotas/date.h \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
-		../../../Qt/5.11.2/clang_64/lib/QtGui.framework/Headers/QImage \
-		../../../Qt/5.11.2/clang_64/lib/QtGui.framework/Headers/qimage.h \
 		../misNotas/graphicform.h \
 		moc_predefs.h \
 		../../../Qt/5.11.2/clang_64/bin/moc
@@ -979,89 +980,89 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 ####### Compile
 
 main.o: ../misNotas/main.cpp ../misNotas/mainwindow.h \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		../misNotas/textnoteform.h \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
-		../misNotas/textnote.h \
-		../misNotas/note.h \
-		../misNotas/date.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
 		../misNotas/audionoteform.h \
-		../misNotas/audionote.h \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioInput \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudioinput.h \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlayer \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioRecorder \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudiorecorder.h \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioProbe \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudioprobe.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QBuffer \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qbuffer.h \
-		../misNotas/videonoteform.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QUrl \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qurl.h \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
-		../misNotas/videonote.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../misNotas/audionote.h \
+		../misNotas/note.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
+		../misNotas/date.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
 		../misNotas/graphicform.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		../misNotas/graphicnote.h \
 		../../../Qt/5.11.2/clang_64/lib/QtGui.framework/Headers/QImage \
 		../../../Qt/5.11.2/clang_64/lib/QtGui.framework/Headers/qimage.h \
 		../misNotas/new_note_window.h \
+		../misNotas/textnoteform.h \
+		../misNotas/textnote.h \
+		../misNotas/videonoteform.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QSlider \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qslider.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QUrl \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qurl.h \
+		../misNotas/videonote.h \
+		../../../Qt/5.11.2/clang_64/lib/QtGui.framework/Headers/QCloseEvent \
+		../../../Qt/5.11.2/clang_64/lib/QtGui.framework/Headers/qevent.h \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QApplication \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../misNotas/main.cpp
 
 mainwindow.o: ../misNotas/mainwindow.cpp ../misNotas/mainwindow.h \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		../misNotas/textnoteform.h \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
-		../misNotas/textnote.h \
-		../misNotas/note.h \
-		../misNotas/date.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
 		../misNotas/audionoteform.h \
-		../misNotas/audionote.h \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioInput \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudioinput.h \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlayer \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioRecorder \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudiorecorder.h \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioProbe \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudioprobe.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QBuffer \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qbuffer.h \
-		../misNotas/videonoteform.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QUrl \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qurl.h \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
-		../misNotas/videonote.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../misNotas/audionote.h \
+		../misNotas/note.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
+		../misNotas/date.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
 		../misNotas/graphicform.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		../misNotas/graphicnote.h \
 		../../../Qt/5.11.2/clang_64/lib/QtGui.framework/Headers/QImage \
 		../../../Qt/5.11.2/clang_64/lib/QtGui.framework/Headers/qimage.h \
 		../misNotas/new_note_window.h \
+		../misNotas/textnoteform.h \
+		../misNotas/textnote.h \
+		../misNotas/videonoteform.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QSlider \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qslider.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QUrl \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qurl.h \
+		../misNotas/videonote.h \
+		../../../Qt/5.11.2/clang_64/lib/QtGui.framework/Headers/QCloseEvent \
+		../../../Qt/5.11.2/clang_64/lib/QtGui.framework/Headers/qevent.h \
 		ui_mainwindow.h \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
@@ -1076,44 +1077,38 @@ textnoteform.o: ../misNotas/textnoteform.cpp ../misNotas/textnoteform.h \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../misNotas/textnote.h \
 		../misNotas/note.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
 		../misNotas/date.h \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
 		ui_textnoteform.h \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o textnoteform.o ../misNotas/textnoteform.cpp
 
 audionoteform.o: ../misNotas/audionoteform.cpp ../misNotas/audionoteform.h \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
-		../misNotas/audionote.h \
-		../misNotas/note.h \
-		../misNotas/date.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioInput \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudioinput.h \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlayer \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioRecorder \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudiorecorder.h \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioProbe \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qaudioprobe.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QBuffer \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qbuffer.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../misNotas/audionote.h \
+		../misNotas/note.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
+		../misNotas/date.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
 		ui_audionoteform.h \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QAudioEncoderSettings \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qmediaencodersettings.h \
@@ -1124,26 +1119,34 @@ audionoteform.o: ../misNotas/audionoteform.cpp ../misNotas/audionoteform.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o audionoteform.o ../misNotas/audionoteform.cpp
 
 videonoteform.o: ../misNotas/videonoteform.cpp ../misNotas/videonoteform.h \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
-		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlayer \
-		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QUrl \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qurl.h \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
+		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlayer \
+		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QSlider \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qslider.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QUrl \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qurl.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../misNotas/videonote.h \
 		../misNotas/note.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
 		../misNotas/date.h \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
 		ui_videonoteform.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QAbstractSlider \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qabstractslider.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QBoxLayout \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qboxlayout.h \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QCamera \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qcamera.h \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
@@ -1152,6 +1155,10 @@ videonoteform.o: ../misNotas/videonoteform.cpp ../misNotas/videonoteform.h \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qgraphicsview.h \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlaylist \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimedia.framework/Headers/qmediaplaylist.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStandardPaths \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstandardpaths.h \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QToolButton \
+		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qtoolbutton.h \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimediaWidgets.framework/Headers/QVideoWidget \
 		../../../Qt/5.11.2/clang_64/lib/QtMultimediaWidgets.framework/Headers/qvideowidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o videonoteform.o ../misNotas/videonoteform.cpp
@@ -1159,34 +1166,35 @@ videonoteform.o: ../misNotas/videonoteform.cpp ../misNotas/videonoteform.h \
 new_note_window.o: ../misNotas/new_note_window.cpp ../misNotas/new_note_window.h \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../misNotas/date.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../misNotas/file_formats.h \
 		ui_new_note_window.h \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QComboBox \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qcombobox.h \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
-		../misNotas/date.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o new_note_window.o ../misNotas/new_note_window.cpp
 
 graphicform.o: ../misNotas/graphicform.cpp ../misNotas/graphicform.h \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		../misNotas/graphicnote.h \
+		../../../Qt/5.11.2/clang_64/lib/QtGui.framework/Headers/QImage \
+		../../../Qt/5.11.2/clang_64/lib/QtGui.framework/Headers/qimage.h \
 		../misNotas/note.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
 		../misNotas/date.h \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
-		../../../Qt/5.11.2/clang_64/lib/QtGui.framework/Headers/QImage \
-		../../../Qt/5.11.2/clang_64/lib/QtGui.framework/Headers/qimage.h \
 		ui_graphicform.h \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/QColorDialog \
 		../../../Qt/5.11.2/clang_64/lib/QtWidgets.framework/Headers/qcolordialog.h \
@@ -1210,70 +1218,75 @@ graphicform.o: ../misNotas/graphicform.cpp ../misNotas/graphicform.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o graphicform.o ../misNotas/graphicform.cpp
 
 note.o: ../misNotas/note.cpp ../misNotas/note.h \
-		../misNotas/date.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h
+		../misNotas/date.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o note.o ../misNotas/note.cpp
 
 textnote.o: ../misNotas/textnote.cpp ../misNotas/textnote.h \
 		../misNotas/note.h \
-		../misNotas/date.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h
+		../misNotas/date.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o textnote.o ../misNotas/textnote.cpp
 
 audionote.o: ../misNotas/audionote.cpp ../misNotas/audionote.h \
 		../misNotas/note.h \
-		../misNotas/date.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h
+		../misNotas/date.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o audionote.o ../misNotas/audionote.cpp
 
 graphicnote.o: ../misNotas/graphicnote.cpp ../misNotas/graphicnote.h \
+		../../../Qt/5.11.2/clang_64/lib/QtGui.framework/Headers/QImage \
+		../../../Qt/5.11.2/clang_64/lib/QtGui.framework/Headers/qimage.h \
 		../misNotas/note.h \
-		../misNotas/date.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
-		../../../Qt/5.11.2/clang_64/lib/QtGui.framework/Headers/QImage \
-		../../../Qt/5.11.2/clang_64/lib/QtGui.framework/Headers/qimage.h
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
+		../misNotas/date.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o graphicnote.o ../misNotas/graphicnote.cpp
 
 videonote.o: ../misNotas/videonote.cpp ../misNotas/videonote.h \
 		../misNotas/note.h \
-		../misNotas/date.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QFile \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
 		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QStringList \
-		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstringlist.h
+		../misNotas/date.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o videonote.o ../misNotas/videonote.cpp
+
+date.o: ../misNotas/date.cpp ../misNotas/date.h \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.11.2/clang_64/lib/QtCore.framework/Headers/qstring.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o date.o ../misNotas/date.cpp
 
 qrc_resources.o: qrc_resources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources.o qrc_resources.cpp

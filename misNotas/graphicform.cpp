@@ -1,15 +1,5 @@
 #include "graphicform.h"
 #include "ui_graphicform.h"
-#include <QColorDialog>
-#include <QFileDialog>
-#include <QImageWriter>
-#include <QInputDialog>
-#include <QMessageBox>
-#include <QMouseEvent>
-#include <QPaintEvent>
-#include <QPainter>
-#include <QPrintDialog>
-#include <QPrinter>
 
 graphicform::graphicform(QWidget* parent)
     : QMainWindow(parent)
@@ -35,6 +25,7 @@ void graphicform::get_note(Note* n)
 graphicform::~graphicform()
 {
     delete ui;
+    delete drawArea;
 }
 
 DrawArea::DrawArea(QWidget* parent)
@@ -59,15 +50,9 @@ bool DrawArea::openImage(const QString& fileName)
     return true;
 }
 
-void DrawArea::setPenColor(const QColor& newColor)
-{
-    myPenColor = newColor;
-}
+void DrawArea::setPenColor(const QColor& newColor) { myPenColor = newColor; }
 
-void DrawArea::setPenWidth(int newWidth)
-{
-    myPenWidth = newWidth;
-}
+void DrawArea::setPenWidth(int newWidth) { myPenWidth = newWidth; }
 
 void DrawArea::clearImage()
 {
@@ -77,7 +62,8 @@ void DrawArea::clearImage()
 
 void DrawArea::mousePressEvent(QMouseEvent* event)
 {
-    if (event->button() == Qt::LeftButton) {
+    if (event->button() == Qt::LeftButton)
+    {
         lastPoint = event->pos();
         drawing = true;
     }
@@ -91,7 +77,8 @@ void DrawArea::mouseMoveEvent(QMouseEvent* event)
 
 void DrawArea::mouseReleaseEvent(QMouseEvent* event)
 {
-    if (event->button() == Qt::LeftButton && drawing) {
+    if (event->button() == Qt::LeftButton && drawing)
+    {
         drawLineTo(event->pos());
         drawing = false;
     }
@@ -106,7 +93,8 @@ void DrawArea::paintEvent(QPaintEvent* event)
 
 void DrawArea::resizeEvent(QResizeEvent* event)
 {
-    if (width() > image.width() || height() > image.height()) {
+    if (width() > image.width() || height() > image.height())
+    {
         int newWidth = qMax(width() + 128, image.width());
         int newHeight = qMax(height() + 128, image.height());
         resizeImage(&image, QSize(newWidth, newHeight));
@@ -137,22 +125,6 @@ void DrawArea::resizeImage(QImage* image, const QSize& newSize)
     *image = newImage;
 }
 
-void DrawArea::print()
-{
-    QPrinter printer(QPrinter::HighResolution);
-
-    QPrintDialog* printDialog = new QPrintDialog(&printer, this);
-    if (printDialog->exec() == QDialog::Accepted) {
-        QPainter painter(&printer);
-        QRect rect = painter.viewport();
-        QSize size = image.size();
-        size.scale(rect.size(), Qt::KeepAspectRatio);
-        painter.setViewport(rect.x(), rect.y(), size.width(), size.height());
-        painter.setWindow(image.rect());
-        painter.drawImage(0, 0, image);
-    }
-}
-
 void graphicform::save()
 {
     QImage image = drawArea->get_image();
@@ -180,14 +152,12 @@ void graphicform::color()
     QColor color = QColorDialog::getColor();
     if (color.isValid())
         drawArea->setPenColor(color);
-    else {
+    else
+    {
         QMessageBox msgBox;
         msgBox.setText("This color is unsupported!");
         msgBox.exec();
     }
 }
 
-void graphicform::clear()
-{
-    drawArea->clearImage();
-}
+void graphicform::clear() { drawArea->clearImage(); }

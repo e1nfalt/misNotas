@@ -6,9 +6,9 @@
 #include "new_note_window.h"
 #include "textnoteform.h"
 #include "videonoteform.h"
+#include <note.h>
 #include <QCloseEvent>
 #include <QMainWindow>
-#include <note.h>
 
 namespace Ui {
 class MainWindow;
@@ -26,7 +26,6 @@ private slots:
     void find();
     void edit();
     void closeEvent(QCloseEvent*);
-
 private:
     Ui::MainWindow* ui;
     std::vector<Note*> notes;

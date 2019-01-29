@@ -2,6 +2,8 @@
 #define NEW_NOTE_WINDOW_H
 
 #include <QWidget>
+#include <QFile>
+#include <QTextStream>
 
 namespace Ui {
 class new_note_window;
@@ -14,7 +16,6 @@ public:
     ~new_note_window();
 private slots:
     void create();
-
 private:
     Ui::new_note_window* ui;
 };

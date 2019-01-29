@@ -1,10 +1,10 @@
 #ifndef AUDIONOTEFORM_H
 #define AUDIONOTEFORM_H
 
-#include <QAudioInput>
+#include <audionote.h>
 #include <QMediaPlayer>
 #include <QWidget>
-#include <audionote.h>
+#include <QFileDialog>
 
 namespace Ui {
 class AudioNoteForm;
@@ -17,20 +17,18 @@ public:
     ~AudioNoteForm();
     void transfer_note(Note*);
 private slots:
-    void on_play_button_clicked();
-    void on_open_button_clicked();
-    void on_volumeControl_sliderMoved(int position);
-    void on_saveButton_clicked();
+    void play();
+    void open();
+    void save();
+    void volume_slider_move(int);
     void positionChanged(qint64);
     void durationChanged(qint64);
     void setPosition(int);
     void mediaStateChanged(QMediaPlayer::State);
-
 private:
     Ui::AudioNoteForm* ui;
     AudioNote* note;
     QMediaPlayer* player;
-    QFile* output_file;
 };
 
 #endif // AUDIONOTEFORM_H

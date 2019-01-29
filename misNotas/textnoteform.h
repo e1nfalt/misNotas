@@ -1,8 +1,10 @@
 #ifndef TEXTNOTEFORM_H
 #define TEXTNOTEFORM_H
 
-#include <QWidget>
 #include <textnote.h>
+#include <QWidget>
+#include <QFileDialog>
+#include <QTextStream>
 
 namespace Ui {
 class TextNoteForm;
@@ -16,10 +18,8 @@ public:
     ~TextNoteForm();
     void transfer_note(Note*);
 private slots:
-
     void save();
     void open();
-
 private:
     Ui::TextNoteForm* ui;
     TextNote* note;

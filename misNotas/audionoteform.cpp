@@ -1,8 +1,5 @@
 #include "audionoteform.h"
 #include "ui_audionoteform.h"
-#include <QAudioEncoderSettings>
-#include <QFileDialog>
-#include <QTimer>
 
 AudioNoteForm::AudioNoteForm(QWidget* parent)
     : QWidget(parent)
@@ -15,6 +12,10 @@ AudioNoteForm::AudioNoteForm(QWidget* parent)
     player = new QMediaPlayer;
     ui->volumeControl->setValue(50);
     connect(ui->positionSlider, &QSlider::sliderMoved, this, &AudioNoteForm::setPosition);
+    connect(ui->volumeControl, &QSlider::sliderMoved, this, &AudioNoteForm::volume_slider_move);
+    connect(ui->open_button, &QPushButton::clicked, this, &AudioNoteForm::open);
+    connect(ui->saveButton, &QPushButton::clicked, this, &AudioNoteForm::save);
+    connect(ui->play_button, &QPushButton::clicked, this, &AudioNoteForm::play);
     connect(player, &QMediaPlayer::stateChanged, this, &AudioNoteForm::mediaStateChanged);
     connect(player, &QMediaPlayer::positionChanged, this, &AudioNoteForm::positionChanged);
     connect(player, &QMediaPlayer::durationChanged, this, &AudioNoteForm::durationChanged);
@@ -28,17 +29,14 @@ AudioNoteForm::~AudioNoteForm()
     delete player;
 }
 
-void AudioNoteForm::on_play_button_clicked()
+void AudioNoteForm::play()
 {
     if (player->state() == QMediaPlayer::StoppedState) {
         player->setMedia(QUrl::fromLocalFile(note->get_file_path()));
         player->setVolume(ui->volumeControl->value());
         player->play();
-        ui->play_button->setText("Stop");
-        //ui->play_button->seti
     } else {
         player->stop();
-        ui->play_button->setText("Play");
     }
 }
 
@@ -47,18 +45,18 @@ void AudioNoteForm::transfer_note(Note* n)
     note = dynamic_cast<AudioNote*>(n);
 }
 
-void AudioNoteForm::on_open_button_clicked()
+void AudioNoteForm::open()
 {
     QString file_name = QFileDialog::getOpenFileName();
     note->load_data_from_file(file_name);
 }
 
-void AudioNoteForm::on_volumeControl_sliderMoved(int position)
+void AudioNoteForm::volume_slider_move(int position)
 {
     player->setVolume(position);
 }
 
-void AudioNoteForm::on_saveButton_clicked()
+void AudioNoteForm::save()
 {
     note->save_into_file();
 }

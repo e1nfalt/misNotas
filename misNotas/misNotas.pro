@@ -38,7 +38,8 @@ SOURCES += \
     textnote.cpp \
     audionote.cpp \
     graphicnote.cpp \
-    videonote.cpp
+    videonote.cpp \
+    date.cpp
 
 HEADERS += \
         mainwindow.h \
